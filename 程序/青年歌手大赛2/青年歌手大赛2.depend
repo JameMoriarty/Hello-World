@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1484745867 source:e:\程序\青年歌手大赛2\main.cpp
+	<iostream>
+	<cstdio>
+	<algorithm>
+

@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 考勤管理系统 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\gwq12\AppData\Local\Temp\RSP15C2.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/考勤管理系统.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\程序\考勤管理系统\考勤管理系统Dlg.cpp"
+]
+Creating command line "cl.exe @C:\Users\gwq12\AppData\Local\Temp\RSP15C2.tmp" 
+Creating command line "link.exe /nologo /subsystem:windows /incremental:yes /pdb:"Debug/考勤管理系统.pdb" /debug /machine:I386 /out:"Debug/考勤管理系统.exe" /pdbtype:sept  ".\Debug\StdAfx.obj" ".\Debug\考勤管理系统.obj" ".\Debug\考勤管理系统Dlg.obj" ".\Debug\考勤管理系统.res" "
+<h3>Output Window</h3>
+Compiling...
+考勤管理系统Dlg.cpp
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(35) : error C2061: syntax error : identifier 'THIS_FILE'
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(35) : error C2091: function returns function
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(35) : error C2809: 'operator new' has no formal parameters
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(36) : error C2061: syntax error : identifier 'THIS_FILE'
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(37) : error C2091: function returns function
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(37) : error C2556: 'void *(__cdecl *__cdecl operator new(void))(unsigned int,const struct std::nothrow_t &)' : overloaded function differs only by return type from 'void *(__cdecl *__cdecl operator new(void))(unsigned int)'
+        e:\vc++\vc++green\microsoft visual studio\vc98\include\new(35) : see declaration of 'new'
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(41) : error C2061: syntax error : identifier 'THIS_FILE'
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(42) : error C2091: function returns function
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(42) : error C2556: 'void *(__cdecl *__cdecl operator new(void))(unsigned int,void *)' : overloaded function differs only by return type from 'void *(__cdecl *__cdecl operator new(void))(unsigned int)'
+        e:\vc++\vc++green\microsoft visual studio\vc98\include\new(35) : see declaration of 'new'
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(42) : error C2809: 'operator new' has no formal parameters
+e:\vc++\vc++green\microsoft visual studio\vc98\include\new(42) : error C2065: '_P' : undeclared identifier
+E:\程序\考勤管理系统\考勤管理系统Dlg.cpp(119) : error C2065: 'IDC_COMBO1' : undeclared identifier
+E:\程序\考勤管理系统\考勤管理系统Dlg.cpp(220) : error C2065: 'EndDialod' : undeclared identifier
+E:\程序\考勤管理系统\考勤管理系统Dlg.cpp(226) : error C2661: 'GetDlgItem' : no overloaded function takes 0 parameters
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+考勤管理系统.exe - 14 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

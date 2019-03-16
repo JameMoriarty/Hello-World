@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1497075754 source:e:\³ÌÐò\20170607cfa\main.cpp
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<iostream>
+	<algorithm>
+

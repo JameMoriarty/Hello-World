@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1495631626 source:e:\程序\训练指南枚举poj1753\main.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	<algorithm>
+

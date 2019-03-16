@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1514983042 source:e:\程序\排序比较优劣\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

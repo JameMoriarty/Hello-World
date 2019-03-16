@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1480854372 source:e:\程序\学籍管理系统\main.c
+	<stdio.h>
+	<string.h>
+

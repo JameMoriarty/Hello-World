@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1483542863 source:e:\程序\课设aaa最终完成\main.c
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<stdlib.h>
+

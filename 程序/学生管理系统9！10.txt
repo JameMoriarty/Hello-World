@@ -1,0 +1,157 @@
+#define MAXSIZE 80
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+typedef struct
+{
+	char name[9],no[11];
+	int math,eng,comp;
+}datatype;
+ typedef struct
+ {
+	 datatype data[MAXSIZE+1];
+	 int len; 
+ }SeqList;
+void menu()
+{
+	printf("1.录入姓名、学号\n");
+	printf("2.录入成绩\n");
+	printf("3.给定学号，查找其它信息\n");
+	printf("4.给定学号，删除该学生信息\n");
+	printf("5.给定学生信息，插入该学生信息\n");
+	printf("6.浏览全部学生信息\n");
+	printf("0.退出\n");
+}
+//录入姓名，学号
+void inp(SeqList *L)
+{
+	int i;
+	printf("输入人数\n");
+	scanf("%d",&L->len);
+	printf("输入 姓名、学号\n");
+	for(i=1;i<=L->len;i++)
+	{
+		scanf("%s%s",L->data[i].name,L->data[i].no);
+        L->data[i].comp=L->data[i].eng=L->data[i].math=0;
+	}
+}
+//输出学生信息 
+void out(SeqList *L)
+{
+	int i;
+	printf("姓名、学号、数学、英语、计算机\n");
+	for(i=1;i<=L->len;i++)
+		printf("%10s%12s%5d%5d%5d\n",L->data[i].name,L->data[i].no,L->data[i].math,L->data[i].eng,L->data[i].comp);
+}
+//查找 
+int search(SeqList *L,datatype x)
+{
+	int i=1;
+	while(i<=L->len&&strcmp(L->data[i].no,x.no)!=0)
+	  i++;
+	if(i>L->len)
+		return(0);
+	else	return(i);
+}
+
+//录成绩
+void inp_score(SeqList *L)
+{  
+	char kch[41];
+	int i;
+	printf("录入课程名\n");
+    scanf("%s",kch);
+	if(strcmp(kch,"math")==0)
+	{
+		printf("录入每个人的数学成绩\n");
+        for(i=1;i<=L->len;i++)
+		  scanf("%d",&(L->data[i].math));
+
+	}
+	else if(strcmp(kch,"english")==0)
+	{
+		printf("录入每个人的英语成绩\n");
+        for(i=1;i<=L->len;i++)
+		  scanf("%d",&(L->data[i].eng));
+
+	}
+    else if(strcmp(kch,"computer")==0)
+	{
+		printf("录入每个人的计算机成绩\n");
+        for(i=1;i<=L->len;i++)
+		  scanf("%d",&(L->data[i].comp));
+
+	}
+	else printf("课程名出错\n");
+}
+
+//插入学生信息
+void ins(SeqList *L,datatype x)
+{
+	int i=1,j;
+	while(i<=L->len&&strcmp(L->data[i].no,x.no)<0)
+		i++;
+	if(L->len==MAXSIZE)
+		printf("表已经满了\n");
+	else
+	{
+		for(j=L->len;j>=i;j--)
+	      L->data[j+1]=L->data[j];
+   	    L->data[i]=x;
+	    L->len++;
+	}
+}
+
+//删除 
+void del(SeqList *L,datatype x)
+{
+	int i,j;
+	i=search(L,x);
+    if(i==0)
+		printf("元素不存在\n");
+	else
+	{
+		for(j=i+1;j<=L->len;j++)
+	       L->data[j-1]=L->data[j];
+		 L->len--;
+	  }
+}
+
+void main()
+{
+	SeqList *stu;
+	int sel,k;
+	datatype x;
+	stu=(SeqList*)malloc(sizeof(SeqList));//初始化 
+	stu->len=0;
+	do
+	{
+		menu();
+		printf("输入你的选择\n");
+		scanf("%d",&sel);
+		switch(sel)
+		{
+		case 1:inp(stu);break;
+		case 2:inp_score(stu);break;
+		case 3:printf("输入所查找的学号\n");
+               scanf("%s",x.no);
+			   k=search(stu,x);
+               if(k==0)
+				   printf("元素不存在\n");
+			   else
+				   printf("姓名%s,数学:%d,英语:%d,计算机:%d\n",stu->data[k].name,stu->data[k].math,stu->data[k].eng,stu->data[k].comp);
+			   break;
+		case 4:printf("输入所删除的学号\n");
+               scanf("%s",x.no);
+			   del(stu,x);
+			   break;
+		case 5:printf("输入姓名，学号，数学，英语，计算机\n");
+			   scanf("%s%s%d%d%d",x.name,x.no,&x.math,&x.eng,&x.comp);
+			   ins(stu,x);
+			   break;
+		case 6:out(stu);break;
+		}
+	}while(sel!=0);     
+}
+
+

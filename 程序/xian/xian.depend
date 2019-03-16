@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1505542092 source:e:\³ÌÐò\xian\main.cpp
+	<cstdio>
+	<cstring>
+	<map>
+	<algorithm>
+	<iostream>
+	<cstdlib>
+	<vector>
+	<cmath>
+

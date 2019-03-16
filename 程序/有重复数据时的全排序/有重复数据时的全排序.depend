@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1521124003 source:e:\程序\有重复数据时的全排序\main.cpp
+	<iostream>
+	<string.h>
+

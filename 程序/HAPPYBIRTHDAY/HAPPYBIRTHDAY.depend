@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1485099710 source:e:\³ÌÐò\happybirthday\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+

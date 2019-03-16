@@ -1,0 +1,49 @@
+//今后写竞赛代码要写C++，不可以继续写C ：）
+//假期记得打至少三场比赛（或者virtual participation,实在不会或者巨懒可以看答案抄完）
+//比赛的前两道题务必做出来，尽量做到AK
+
+STL:
+	hdu 2072（set）
+	hdu 1800（可以尝试使用map简化代码逻辑）
+	/* vector priority_queue queue stack不再重述*/
+	可以参考博客	http://blog.csdn.net/chrome_matrix_68/article/details/44981171
+	做题的时候体会STL的效率巨慢，但还是必须会用。。。*/
+
+并查集：    
+	hdu 1213
+	poj 1611
+ 	poj 1988（带权并查集必会）
+最小生成树：	
+	hdu 1232
+	hdu 1874
+	hdu 1875
+	hdu 1879 
+	（以上四道浙江大学研究生复试真题及模拟题，难度极低，必过）
+
+最短路:		
+	hdu 2544
+   	hdu 3790            
+	uva 12661 （dijkstra基础题）
+	poj 3259  （判断负环）
+
+字符串处理: 
+	hihocoder 1014
+	hihocoder 1015
+	hdu 2222	（AC自动机）
+		
+
+动态规划：
+	poj 3903（最长上升子序列 O(n*logn)二分法 ）
+	hdu 1231
+	uva 10534 
+	openjudge 百练4120
+	Codeforces 741B （容斥背包）
+
+数据结构:
+	hdu 1556（线段树）
+	poj 2352 (树状数组)
+
+数学：
+	poj 1061 （拓展欧几里得）
+	
+	
