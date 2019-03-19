@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unity3-->3_5</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//***********操作符3.5		可以适用于很多值，数值、字符串、布尔值、对象【应用于对象时一般会调用对应的valueOf()和toString()】
+				//****3.5.1一元操作符		(只能操作一个值的操作符)
+		function test3_5_1(){
+					// ++/--
+		/*	var age=29;
+			alert(age);	//29
+			++age;
+			alert(age);	//30
+			--age;
+			alert(age);	//29
+						//递增
+			var age1=29;
+			var agenum1=++age1+2;	//前置
+			alert(agenum1);				//32
+			alert(age1);				//30
+			var age2=29;
+			var agenum2=age2++ +2;	//后置  在包含它的语句被求值之后才执行
+			alert(agenum2);				//31	未执行age2++
+			alert(age2);				//20 	执行了age2++
+						//递减
+			var age3=29;
+			var agenum3=--age3+2;	//前置	
+			alert(agenum3);				//30
+			alert(age3);				//28
+			var age4=29;
+			var agenum4=age4-- +2;	//后置
+			alert(agenum4);				//31	未执行age4--
+			alert(age4);				//28	执行了age4--		*/
+						//适用于其他值
+		/*	var s1="2";
+			var s2="a";
+			var b=false;
+			var b1=true;
+			var f=1.1;
+			var f1=1.1;
+			var o =new Object();
+				o={
+					valueOf:function(){
+						return -1;
+					}
+				};
+			s1++;		//3		数值字符串，转换为数值后++
+			s2++;		//NaN	字符串转换为数值NaN，再++
+			b++;		//1		Boolean转换为对应的O/1，再++
+			b1++;		//2		
+			f++;		//2.1	float直接++
+			o++;		//0		Object调用valueOf()转换成数值，再++
+			f1--;		//0.100000000000000009		由于浮点舍入错误导致
+			alert(s1);
+			alert(s2);
+			alert(b);
+			alert(b1);
+			alert(f);
+			alert(o);
+			alert(f1);	*/
+					// 一元+/-
+			var num1=25;
+			num1=+num1;
+			alert(num1);	//25	
+			var str3="1.1";
+			str3=+str3;		//1.1	不改变数值的结果
+			alert(str3);
+					//非数值  将它们转换为数值
+			var str1="01";
+			str1=+str1;		//1
+			alert(str1);
+			var str2="abc";
+			str2=+str2;		//NaN
+			alert(str2);
+			
+			var b=false;
+			b=+b;			//0
+			alert(b);
+			var f=1.1;
+			f=+f;			//1.1
+			alert(f);
+			var o=new Object();
+			o={
+				valueOf:function(){
+					return -1;
+				}
+			};
+			o=+o;
+			alert(o);		//-1
+					//一元 - 操作符对数值-->变为负数；对非数值-->转换为数值后，变为负数；
+		}
+		//test3_5_1();
+
+				//****3.5.2位操作符        （按内存中表示数值的位来操作数值 IEE-754 64位格式储存）【将64位转换为32位操作，再转换回64位】
+									//对非数值进行位操作时，先使用Number()函数转为数值，再操作。null，Infinity会当作0处理
+		function test3_5_2(){
+					//按位非（~）-->操作数的负值减1
+			var num1=25;
+			var num2= ~num1;
+			alert(num2);	//-26
+					//按位与（&）-->对两个数的每一位对齐，然后按照规则对相同位置上的两个数执行AND操作：全为1返回1，一个为0返回0；
+			var num3=25&3;
+			alert(num3);	//1
+					//按位或（|）-->两个操作数，一个为1返回1，全为0返回0；
+			var num4=25|3;
+			alert(num4);	//27
+					//按位异或（^）-->两个操作数。一个为1返回1，全为0或全为1返回0；
+			var num5=25^3;
+			alert(num5);	//26
+					//左移（<<）-->将数值的所有位向左移动指定的位数
+			var num6=2;
+			var num7=num6<<5;
+			alert(num7);	//64
+					//有符号右移（>>）-->将数值向右移动，保留符号位[用符号位来填充空位]
+			var num8=64;
+			var num9=num8>>5;
+			alert(num9);	//2
+					//无符号右移（>>>）-->将数值所有32位向右移动[用0来填充空位]
+			var num10=64;
+			var num11=num10>>>5;
+			alert(num11);	//2
+			var num12=-64;		//负数会被当成正数直接操作，所以值会很大
+			var num13=num12>>>5;
+			alert(num13);	//134217726
+		}
+		test3_5_2();
+	</script>
+</body>
+</html>

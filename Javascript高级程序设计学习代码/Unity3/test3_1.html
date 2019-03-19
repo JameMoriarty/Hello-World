@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unity3-->3_1~3_4</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//***********定义变量3.3
+		function test3_3(){
+			var message="hi";	//局部变量
+			message1="hello";	//全局变量
+		}
+		//test3_3();
+		//alert(message);	//error:Uncaught ReferenceError: message is not defined at test1.html:13
+		//alert(message1);
+
+		//***********数据类型3.4
+			//****3.4.1-3.4.3
+		//Undefined Null Boolean Number String Object / 数据类型具有动态性,不支持任何创建自定义类型的机制
+		function test3_4_1(){
+			var message="some thing";
+			alert(typeof(message));		//查看message变量的数据类型*****string
+			alert(typeof message);		//查看message变量的数据类型（typeof后面的括号可以省略）*****string
+			alert(typeof 521);			//查看521的数据类型*****number
+			var message2;
+			alert(typeof message2);		//undefined
+			var car =null;					//@@若要使用变量准备保存对象，最好先将变量初始化成null，
+											//可通过检查变量是否为null来确定是否保存了一个对象的引用。
+			alert(null==undefined);		//undefined是派生自null,故返回true
+			alert(typeof car);			//Object
+		}
+		//test3_4_1();
+		//alert(typeof test2);			//查看函数test2的数据类型*****function
+			//****3.4.4
+		function test3_4_4(){
+			var message ="Hello World";
+			//var messageAsBoolean = Boolean(message);	//Boolean()-->转型函数，将message的值转成Boolean值保存在变量中
+			alert(message);
+			//alert(messageAsBoolean);
+
+			if(message){
+				alert("Value is true");
+			}
+		}
+		//test3_4_4();
+			//****3.4.5
+		function test3_4_5(){
+		/*	var num1=10;	//十进制
+			var num2=010;	//八进制0开头
+			var num3=0xA;	//十六进制0x开头
+			alert(num1);
+			alert(num2);
+			alert(num3);
+							//浮点数		
+			var floatnum1=0.1;
+			var floatnum2=0.2;
+			var floatnum3=3.125e1;	//科学记数法
+			alert(floatnum1);
+			alert(floatnum2);
+			alert(floatnum3);
+			if (floatnum1+floatnum2==0.3){		//@@由于浮点数是17位有舍入误差，故不要判断测试某个浮点数的值。
+				alert("You get a 0.3");
+			}else {
+				alert(floatnum1+floatnum2);		//=0.300000000000000004
+			}
+
+			var resnum1=10.5673;
+			alert(isFinite(resnum1));	//isFinite()判断变量的值是否在ECMAScript能够表示的最大最小数之间
+
+			alert(Number.MIN_VALUE);	//最小值
+			alert(Number.MAX_VALUE);	//最大值
+			alert(2.8e+308);		//超出最大值Infinity
+			alert(-2.8e+308);		//超出最小值-Infinity*/
+							//NaN-->非数值，是一个特殊的数值
+		/*	alert(NaN==NaN);		//NaN不等于任何值，包括它自己
+			alert(isNaN(NaN));		//true
+			alert(isNaN(10));		//false
+			alert(isNaN("10"));		//false
+			alert(isNaN("Double"));	//true
+			alert(isNaN(true));		//false 被转换成1
+			alert(NaN/10);			//NaN  NaN和任何数运算返回值都为NaN
+			alert(isNaN(NaN/10));	//true*/
+							//数值转换---->Number()
+		/*	var Numnum1=Number("Hello World");	//NaN
+			alert(Numnum1);
+			var Numnum2=Number("");				//0
+			alert(Numnum2);
+			var Numnum3=Number("00019");		//19
+			alert(Numnum3);
+			var Numnum4=Number("0x10");			//16
+			alert(Numnum4);
+			var Numnum5=Number(true);			//1
+			alert(Numnum5);
+			var Numnum6=Number("Hello World50");//NaN
+			alert(Numnum6);						*/
+							//数值转换---->parseInt()
+		/*	var parnum1=parseInt("1234abc");	//1234  只有以数字开头的字符串才会被转换成整数
+			alert(parnum1);
+			var parnum2=parseInt("");			//NaN
+			alert(parnum2);
+			var parnum3=parseInt("0x10");		//16
+			alert(parnum3);
+			var parnum4=parseInt("22.5");		//22	“.”不是数字，其后的部分不会被识别
+			alert(parnum4);
+			var parnum5=parseInt("010");		//10  ECMAScript3可转换成八进制，但ECMAScript5不支持转换成八进制
+			alert(parnum5);
+			var parnum6=parseInt("19");			//19
+			alert(parnum6);
+			var parnum7=parseInt("Hello World50");//NaN  字符后面的数字不会被识别
+			alert(parnum7);
+			//parseInt("xx",基数) 可穿一个参数作为基数，即可要求将该字符串转换成几进制的数字
+			var parnum8=parseInt("010",8);
+			alert(parnum8);
+			var parnum9=parseInt("A",16);
+			alert(parnum9);						*/
+							//数值转换---->parseFloat() -->同parseInt(),都是从第一位字符串位置开始解析
+		/*	var parfnum1=parseFloat("1234abc");		//1234
+			alert(parfnum1);
+			var parfnum2=parseFloat("0x10");		//0
+			alert(parfnum2);
+			var parfnum3=parseFloat("22.5");		//22.5
+			alert(parfnum3);
+			var parfnum4=parseFloat("22.34.56");	//22.34
+			alert(parfnum4);
+			var parfnum5=parseFloat("3.125e7");		//31250000
+			alert(parfnum5);						*/
+
+		}
+		//testtest3_4_5();
+
+			//****3.4.6  String
+		function test3_4_6(){
+		/*	var Str1="Hello";
+			alert(Str1);
+			var Str2='Hello';
+			alert(Str2);
+			var Str3="This is the letter sigma:\u03a3.";	// \unn  转义字符表示Unicode字符
+			alert(Str3);
+			alert(Str1.length);		//字符长度
+			Str2=Str2+"World";		//拼接字符串（字符串一旦被创建，不能更改，只能销毁原来的字符串再创建新的字符串填充该变量【在后台执行】）
+			Str1="Hi";
+			alert(Str2);
+			alert(Str1);			*/
+					//toString()	除了null和undefined其他数据类型都有toString()方法
+									//toString()返回相应值的字符串表示
+		/*	var age=10;				//一般不用传参数，但可以传一个参数作为基数，把相应数值变为对应的进制形式用字符串表示
+			alert(age.toString());		//10  无参默认为10进制
+			alert(age.toString(2));		//1010
+			alert(age.toString(8));		//12
+			alert(age.toString(10));	//10
+			alert(age.toString(16));	//a
+			var bool=true;
+			var Strbool=bool.toString();
+			alert(Strbool);				//true
+			alert(Strbool.length);		//4		*/
+
+					//String()   可以把所有类型转换成字符串 null和undefined类型返回"null"和"undefined"，其他类型调用toString()
+		/*	var age1=10;
+			var age2=true;
+			var age3=null;
+			var age4;
+			var age5=0x10;
+			alert(String(age1));	//10
+			alert(String(age2));	//true
+			alert(String(age3));	//null
+			alert(String(age4));	//undefined
+			alert(String(age5));	//16	默认将其他进制转换成十进制然后返回对应字符串
+			alert(String(age5));	*/
+		}
+		//test3_4_6();
+
+				//****3.4.7 Object	对象，是一组数据和功能的集合---->>Unity5、6详细
+		function test3_4_7(){
+		/*	var o=new Object();		//创建对象
+			var o1=new Object;		//不给构造函数传递参数时可用此方法创建对象，但是不推荐
+			//Object实例具有的属性和方法：constructor-->保存用于创建当前对象的函数；
+					//hasOwnProperty(propertyName)-->检查给定属性在当前实例中是否存在，propertyName是字符串
+					//isPrototypeOf(object)-->用于检查传入的对象是否是当前对象的原型
+					//propertyIsEnumerable(propertyName)-->用来检查给定属性能否使用for-in语句枚举
+					//toLocaleString()-->返回对象的字符串表示，该字符串与执行环境的地区对应
+					//toString()-->返回对象的字符串表示
+					//valueOf()-->返回对象的字符串、布尔值、数值。通常与toString()方法的返回值相同 */
+		}
+		//test3_4_7();
+	</script>
+</body>
+</html>
