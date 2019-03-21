@@ -125,7 +125,201 @@
 			var num13=num12>>>5;
 			alert(num13);	//134217726
 		}
-		test3_5_2();
+		//test3_5_2();
+				//****3.5.3布尔操作符   非（not），与（and），或（or）
+		function test3_5_3(){
+						//非(!)
+		/*	alert(!false);		//true
+			alert(!true);		//false
+			alert(!"bule");		//false
+			alert(!"");			//true
+			alert(!0);			//true
+			alert(!NaN);		//true
+			alert(!12345);		//false
+			alert(!Infinity);	//false
+			var a;
+			alert(!a);			//true		*/
+							//使用！！相当于Boolean()，将值转换成对应的bool值
+		/*	alert(!!"blue");	//true
+			alert(!!0);			//flase
+			alert(!!NaN);		//flase
+			alert(!!"");		//false
+			alert(!!12345);		//true		*/
+						//与(&&)		如果第一个为false时不对第二个值操作，直接返回第一个值
+		/*	alert(true&&false);			//false
+			alert(true&&true);			//true
+			alert(false&&true);			//false
+			alert(false&&false);		//flase  
+			var found1=new Object();
+			found1={
+				valueOf:function(){
+					return 123;
+				}
+
+			};
+			alert(found1&&true);		//true
+			alert(found1&&false);		//flase
+			alert(true&&found1);		//[Object Object]
+			alert(false&&found1);		//false     */
+						//或(||)		如果第一个值为true不对第二个值操作，直接返回第一个值
+			alert(true||false);			//true
+			alert(true||true);			//true
+			alert(false||true);			//true
+			alert(false||false);		//flase  
+			var found1=new Object();
+			found1={
+				valueOf:function(){
+					return 123;
+				}
+
+			};
+			alert(found1||true);		//[Onject Object]
+			alert(found1||false);		//[Onject Object]
+			alert(true||found1);		//true
+			alert(false||found1);		//[Onject Object]
+			var pre=1;
+			var back;
+			var myObject=pre||back;
+						//利用逻辑或的特性，可在一个变量没有有效值的情况下，给它赋予另一个变量的值。避免出现null和undefined
+			alert(myObject);			//1
+			var pre1;
+			var back1=2;
+			var myObject1=pre1||back1;
+			alert(myObject1);			//2
+		}
+		//test3_5_3();
+				//****3.5.4乘性操作符	乘法、除法、求模  （会自动进行类型转换，转换成数值）
+		function test3_5_4(){
+					//乘法（*）
+		/*	alert(Infinity*0);			//NaN
+			alert(Infinity*10);			//Infinity
+			alert(Infinity*Infinity);	//Infinity   */
+					//除法（/）
+			alert(Infinity/0);			//Infinity
+			alert(Infinity/10);			//Infinity
+			alert(Infinity/Infinity);	//NaN
+			alert(0/0);					//NaN
+			alert(5/0);					//NaN
+		}
+		//test3_5_4();
+				//****3.5.5加性运算符	加法、减法	（在后台有数据转换）
+		function test3_5_5(){
+					//加法（+）
+		/*	alert(Infinity+Infinity);			//Infinity
+			alert(Infinity+(-Infinity));		//NaN
+			alert(-Infinity+(-Infinity));		//-Infinity
+			alert(NaN+12);						//NaN
+			alert((+0)+(+0));					//0			?书上是+0
+			alert((-0)+(-0));					//0			？书上是-0
+			alert((+0)+(-0));					//0			？书上是+0
+
+			alert("Hello"+"World");				//HelloWorld
+			alert("Hello"+123);					//Hello123
+
+			var a=10;
+			var b=5;
+			var str="10+5="+a+b;
+			alert(str);					//10+5=105
+			var str1="10+5="+(a+b);
+			alert(str1);				//10+5=15	*/
+					//减法（-）
+			alert(Infinity-Infinity);			//NaN
+			alert(Infinity-(-Infinity));		//Infinity
+			alert(-Infinity-(-Infinity));		//NaN
+			alert(-Infinity-Infinity);			//-Infinity
+			alert(NaN-12);						//NaN
+			alert((+0)-(+0));					//0			?书上是+0
+			alert((-0)-(-0));					//0			？书上是-0
+			alert((+0)-(-0));					//0			?书上是+0
+			alert(5-true);						//4
+			alert(5-"");						//5
+			alert(5-"2");						//3
+			alert(5-null);						//5
+		}			
+		//test3_5_5();
+				//****3.5.6关系操作符	>,<,>=,<=
+		function test3_5_6(){
+			alert(5>3);					//true
+			alert(5<3);					//false
+			alert("Brick"<"alphabet");	//true 	按首字母的字符集编码比较大小，B是66，a是97
+			var Ob1=new Object();		
+			Ob1={
+				valueOf:function(){
+					return 1;
+				}
+			};
+			var Ob2=new Object();
+			Ob2={
+				valueOf:function(){
+					return 2;
+				}
+			};
+			alert(Ob1<Ob2);			//true 	用valueOf()变为数字进行比较，若没有则使用toString();
+			alert("5"<6);			//true 	将字符串变为数字
+			alert(4<"a");			//false 字符串变为数字是NaN  规定NaN与任何数比较都是false
+			alert("23"<"3");		//true 	按字符串字符编码比较大小
+			alert(NaN>=2);			//false
+			alert(NaN<=2);			//false
+
+		}	
+		//test3_5_6();
+				//****3.5.7相等操作符  (=)
+		function test3_5_7(){
+					//相等和不相等  （==，！=）-->先转换操作数的数据类型，变为相似再比较
+		/*	alert(true==1);				//true
+			alert(false==0);			//true
+			alert("12"==12);			//true
+			alert(null==undefined);		//true
+			alert(NaN==NaN);			//false
+			alert(NaN!=NaN);			//true
+			alert(NaN!=12);				//true
+			var ob1=new Object();
+			ob1={
+				valueOf:function(){
+					return 12;
+				}
+			};
+			var ob2=new Object();
+			ob2={
+				valueOf:function(){
+					return 12;
+				}
+			};
+			alert(ob1.valueOf());	//12
+			alert(ob1==ob2);		//false
+			alert(ob1==ob1);		//true 	只有同一个对象比较才会是true
+			alert(ob1==12);			//true
+			alert(ob2=="12");		//true 	*/
+					//全等和不全等	(===,!==) -->不转换数据类型，直接比较。
+			alert("55"===55);			//false
+			alert(null===undefined);	//false
+			alert(55==55);				//true
+		}
+		//test3_5_7();
+				//****3.5.8条件操作符
+		function test3_5_8(){
+			var num1=10;
+			var num2=20;
+			var boo=true;
+			alert(boo?"yes":"no");			//yes	如果前面的式子为true，则返回第一个值，否则返回第二个值
+			alert((num1<num2)?num1:num2);	//10
+		}
+		//test3_5_8();
+				//****3.5.9赋值操作符  -3.5.10逗号操作符
+		function test3_5_9(){
+					//=
+			var num=10;		//把右边的值赋给左边
+			alert(num);		//10
+					//,
+			var num1=10,num2=9,num3=8;
+			alert(num1);		//10	分隔作用
+			alert(num2);		//9
+			alert(num3);		//8
+			var num4=(1,2,3,4,5);
+			alert(num4);		//5		用于赋值，返回表达式里的最后一项
+
+		}
+		test3_5_9();
 	</script>
 </body>
 </html>
