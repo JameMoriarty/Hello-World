@@ -1,9 +1,141 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>test3_6语句</title>
 </head>
 <body>
-
+	<script type="text/javascript">
+			//****3.6.1 if
+		function test3_6_1(){
+			var i=23;
+			if(i>25){
+				alert("i>25");
+			}else if(i<0){
+				alert("i<0");
+			}else{
+				alert("0<i<25");
+			}
+		}
+		//test3_6_1();
+			//****3.6.2 do while
+		function test3_6_2(){
+			var i=0;
+			do{
+				i+=2;
+				alert(i);
+			}while (i<10);
+			alert(i);
+		}
+		//test3_6_2();
+			//****3.6.3 while
+		function test3_6_3(){
+			var i=0;
+			while(i<10){
+				i+=2;
+				alert(i);
+			}
+		}
+		//test3_6_3();
+			//****3.6.4 for
+		function test3_6_4(){
+			var count =10;
+			for(var i=0;i<count;i++){
+				alert(i);
+			}
+			alert(i);	//10	在循环内部定义的变量在循环结束之后的外部也可以访问到
+			i=0;
+			for(;i<count;){
+				alert(i);
+				i++;
+			}
+		}
+		//test3_6_4();
+			//****3.6.5  for-in		枚举对象的属性
+		function test3_6_5(){
+			for(var propName in window){		//迭代 输出window对象的所有属性
+				document.write(propName+" ");
+			}
+		}
+		//test3_6_5();
+			//****3.6.6 labe语句 加标签
+		function test3_6_6(){
+			start: for(var i=0;i<10;i++){
+					for(var j=0;j<10;j++){
+						alert(i+" "+j);
+						if(j==5){
+							break start;	//跳出start标签的代码段
+							//break;		//跳出最近的for代码段，直接执行循环后面的部分
+							//continue;		//跳出当前循环，进入下一次循环
+						} 
+					}
+				}
+		}
+		//test3_6_6();
+			//****3.6.8 with语句 将代码的作用域设置在一个特定的对象中
+		function test3_6_8(){
+				//在开发大型应用程序时不建议使用with语句
+			with(location){
+				var qs=search.substring(1);		//location.search.substring(1);
+				var hostName=hostName;			//loscation.hostName;
+				var url=href;					//location.href;
+				alert(qs);
+				alert(hostName);
+				alert(url);
+			}
+		}
+		//test3_6_8();
+			//3.6.9 switch 流控制语句 
+		function test3_6_9(){
+		/*	var i=23;
+			switch  (i){
+				case 25:
+					alert("i=25");
+					break;			//不要忘记每一个case后面都有break，除非想合并两个case，那需要注释清楚
+				case 35:
+					alert("i=35");
+					break;
+				case 45:
+					alert("i=45");
+					break;
+				default:
+					alert("Other");
+			}	*/
+		/*	var j=25;
+			switch  (j){
+				case 25:
+					// 合并两种情况 			
+				case 35:
+					alert("25 or 35");
+					break;
+				case 45:
+					alert("45");
+					break;
+				default:
+					alert("Other");
+			}	*/
+			//javaScript中switch语句case 后可以跟字符串，表达式，对象等
+			var num=25;
+			switch (true){			//switch()里是要比较的值
+				case (num>1):
+					alert(">1");
+					break;
+				case num<1:
+					alert("<1");
+					break;
+				default:
+					alert("=1");
+			}						//>1
+			switch("hello world"){
+				case "hello"+" world":
+					alert("greeting was found.");	
+					break;
+				case "goodbye":
+					alert("Closing is found");
+					break;
+				default:
+					alert("Unexpected message was found");
+			}						//greeting was found.
+		}
+	</script>
 </body>
 </html>

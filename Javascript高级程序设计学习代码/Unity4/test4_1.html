@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>test4.1基本类型和引用类型的值</title>
+</head>
+<body>
+	<h3>4.1.1动态参数</h3>
+	<p>
+		基本类型值（除object）和引用类型值（object）<br>
+		只能给引用类型的值添加属性和方法
+	</p>
+	<h3>4.1.2复制变量值</h3>
+	<p>
+		基本类型值复制一个值赋给新变量，是把原变量的值复制放到新变量分配的内存里，两个变量相互不影响<br>
+		引用类型是给新变量赋一个指针，指向原变量的对象存储位置，改变原变量就会改变新变量
+	</p>
+	<script type="text/javascript">
+			//****4.1.1动态参数
+		function test4_1_1(){
+			var person = new Object();
+			person.name="Liu";			//给person对象添加name属性
+			alert(person.name);
+		}
+		//test4_1_1();
+		function test4_1_2(){
+			var num1=10;
+			var num2=num1;
+			alert("num1:"+num1);		//10
+			alert("num2:"+num2);		//10
+			num1=20;
+			alert("new num1:"+num1);	//20
+			alert("new num2:"+num2);	//10
+
+			var obj1=new Object();
+			obj1.name="Amy";
+			var obj2=obj1;
+			alert("obj1:"+obj1.name);		//Amy
+			alert("obj2:"+obj2.name);		//Amy
+			obj1.name="Mike";
+			alert("new obj1:"+obj1.name);	//Mike
+			alert("new obj2:"+obj2.name);	//Mike
+		}
+		test4_1_2();
+	</script>
+</body>
+</html>

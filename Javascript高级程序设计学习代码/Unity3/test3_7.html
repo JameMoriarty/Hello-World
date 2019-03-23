@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test3.7函数</title>
+</head>
+<body>
+	<script type="text/javascript">
+			//JavaScript中函数命名参数不是必须的，是通过arguments[]数组进行参数传递的；函数不能重载
+		function sayHi(name,message){
+			alert("Hello "+name+","+message);
+		}
+		sayHi("Mr Liu","How are you today?");
+		function add(num1,num2){
+			return num1+num2;
+		}
+		var num=add(2,3);
+		alert(num);
+			//给函数传多个参数 不显式的使用命名参数调用参数，而使用参数数组arguments[]-->
+		function sayHi1(){
+			alert("Hello "+arguments[0]+","+arguments[1]);
+		}
+		sayHi1("Mr.Liu","nice to meet you.");
+		function howManyArgs(){			
+			alert(arguments.length);	//获取有多少个参数传递给函数
+		}
+		howManyArgs("String",45);	//2
+		howManyArgs();				//0
+		howManyArgs(12);			//1
+			//实现函数接受任意个参数并分别实现适当的功能
+		function doAdd(){
+			if(arguments.length==1){
+				alert(arguments[0]+10);
+			}else if(arguments.length==2){
+				alert(arguments[0]+arguments[1]);
+			}
+		}
+		doAdd(2);		//12
+		doAdd(2,3);		//5
+		//没有重载，可通过以上功能完成一些需要重载实现的功能
+	</script>
+</body>
+</html>
