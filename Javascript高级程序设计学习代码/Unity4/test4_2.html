@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>4.2执行环境及作用域</title>
+</head>
+<body>
+	<h3>4.2执行环境及作用域</h3>
+	<p>执行环境（环境）--》变量对象（环境中定义的所有变量和函数都保存在这个对象里）<br>
+		执行环境--》每个函数都有自己的执行环境----》环境栈<br>
+		作用域链
+	</p>
+	<h3>4.2.2没有块级作用域</h3>
+	<p>for和if语句的{}包括的区域里定义的变量在{}结束后也是可以使用的<br>
+		<b>1.声明变量</b><br>在函数中用var声明的变量是局部变量，省略了var的变量是全局变量<br>
+		<b>2.查询标识符</b><br>第一步先搜索[1]函数里有没有color，没找到则再搜索[2]变量对象里有没有color<br>
+		<b>3.垃圾回收机制</b><br>自动回收垃圾<br>优化内存，占用、最少的内存让界面获得更好的性能，通过当变量不再使用是将其值置为null，来释放引用（适用于大多数全局变量和全局对象的属性）<br>/* 局部变量会在环境结束之后自动解除引用 */
+		<br>
+		<b>基本类型值：undefined,null,boolean,number,string..引用类型值：object</b>
+	</p>
+	<script type="text/javascript">
+			//****4.2.1演唱作用域链
+		function buildUrl(){
+			var qs="?debug=true";
+			with(location){			//把代码的作用域放到一个特定的片段中	用来延长作用域，引入新的变量
+				var url=href+qs;
+			}
+			return url;
+		}
+		//var s=buildUrl();
+		//alert(s);
+			//****4.2.2没有块级作用域
+		function test4_2_2(){
+			if(true){
+				var color="blue";
+			}
+			alert(color);			//blue
+			for(var i=0;i<5;i++){
+
+			}
+			alert(i);				//5
+
+			var sum=0;
+			return sum;
+		}
+		//var result=test4_2_2();
+		//alert(result);				//0
+		////alert(sum);				//error:sum is not defind
+		function Wvar(){
+			sum=1+2;
+			return sum;
+		}
+		//var result1=Wvar();
+		//alert(result1);			//3
+		//alert(sum);				//3
+
+	/*	var color="red";		//[2]
+		function getColor(){	//[1]
+			var color="yellow";
+			return color;
+		}
+		alert(getColor());		//red	第一步先搜索[1]函数里有没有color，没找到则再搜索[2]变量对象里有没有color
+		function getColor1(){	//[1]
+			var color="yellow";	//在函数里找到变量color后就不会再向上查找
+			return color;
+		}
+		alert(getColor1());		//yellow
+		alert(window.color);	//red	用window.color调用全局变量color	*/
+
+	</script>
+</body>
+</html>

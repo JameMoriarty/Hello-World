@@ -15,6 +15,9 @@
 		基本类型值复制一个值赋给新变量，是把原变量的值复制放到新变量分配的内存里，两个变量相互不影响<br>
 		引用类型是给新变量赋一个指针，指向原变量的对象存储位置，改变原变量就会改变新变量
 	</p>
+	<h3>4.1.3传递参数</h3>
+	<h3>4.1.4检测类型</h3>
+	<p>typeof()<br>xx instanceof 类型</p>
 	<script type="text/javascript">
 			//****4.1.1动态参数
 		function test4_1_1(){
@@ -23,6 +26,7 @@
 			alert(person.name);
 		}
 		//test4_1_1();
+			//****4.1.2复制变量值
 		function test4_1_2(){
 			var num1=10;
 			var num2=num1;
@@ -41,7 +45,37 @@
 			alert("new obj1:"+obj1.name);	//Mike
 			alert("new obj2:"+obj2.name);	//Mike
 		}
-		test4_1_2();
+		//test4_1_2();
+			//****4.1.3传递参数
+		function test4_1_3(num){
+			var a;
+			var b;
+			alert(typeof([a,b]));	//object
+			num+=10;
+			return num;
+		}
+	/*	test4_1_3();
+		var count=20;
+		var result=test4_1_3(count);
+		alert(count);	//20	形参不改变实参
+		alert(result);	//30	
+		function setName(obj){		//对象是按值传递的
+			obj.name="Liu";			//对象复制后的和原来的是使用的是同一个对象，只是把它的指针复制给新变量
+		}
+		var person=new Object();
+		setName(person);
+		alert(person.name);		//Liu		*/
+			//****4.1.4检测类型
+		function test4_1_4(){
+			var s="Liu";
+			alert(typeof(s));					//String
+			var color=["blue","red"];
+			//color=new Array();
+			var person=new Object();
+			alert(person instanceof Object);	//true
+			alert(color instanceof Array);		//true
+		}
+		test4_1_4();
 	</script>
 </body>
 </html>
