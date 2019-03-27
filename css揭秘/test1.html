@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-Unity1-编码技巧</title>
+</head>
+<body>
+	<h3>DRY和可维护性</h3>
+	<p>尽量少使用绝对位置px，尽量多使用em或者%，使样式可随父元素改变而改变，曾强代码可重用性和可维护性</p>
+	<h3>样式和布局时多相信眼睛</h3>
+	<h3>合理使用简写（防卫式编码）</h3>
+	<div style="font-size: 20px;">
+		<!-- 不可维护的按钮css代码 -->
+		<button class="yes1">Yes!</button>
+		<!-- 将单位改为em可使css控制的尺寸随父级字号尺寸变化【可维护性高】 -->
+		<button class="yes2">Yes!</button>
+		<!-- 可只更改背景颜色就形成新的按钮变体 -->
+		<button class="yes3">Yes!</button>
+		<button class="yes4">Yes!</button>
+	</div>
+	<style type="text/css">
+		.yes1{
+			padding: 6px 16px;
+			border: 1px solid #446d88;
+			background: #58a linear-gradient(#77a0bb,#58a);
+			border-radius: 4px;
+			box-shadow: 0 1px 5px gray;
+			color: white;
+			text-shadow: 0 -1px 1px #335166;
+			font-size: 20px;
+			line-height: 30px;
+		}
+		.yes2{
+			padding: .3em .8em;
+			border: 1px solid #446d88;
+			background: #58a linear-gradient(#77a0bb,#58a);
+			border-radius: .2em;
+			box-shadow: 0 .05em .25em gray;
+			color: white;
+			text-shadow: 0 -.05em .05em #335166;
+			font-size: 125%;
+			line-height: 1.5;
+		}
+		button{
+			padding: .3em .8em;
+			border: 1px solid rgba(0,0,0,.1);
+			background: #58a linear-gradient(hsla(0,0%,100%,.2),transparent);
+			border-radius: .2em;
+			box-shadow: 0 .05em .25em rgba(0,0,0,.5);
+			color: white;
+			text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+			font-size: 125%;
+			line-height: 1.5;
+		}
+		button.yes3{
+			background-color:#c00; 
+		}
+		button.yes4{
+			background-color:#6b0; 
+		}
+	</style>
+</body>
+</html>
