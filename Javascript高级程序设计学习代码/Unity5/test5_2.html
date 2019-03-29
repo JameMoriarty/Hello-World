@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.2Array</title>
+</head>
+<body>
+	<p>javascript数组的每一项可以保存任何数据类型，数组大小可以动态调整，可跟随数据的增加自动增长以容纳新数据</p>
+	<h3>栈方法</h3>
+	<p>pop()-->接受任意数量的参数，把它们逐个添加到数组末尾，并返回修改后数组的长度【入栈】<br>
+		push()-->从数组末尾移除最后一项，减少数组的length，并返回移除项的值【出栈】<br>
+	用数组的行为类似栈数据结构的方法</p>
+	<h3>队列方法</h3>
+	<p>shift()-->移除第一个项返回该值，并把数组长度减一<br>
+		shift()和push()搭配使用，像队列一样使用数组<br>
+		unshift()-->在数组前端添加任意个项，并返回新数组长度<br>
+	unshift()和pop()搭配使用，实现相反的方向模拟队列（前端添加，末尾移除）</p>
+	<h3>重排序方法</h3>
+	<P>reverse()--> 反转数组项的顺序<br>
+		sort()-->升序排列数组，调用toString()方法</P>
+	<script type="text/javascript">
+		function creatarray(){
+			/*构造数组的方法1*/
+			var colors=new Array();
+			alert(colors.length);		//0
+			/*构造数组的方法2*/
+			var colors1=new Array(2);
+			alert(colors1.length);		//2
+			/*构造数组的方法3*/
+			var colors2=new Array("red","blue","yellow");
+			var output="";
+			for(var i=0;i<colors2.length;i++){
+				output+=colors2[i]+" ";
+			}
+			alert(output);				//red blue yellow
+			/*构造数组的方法4-->可省略new操作符*/
+			/*构造数组的方法5-->数组字面量*/
+			var colors3=["red","blue","yellow"];	//一个有三个量的数组
+			alert(colors3.length);		//3
+			colors3[0]="black";			
+			alert(colors3[0]);			//black
+			var colors4=[];				//空数组
+			alert(colors4.length);		//0
+				//如果某个索引超出了数组现有的项数，数组会自动增加到该索引值加一的长度
+			colors3[3]="white";
+			alert(colors3.length);
+			alert(colors3[3]);
+				//length不是只读的，可以通过操作length值对数组进行加项或删除尾部一项
+			colors3.length=2;
+			alert(colors3[2]);			//undefined
+			colors3[colors3.length]="brown";		//在colors3.length--2处添加一个新元素
+			colors3[colors3.length]="black";		//在colors3.length--3处添加一个新元素
+			alert(colors3[2]+" "+colors3[3]);		//broem black
+
+			colors3[99]="greenyellow";	//在99处添加一个元素，则数组长度变为100=0~99
+			alert(colors3.length);		//100
+			
+			if(Array.isArray(colors3)){			//判断某个对象是不是数组
+				alert("colors3 is array");
+			}	
+		}
+		//creatarray();
+				//****5.2.2转换方法
+		function test5_2_2(){
+			var colors=["red","blue","yellow"];
+			alert(colors);				//调用数组每个对象的toString()方法	red,blue,yellow
+			alert(colors.toString());	//调用数组每个对象的toString()方法	red,blue,yellow
+			alert(colors.valueOf());	//调用数组每个对象的valueOf()方法		red blue,yellow
+			alert(colors.toLocaleString());		//调用数组每个对象的toLocaleString()方法	red,blue,yellow
+
+			var person1={
+				toLocaleString:function(){
+					return "Nikolaos";
+				},
+				toString:function(){
+					return "Nik";
+				}
+			};
+			var person2={
+				toLocaleString:function(){
+					return "Grigorios";
+				},
+				toString:function(){
+					return "Gri";
+				}
+			};
+			var people=[person1,person2];
+			alert(people);						//Nik,Gri
+			alert(people.toString());			//Nik,Gri
+			alert(people.toLocaleString());		//Nikolaos,Grigorios
+
+			//toString(),toLocaleString(),valueOf()都是以“，”分割，join()可以自定义不同的分隔符
+			alert(colors.join("||"));			//red||blue||yellow		调用toString方法用||分割
+			alert(colors.join("******"));		//red******blue******yellow
+			alert(people.join(" haha "));		//Nik haha Gri
+		}
+		//test5_2_2();
+				//****5.2.3栈方法
+		function test5_2_3(){
+			var colors=new Array();
+			var count=colors.push("red","blue");	//入栈
+			alert(count);		//2
+			alert(colors);		//red,blue
+
+			count =colors.push("green");			//入栈
+			alert(count);		//1
+			alert(colors);		//red,blue,green
+
+			var item=colors.pop();					//最后一位元素出栈
+			alert(item);		//green
+			alert(colors.length);//2
+			alert(colors);		//red,blue
+		}
+		//test5_2_3();
+			//****5.2.4队列方法
+		function test5_2_4(){
+				//末尾进，前端出
+			alert("Wj,Qc");
+			var colors=new Array();
+			var count=colors.push("red","blue");
+			alert(count);				//2
+			alert(colors);				//red,blue
+
+			var item=colors.shift();
+			alert(item);				//red
+			alert(colors.length);		//1
+			alert(colors);				//blue
+				//前端进，末尾出
+			alert("Qj,Wc");
+			var colors1=new Array();
+			var count1=colors1.unshift("red","blue");
+			alert(count1);				//2
+			alert(colors1);				//red,blue
+
+			var item1=colors1.pop();
+			alert(item1);				//blue
+			alert(colors1.length);		//1
+			alert(colors1);				//red
+
+		}
+		//test5_2_4();
+				//****5.2.5重排序方法
+		function compare(value1,value2){
+			if(value1<value2)
+				return -1;
+			else
+				return 1;
+		}
+		function compare1(value1,value2){
+			if(value1>value2)
+				return -1;
+			else
+				return 1;
+		}
+		function test5_2_5(){
+			var num=[1,2,5,4,6,0];
+			alert(num.reverse());		//0,6,4,5,2,1
+			alert(num.sort());			//0,1,2,4,5,6
+
+			var num1=["10",5,2,4,0,9];
+			alert(num1.sort());			//0,10,2,4,5,9
+			alert(num1.sort(compare));	//0,2,4,5,9,10
+			alert(num1.sort(compare1));	//10,9,5,4,2,0	降序排列
+
+		}
+		test5_2_5();	
+	</script>
+</body>
+</html>

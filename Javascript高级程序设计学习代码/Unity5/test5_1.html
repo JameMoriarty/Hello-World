@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unity5-引用类型-5.1Object</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function test5_1(){
+				//构造函数法
+			var person=new Object();
+			person.name="Liu";
+			person.age=29;
+				//对象字面量		也可以向函数传递大量可选参数	
+			var person1={
+				name:"Q",
+				age:30
+			};
+			alert(person.name+person.age);
+			alert(person1.name+person1.age);
+		}
+		test5_1();
+		function displayInfo(args){
+			var output="";
+			if(typeof args.name=="string"){
+				output+="Name: "+args.name+"\n";
+			}
+			if(typeof args.age=="number"){
+				output+="Age: "+args.age+"\n";
+			}
+			alert(output);
+		}
+		displayInfo({
+			name:"liu",
+			age:29
+		});
+		displayInfo({
+			name:"Q"
+		});
+			//可使用[]来访问对象的属性
+		var obj1={
+			name:"GAI",
+			age:30
+		};
+		alert(obj1["name"]);	//GAI
+	</script>
+</body>
+</html>
