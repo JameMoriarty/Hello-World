@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.4RegExp类型</title>
+</head>
+<body>
+	<h3>RegExp</h3>
+	<p>使用RegExp类型来支持正则表达式。创建方法：var&nbsp;expression=/pattern/flags;<br>
+		pattern部分写正则表达式，可以包含字符类、限定类、分组、向前查找、反向引用<br>
+		flags部分是标志，每个这则表达式可以有多个标志。<br>
+		<ul>
+			<li>g:全局模式，模式用于所有字符串</li>
+			<li>i:不区分大小写模式</li>
+			<li>m:多行模式，到达一行末尾时还会继续查找下一行中是否存在与模式匹配的项</li>
+		</ul></p>
+	<script type="text/javascript">
+		function test5_4() {
+					//正则表达式字面量
+		/*	var pat=/at/g;			 //匹配字符串中所有at的实例
+			alert(pat.test("at"));
+			var pat1=/[bc]at/i;		//匹配字符串中第一个bat或cat，不区分大小写
+			alert(pat1.test("cat"));
+			var pat2=/.at/gi;		//匹配所有以at结尾的3个字符的组合，不区分大小写
+			alert(pat2.test("patdion"));
+							//所有元字符必须转译
+			var pat3=/\[bc\]at/i;	//匹配第一个[bc]at,不区分大小写
+			alert(pat3.test("[bc]atdion"));
+					//使用构造函数GegExp()来构造正则表达式
+			var pat4=new RegExp(".at","i");
+			alert(pat4.test("pation"));
+		*/
+			var re=null,i;
+			for(i=0;i<3;i++){
+				re=/cat/g;
+				var s=re.test("catastrophe");
+				alert("字面量"+s);
+			}
+			for(i=0;i<3;i++){
+				re=new RegExp("cat","g");
+				alert("构造函数"+re.test("catastrophe"));
+			}				//旧版本中字面量会共享一个实例，所以第二次调用test()方法会失败；构造函数每次迭代都会创建新的实例
+							//新版本中更改了
+		}
+		test5_4();
+	</script>
+</body>
+</html>

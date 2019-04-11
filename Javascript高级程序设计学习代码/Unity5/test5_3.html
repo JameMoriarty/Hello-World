@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.3date</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h3>Date类型</h3>
+	<p>Date()自动获取当前时间,Date.UTC()和Date.parse()获取特定时间，两个函数参数不同；Date.now()返回调用方法是的日期和是时间的毫秒数</p>
+	<h3>继承的方法</h3>
+	<p>toLocaleString()-->按照与浏览器相适应的格式返回日期和时间;<br>
+		toString()-->返回有时区的时间表示，一般以军用时间表示<br>
+		valueOf()-->返回日期的毫秒表示</p>
+	<h3>日期时间组件方法</h3>
+	<p>alert(d.getTime());				//返回日期表示的毫秒数<br>
+			alert(d.setTime(2000));			//以毫秒设置日期<br>
+			alert(d.setFullYear(1994));		//设置年份4位数<br>
+			alert(d.setUTCFullYear(1997));	//设置UTC日期的年份4位数<br>
+			alert(d.getFullYear());			//取得4位数的年份<br>
+			alert(d.getUTCFullYear());		//取得UTC4位数的年份<br>
+			alert(d.setMonth(9));			//设置日期的月份<br>
+			alert(d.setUTCMonth(9));		//设置UTC日期的月份<br>
+			alert(d.getMonth());			//取得日期月份<br>
+			alert(d.getUTCMonth());			//取得UTC日期的月份<br>
+			alert(d.setDate(30));			//设置天数<br>
+			alert(d.setUTCDate(30));		//设置UTC天数<br>
+			alert(d.getDate());				//取得天数<br>
+			alert(d.getUTCDate());			//取得天数UTC天数<br>
+			alert(d.getDay());				//取得星期<br>
+			alert(d.getUTCDay());			//取得星期UTC星期<br>
+			//没有setDay()和setUTCDay()<br>
+			alert(d.setHours(18));			//设置小时<br>
+			alert(d.setUTCHours(18));		//设置UTC小时<br>
+			alert(d.getHours());			//取得小时<br>
+			alert(d.getUTCHours());			//取得UTC小时<br>
+			alert(d.setMinutes(33));		//设置分钟<br>
+			alert(d.setUTCMinutes(30));		//设置UTC分钟<br>
+			alert(d.getMinutes());			//取得分钟<br>
+			alert(d.getUTCMinutes());		//取得UTC分钟<br>
+			alert(d.setSeconds(20));		//设置秒<br>
+			alert(d.setUTCSeconds(22));		//设置UTC秒<br>
+			alert(d.getSeconds());			//取得秒<br>
+			alert(d.getUTCSeconds());		//取得UTC秒<br>
+			alert(d.setMilliseconds(10));	//设置毫秒<br>
+			alert(d.setUTCMilliseconds(11));//设置UTC毫秒<br>
+			alert(d.getMilliseconds());		//取得毫秒<br>
+			alert(d.getUTCMilliseconds());	//取得UTC毫秒<br>
+			alert(d.getTimezoneOffset());	//返回本地时间与UTC时间相差的分钟数</p>
+	<script type="text/javascript">
+				//****Data()方法
+		function test5_3(){
+			var d=new Date();	//自动获取当前时间
+			var d1=new Date(Date.UTC(2000,0));		//获取特定时间的毫秒数
+			var d2=new Date(Date.UTC(2005,4,5,17,55,55));	//参数：年份，月份（一月为0），日期，小时（24小时制），分钟，秒
+			var dp=new Date(Date.parse("May 25,2004"));		//获取特定时间的毫秒数 	接受一个表示时间的字符串参数
+			var dp1=new Date(Date.parse("6/13/2004"));		//传入的日期格式随地区而定
+									//也可以直接把参数传进Date()构造函数里
+			alert(d);
+			alert(d1);
+			alert(d2);
+			alert(dp);
+			alert(dp1);
+			var start=Date.now();	//返回调用方法时的日期和时间的毫秒数
+			alert("start"+start);
+			var stop=Date.now();
+			var result=stop-start;
+			alert("stop"+stop+" result"+result);
+		}
+		//test5_3();
+				//****继承的方法
+		function test5_3_1(){
+			var d=new Date();
+			alert("toLocalString: "+d.toLocaleString());
+			alert("toString: "+d.toString());
+			alert("valueOf: "+d.valueOf());
+		}
+		//test5_3_1();
+				//****日期格式化方法
+		function test5_3_2(){
+			var d=new Date();
+			alert("toDateString(): "+d.toDateString());		//星期、月、日、年}-->特定于实现的格式
+			alert("toTimeString(): "+d.toTimeString());		//时、分、秒、时区}
+			alert("toLocaleDateString(): "+d.toLocaleDateString());		//星期、月、日、年}-->特定于地区的格式
+			alert("toLocaleTimeString(): "+d.toLocaleTimeString());		//时、分、秒}--》特定于实现的格式
+			alert("toUTCString(): "+d.toUTCString());		//特定于实现的格式显示完整的UTC日期
+		}
+		//test5_3_2();
+				//****日期/时间组件方法
+		function test5_3_3(){
+			var d=new Date();
+			alert(d.getTime());				//返回日期表示的毫秒数
+			alert(d.setTime(2000));			//以毫秒设置日期
+			alert(d.setFullYear(1994));		//设置年份4位数
+			alert(d.setUTCFullYear(1997));	//设置UTC日期的年份4位数
+			alert(d.getFullYear());			//取得4位数的年份
+			alert(d.getUTCFullYear());		//取得UTC4位数的年份
+			alert(d.setMonth(9));			//设置日期的月份
+			alert(d.setUTCMonth(9));		//设置UTC日期的月份
+			alert(d.getMonth());			//取得日期月份
+			alert(d.getUTCMonth());			//取得UTC日期的月份
+			alert(d.setDate(30));			//设置天数
+			alert(d.setUTCDate(30));		//设置UTC天数
+			alert(d.getDate());				//取得天数
+			alert(d.getUTCDate());			//取得天数UTC天数
+			alert(d.getDay());				//取得星期
+			alert(d.getUTCDay());			//取得星期UTC星期
+			//没有setDay()和setUTCDay()
+			alert(d.setHours(18));			//设置小时
+			alert(d.setUTCHours(18));		//设置UTC小时
+			alert(d.getHours());			//取得小时
+			alert(d.getUTCHours());			//取得UTC小时
+			alert(d.setMinutes(33));		//设置分钟
+			alert(d.setUTCMinutes(30));		//设置UTC分钟
+			alert(d.getMinutes());			//取得分钟
+			alert(d.getUTCMinutes());		//取得UTC分钟
+			alert(d.setSeconds(20));		//设置秒
+			alert(d.setUTCSeconds(22));		//设置UTC秒
+			alert(d.getSeconds());			//取得秒
+			alert(d.getUTCSeconds());		//取得UTC秒
+			alert(d.setMilliseconds(10));	//设置毫秒
+			alert(d.setUTCMilliseconds(11));//设置UTC毫秒
+			alert(d.getMilliseconds());		//取得毫秒
+			alert(d.getUTCMilliseconds());	//取得UTC毫秒
+			alert(d.getTimezoneOffset());	//返回本地时间与UTC时间相差的分钟数
+			alert(d.toString());			//输出时间
+			alert(d.toUTCString());			//输出UTC时间
+		}
+		test5_3_3();
+	</script>
+</body>
+</html>

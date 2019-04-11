@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>5.2Array</title>
+	<meta charset="utf-8">
 </head>
 <body>
 	<p>javascript数组的每一项可以保存任何数据类型，数组大小可以动态调整，可跟随数据的增加自动增长以容纳新数据</p>
@@ -16,7 +17,35 @@
 	unshift()和pop()搭配使用，实现相反的方向模拟队列（前端添加，末尾移除）</p>
 	<h3>重排序方法</h3>
 	<P>reverse()--> 反转数组项的顺序<br>
-		sort()-->升序排列数组，调用toString()方法</P>
+		sort()-->升序排列数组，调用toString()方法******sort()函数里可以传参，将一个比较函数作为参数传入sort里就可以实现降序排列和避免字符和数值排列错误的情况</P>
+	<h3>操作方法</h3>
+	<p>concat()-->基于当前数组<i><b>所有项</b></i>创建一个新数组（将传递的参数添加到复制的数组的末尾，并返回副本数组；若没有参数，则直接返回副本数组；参数可为多个数组或多个元素）<br>
+		slice()-->基于当前数组的<i><b>一个或多个项</b></i>创建新数组（接受两个参数，返回项的起始和结束位置；只有一个参数时默认为参数到数组末尾的所有项；有两个参数时不包括结束位置的项）【若参数为负数则是数组长度加上参数的值来确定位置，结束位置小于起始位置返回空数组】<br>
+		splice()--><b>最强大的数组方法</b>向数组中插入项，有三种使用方法:(splice方法会返回从原始数组中删除的项)</p>
+		<ul>
+			<li>删除：传入两个参数要删除第一项的位置和要删除的项数splice(0,2)</li>
+			<li>插入：传入三个参数，起始位置，0（要删除的项数），要插入的项splice(2,0,"red","green")</li>
+			<li>替换：传入三个参数，起始位置，要删除的项数，要插入的项splice(2,1,"red","green")</li>
+		</ul>
+	<h3>位置方法</h3>
+	<p>两个方法都接受两个参数，要查找的项和表示查找位置起点的索引。<br>
+		indexOf()-->从数组开头（位置0）向后查找<br>
+		lastIndexOf()-->从数组末尾开始向前查找<br>
+	都返回要查找的项在数组中的位置，没找到返回-1，查找时使用全等操作符（===）</p>
+	<h3>迭代方法</h3>
+
+	<p>为数组指定范围内的每一项数据执行一个函数，迭代方法传入的参数为，要运行的函数和作用域（可选）<br>
+		every()-->对每一项运行给定函数，每一项都返回true则该方法返回true<br>
+		filter()-->对数组每一项运行该函数，返回函数返回true的项返回的项组成的数组<br>
+		forEach()-->对数组中每一项运行给定函数，这个方法没有返回值<br>
+		map()-->对每一项运行给定函数，返回每次函数调用的结果组成的数组<br>
+		some()-->对数组中每一项运行给定函数，若一项返回true则返回true<br>
+	以上方法都不会修改数组本身的值，且给运行的函数传入的三个参数：数组项的值，该项在数组中的位置，数组对象本身</p>
+	<h3>归并方法</h3>
+	<p>ruduce()和reduceRight()都会迭代数组的每一项，构建一个最终返回的值。都接受两个参数：在每一项上调用的函数，作为归并基础的初始值。运行的函数接受4个参数：前一个值，当前值，项的索引，数组对象，这个运行函数返回的任何值都会作为第一个参数自动传给下一项。<br>
+		reduce()-->从头开始,向后遍历<br>
+		reduceRight()-->从末尾开始，向前遍历<br>
+	</p>
 	<script type="text/javascript">
 		function creatarray(){
 			/*构造数组的方法1*/
@@ -162,7 +191,96 @@
 			alert(num1.sort(compare1));	//10,9,5,4,2,0	降序排列
 
 		}
-		test5_2_5();	
+		//test5_2_5();
+				//****5.2.6操作方法
+		function test5_2_6(){
+			var colors=["red","green","blue"];
+			//concat()
+			var colors1=colors.concat("black",["gs","gr"]);
+			var colors2=colors.concat();
+			alert(colors);
+			alert(colors1);
+			alert(colors2);
+			//slice()
+			var colors3=colors.slice(1);		//1~末尾  green,blue
+			var colors4=colors.slice(0,1);		//0		  red
+			var colors5=colors.slice(-3,-2);	//3-3=0 3-2=1  =slice(0,1)
+			var colors6=colors.slice(2,1);		//空数组
+			alert(colors3);
+			alert(colors4);
+			alert(colors5);
+			alert(colors6);			
+			//splice()
+			var colors7=new Array();
+			colors7=["r","g","b"];
+			var col=colors7.splice(1,1);		//删除从1开始的1项
+			alert("删除的项"+col);				//g
+			alert(colors7);						//r,b
+			var col1=colors7.splice(1,0,"black","yellow");	//在1位置插入black和yellow
+			alert("删除的项"+col1);				//空
+			alert(colors7);						//r,black,yellow,b
+			var col2=colors7.splice(1,1,"green");	//把1位置的值替换成green
+			alert("删除的项"+col2);				//black
+			alert(colors7);						//r,green,yellow,b
+		}	
+		//test5_2_6();
+				//****位置方法
+		function test5_2_7(){
+			var num=[1,2,3,4,5,4,3,2,1];
+			alert(num.indexOf(4));			//3	  从0位置开始向后查找4
+			alert(num.indexOf(4,4));		//5	  从4位置开始向后查找4
+			alert(num.lastIndexOf(4));		//5	  从末尾开始向前查找4
+			alert(num.lastIndexOf(3,4));	//2	  从4位置开始向前查找3
+			alert(num.indexOf(6));			//-1  从0位置开始向后查找6，未找到返回-1
+		}
+		//test5_2_7();
+				//****迭代方法
+		function test5_2_8(){
+			var num=[1,2,3,4,5,4,3,2,1];
+			var everyResult=num.every(function(item,index,array){	//三个参数：数组项的值，该项在数组中的位置，数组对象本身
+				return (item>2);
+			});
+			alert(everyResult);		//false		必须每一项都返回true结果才是true
+
+			var someResult=num.some(function(item,index,array){
+				return (item>2);
+			});
+			alert(someResult);		//true		只要有一项返回true则结果为true
+
+			var filterResult=num.filter(function(item,index,array){
+				return (item>2);
+			});
+			alert(filterResult);	//3,4,5,4,3		返回结果为true的项的值
+
+			var mapResult=num.map(function(item,index,array){
+				return (item*2);
+			});
+			alert(mapResult);		//2,4,6,8,10,8,6,4,2	返回每一项操作后的值-->可替代for循环创建新的操作后的数组
+
+			var string1=0;
+			num.forEach(function(item,index,array){
+				string1+=item;
+			});
+			alert(string1);			//25	等价与for循环
+		}
+		//test5_2_8();
+				//****归并函数
+		function test5_2_9(){
+			var values=[1,2,3,4,5];
+			var sum=values.reduce(function(prev,cur,index,array){
+				return prev+cur;
+			});
+			alert(sum);			//15	对数组所有项的和	从头遍历
+
+			var sum1=values.reduceRight(function(prev,cur,index,array){
+				return prev+cur;
+			});
+			alert(sum1);		//15	对数组所用项求和	从尾遍历
+			alert((3/112));
+			alert(100000/1440);
+			alert(0.6*60);
+		}
+		test5_2_9();
 	</script>
 </body>
 </html>
