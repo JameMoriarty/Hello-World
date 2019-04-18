@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.5Function类型</title>
+</head>
+<body>
+	<h3>Function类型（函数）</h3>
+	<p>函数实际上是对象，每个函数都是Function类型的实例，函数名是指向函数对象的指针</p>
+	<h3>5.5.1没有重载</h3>
+	<p>因为函数名实际上是指针，故后一个函数会覆盖前一个函数，故没有重载</p>
+	<h3>5.5.2函数声明和函数表达式</h3>
+	<p>解析器会先读取函数声明，并使其在执行任何代码前可用<br>
+	函数表达式，当解析器执行到它所在的代码行，才会被真正解析执行</p>
+	<h3>5.5.3作为值的函数</h3>
+	<p>函数中可以把另一个函数名作为参数，把一个函数传递给另一个函数，将一个函数作为另一个函数的结果返回</p>
+	<h3>5.5.4函数内部属性</h3>
+	<p>arguments-->保存函数参数::::arguments的属性callee-->指向拥有arguments对象的函数<br>
+		this-->引用函数执行的环境变量<br>
+		caller-->存储调用函数的函数的引用</p>
+	<h3>5.5.5函数属性和方法</h3>
+	<p>属性：length-->函数希望接受的命令参数的个数,prototype-->保存所有实例方法<br>
+		方法：apply()-->在特定作用域中调用函数，两个参数（作用域和参数数组）,call()-->在特定作用域中调用函数,参数中第一个是this，后面的是注意列举传递给函数的参数</p>
+	<script type="text/javascript">
+		//函数两种定义方式
+	/*	function sum1(num1,num2){		//推荐使用的方法
+			return num1+num2;
+		}
+		var sum2=function(num1,num2){
+			return num1+num2;
+		};
+		var sum3=new Function("num1","num2","return num1+num2");	//函数表达式
+		var sum4=sum2;		//体现出函数名是指针
+		alert("1+2="+sum1(1,2));
+		alert("3+4="+sum2(3,4));
+		alert("5+6="+sum3(5,6));
+		alert("7+8="+sum4(7,8));	*/
+				//****5.5.1没有重载
+				//****5.5.2函数声明与函数表达式
+	/*	alert(test1());
+		function test1(){
+			return "执行test1";
+		}	*/
+		/*	
+		alert(test2());		//报错
+		var test2=new Function("执行test2"); */
+				//****5.5.3作为值的函数
+	/*	function callSomeFunction(someFunction,someArgument){
+			return someFunction(someArgument);
+		}
+		function add10(num){
+			return num+10;
+		}
+		var result=callSomeFunction(add10,2);	//传递一个函数作为参数
+		alert(result);	*/
+
+	/*	function creatComparisonFunction(propertyName){
+			return function(Object1,Object2){		//返回一个函数
+				var value1=Object1[propertyName];	//方括号表示法来取得给定属性的值
+				var value2=Object2[propertyName];
+
+				if(value1<value2){
+					return -1;
+				} else if(value1>value2){
+					return 1;
+				} else {
+					return 0;
+				}
+			};
+		}
+
+		var data=[{name:"Zac",age:28},{name:"Nic",age:30}];
+		data.sort(creatComparisonFunction("name"));
+		alert(data[0].name);
+		data.sort(creatComparisonFunction("age"));
+		alert(data[0].age);		*/
+
+				//****5.5.4函数内部属性
+						//arguments.callee
+	/*	function factorial(num){
+			if(num<=1){
+				return 1;
+			}else {
+				return num*arguments.callee(num-1);		//arguments.callee-->指向拥有arguments对象的函数
+			}
+		}
+		alert(factorial(3));	//6
+						//this
+		window.color="red";
+		var o={color:"blue"};
+		function saycolor(){
+			alert(this.color);
+		}
+		saycolor();		//red	saycolor()在全局中定义，故执行环境是全局,故返回red
+		o.saycolor=saycolor;	//把saycolor()赋值给对象o
+		o.saycolor();	//blue	调用o.saycolor()时执行环境是o，故返回blue
+						//caller
+		function outer(){
+			inner();
+		}
+		function inner(){
+			alert(inner.caller);	//保存着调用当前函数的函数的引用
+		}
+		outer();		*/
+				//****5.5.5函数属性和方法
+		function sayName(name){
+			alert(name);
+		}
+		function sum(num1,num2){
+			return num1+num2;
+		}
+		function sayHi(){
+			alert("hi");
+		}
+		alert(sayName.length);	//1
+		alert(sum.length);		//2
+		alert(sayHi.length);	//0
+					//apply()
+		function sum1(num1,num2){
+			return num1+num2;
+		}
+		function callSum1(num1,num2){
+			return sum1.apply(this,arguments);
+		}
+		function callSum2(num1,num2){
+			return sum1.apply(this,[num1,num2]);
+		}
+		alert(callSum1(10,10));		//20
+		alert(callSum2(10,10));		//20
+					//call()-->必须明确的传入每一个参数
+		function sum2(num1,num2){
+			return num1+num2;
+		}
+		function callSum3(num1,num2){
+			return sum2.call(this,num1,num2);
+		}
+		alert(callSum3(10,10));
+	</script>
+</body>
+</html>

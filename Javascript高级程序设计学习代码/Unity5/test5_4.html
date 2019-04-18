@@ -13,6 +13,44 @@
 			<li>i:不区分大小写模式</li>
 			<li>m:多行模式，到达一行末尾时还会继续查找下一行中是否存在与模式匹配的项</li>
 		</ul></p>
+	<h3>RegExp实例属性</h3>
+	<p>
+		<ul>
+			<li>global&nbsp;bool&nbsp;是否设置了g属性</li>
+			<li>ignoreCase&nbsp;bool&nbsp;是否设置了i属性</li>
+			<li>lastIndex&nbsp;整数&nbsp;开始搜索下一个匹配项的字符位置</li>
+			<li>multiline&nbsp;bool&nbsp;是否设置了m属性</li>
+			<li>source&nbsp;正则表达式的字符串表示</li>
+		</ul>
+	</p>
+	<h3>RegExp实例方法</h3>
+	<p>exec()接受要应用模式的字符串做参数，返回包含一个匹配项的数组（数组中第一项是与整个模式匹配的字符串，其他项是与模式中捕获组匹配的字符串）数组额外包含两个属性{index-->匹配项在字符串中的位置；input-->应用正则表达式的字符串}<br>
+		test()&nbsp;&nbsp;返回bool属性，判断目标字符串和模式是否匹配<br>
+	valueOf()&nbsp;&nbsp;返回正则表达式本身</p>
+	<h3>RegExp构造函数属性</h3>
+	<p>每个属性分别有一个短属性名和长属性名（Opera不支持短属性名）<br>
+		<ul>
+			<li>input&nbsp;&nbsp;$_&nbsp;&nbsp;最近一次要匹配的字符串（Opera未实现此属性）</li>
+			<li>lastMatch&nbsp;&nbsp;$&&nbsp;&nbsp;最近一次的匹配项</li>
+			<li>lastParen&nbsp;&nbsp;$+&nbsp;&nbsp;最近一次匹配的捕获组</li>
+			<li>multiline&nbsp;&nbsp;$*&nbsp;&nbsp;bool，表示是否所有表达式都使用多行模式</li>
+			<li>leftContext&nbsp;&nbsp;$`&nbsp;&nbsp;input字符串中lastMatch之前的文本</li>
+			<li>rightContext&nbsp;&nbsp;$'&nbsp;&nbsp;inout字符串中lastMatch之后的文本</li>
+		</ul>
+	除了以上还有9个用于储存捕获组的构造函数属性：RegExp.$1、RegExp.$2、RegExp.$3………… </p>
+	<h3>模式的局限性</h3>
+	<p>不支持的特性：
+		<ol>
+			<li>匹配字符串开始和结尾的\A,\z锚</li>
+			<li>向后查找</li>
+			<li>并集和交集</li>
+			<li>原子组</li>
+			<li>Unicode支持（单个字符除外）</li>
+			<li>命名的捕获组</li>
+			<li>s（单行）和x（无间隔）匹配模式</li>
+			<li>条件匹配</li>
+			<li>正则表达式注释</li>
+		</ol></p>
 	<script type="text/javascript">
 		function test5_4() {
 					//正则表达式字面量
@@ -41,7 +79,87 @@
 			}				//旧版本中字面量会共享一个实例，所以第二次调用test()方法会失败；构造函数每次迭代都会创建新的实例
 							//新版本中更改了
 		}
-		test5_4();
+		//test5_4();
+				//****RegExp实例属性
+		function test5_4_1(){
+			var pat=/\[bc\]at/i;
+
+			alert(pat.global);			//false		bool 是否设置了g属性
+			alert(pat.ignoreCase);		//true		bool 是否设置了i属性
+			alert(pat.lastIndex);		//0			整数 开始搜索下一个匹配项的字符位置
+			alert(pat.multiline);		//false		bool 是否设置了m属性
+			alert(pat.source);			//"\[bc]at"		正则表达式的字符串表示
+		}
+		//test5_4_1();
+				//****RehExp实例方法
+		function test5_4_2(){
+			//*******exec()
+			var text="mom and dad and baby";
+			var pat=/mom( and dad( and baby)?)?/gi;
+			var matches=pat.exec(text);		//RegExp对象的主要方法，是为捕获组设计的。
+			alert(matches.index);		//0		匹配项在字符串中的位置
+			alert(matches.input);		//mom and dad and baby		应用正则表达式的字符串
+			alert(matches[0]);			//mom and dad and baby
+			alert(matches[1]);			// and dad and baby
+			alert(matches[2]);			// and baby		
+						//在同一个字符串上多次调用exec()时： 没有全局标志，只返回第一个匹配项的信息;有全局标志，每一次调用都会查找新匹配项
+			var text1="cat, bat, sat, fat";
+			var pat1=/.at/;
+			for(var i=0;i<=1;i++){
+				var matches1=pat1.exec(text1);
+				alert("index: "+matches1.index+" matches1[0]: "+matches1[0]+" pat1.lastIndex: "+pat1.lastIndex);
+			}
+
+			var pat2=/.at/g;
+			for(var i=0;i<=1;i++){
+				var matches2=pat2.exec(text1);
+				alert("index: "+matches2.index+" matches1[0]: "+matches2[0]+" pat2.lastIndex: "+pat2.lastIndex);
+			}
+			//*******test()		返回bool属性，判断目标字符串和模式是否匹配
+			var text3="000-00-0000";
+			var pat3=/\d{3}-\d{2}-\d{4}/;
+
+			if(pat3.test(text)){
+				alert("The pat3 was matched.");
+			}
+			//*******toLocaleString()和toString()	返回正则表达式的字面量，与创建正则表达式的方式无关
+			alert(" toLocaleString(): "+pat3.toLocaleString());		//  /\d{3}-\d{2}-\d{4}/
+			alert(" toString(): "+pat3.toString());				//	/\d{3}-\d{2}-\d{4}/
+			//******valueOf()	返回正则表达式本身
+			alert(" valueOf(): "+pat3.valueOf());		//	/\d{3}-\d{2}-\d{4}/
+		}
+		//test5_4_2();
+				//****5.4.3构造函数属性
+		function test5_4_3(){
+			var text="this has been a short summer";
+			var pat=/(.)hort/g;
+			//短属性
+		/*	if(pat.test(text)){
+				alert(RegExp.input);			//this has been a short summer
+				alert(RegExp.leftContext);		//this has been a
+				alert(RegExp.rightContext);		//summer
+				alert(RegExp.lastMatch);		//short
+				alert(RegExp.lastParen);		//s
+				alert(RegExp.multiline);		//undefined
+			}	*/
+			//长属性
+			if(pat.test(text)){
+				alert(RegExp["$_"]);			//this has been a short summer
+				alert(RegExp["$`"]);		//this has been a
+				alert(RegExp["$'"]);		//summer
+				alert(RegExp["$&"]);		//short
+				alert(RegExp["$+"]);		//s
+				alert(RegExp["$*"]);		//undefined
+			}
+			//存储捕获组的构造函数属性
+			var pat1=/(..)or(.)/g;
+			if(pat1.test(text)){
+				alert(RegExp.$1);		//sh
+				alert(RegExp.$2);		//t
+			}
+
+		}
+		test5_4_3();
 	</script>
 </body>
 </html>
