@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5.6基本包装类型</title>
+</head>
+<body>
+	<h3>基本包装类</h3>
+	<P>Boolean,Number,String</P>
+	<h3>Boolean引用类型</h3>
+	<p>是与布尔值对应的引用类型。<b><i>[建议：不要使用Boolean引用类型]</i></b></p>
+	<h3>Number引用类型</h3>
+	<p>是与数字值对应引用类型。<b><i>[建议：不要使用Number引用类型]</i></b></p>
+	<h3>String引用类型</h3>
+	<p>是与字符串对应的引用类型。<b><i></i></b></p>
+	<table border="1">
+		<tr>
+			<td>字符序列</td>
+			<td>替换文本</td>
+		</tr>
+		<tr>
+			<td>$$</td>
+			<td>$</td>
+		</tr>
+		<tr>
+			<td>$&</td>
+			<td>匹配整个模式的字符串</td>
+		</tr>
+		<tr>
+			<td>$'</td>
+			<td>匹配字符串之前的子字符串</td>
+		</tr>
+		<tr>
+			<td>$`</td>
+			<td>匹配的字符串之后的子字符串</td>
+		</tr>
+		<tr>
+			<td>$n</td>
+			<td>匹配第n个捕获组的子字符串</td>
+		</tr>
+		<tr>
+			<td>$nn</td>
+			<td>匹配的nn个捕获组的子字符串</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+				//****基本包装类型共性
+	/*	var s1="some text";
+		var s2=s1.substring(2);		//me text
+			//基本类型不能添加属性和方法
+		alert(s2);		//me text
+		alert(s1);		//some text
+		s1.color="red";
+		alert(s1.color);	//undefined
+
+		var value="25";
+		var number=Number(value);
+		alert(typeof number);	//Number 	*/
+				//****Boolean类型
+		function test5_6_1(){
+			var falseOnject = new Boolean(false);	//Boolean对象（Object）
+			var result=falseOnject && true;			//falseObject求值（布尔表达式中所有对象都会被返回true），true&&true=true
+			alert("result: "+result+" falseOnject: "+falseOnject);	//true false
+
+			var result2=Boolean(falseOnject) && true;	//等价于这个
+			alert("result2: "+result2+" Boolean(falseOnject): "+Boolean(falseOnject));	//true true
+
+			var falseValue=false;	//基本类型bool值
+			var result1=falseValue && true;
+			alert("result1: "+result1+" falseValue: "+falseValue);	//false false
+
+			alert("Boolean对象 "+typeof falseOnject);	//object
+			alert("bool值 "+typeof falseValue);		//boolean
+		}
+		//test5_6_1();
+				//****Number类型
+		function test5_6_2(){
+			var num=new Number(10);
+			var num1=10.005;
+			alert(num.toString());	//10
+			alert(num.toString(2));	//1010
+			//将数值格式化为字符串的方法
+					//toFixed()		n位小数
+			alert(num.toFixed(2));		//转换成两位小数的字符串格式	10.00
+			alert(num1.toFixed(2));		//会自动舍入（不同浏览器舍入规则不同）	10.01
+					//toExponential()	n位小数的指数形式
+			alert(num.toExponential(2));	//转换成两位小数的指数表示形式		1.00e+1
+			alert(num1.toExponential(3));		//1.001e+1
+					//toPrecision()		n位数，自动选用最佳表示形式
+			alert(num.toPrecision(1));		//用一位数表示	1e+1
+			alert(num.toPrecision(2));		//用两位数表示	10
+			alert(num.toPrecision(3));		//用三位数表示	10.0
+
+			alert("Number引用类型 "+typeof num);			//object
+			alert("Number基本类型值 "+typeof num1);		//number
+		}
+		//test5_6_2();
+				//****String类型
+		function test5_6_3(){
+			var str=new String("hello world");
+			alert(str.length);		//11
+				//访问特定位置的字符
+		/*	alert(str.charAt(1));		//e 	以单字符字符串形式返回位置1的字符
+			alert(str[1]);				//e 	返回位置1的字符
+			alert(str.charCodeAt(1));	//101	返回位置1的字符编码	*/
+				//字符串操作方法
+		/*	var result=str.concat(", my honey");	//拼接字符串
+			alert("result: "+result);	//hello world, my honey
+			alert("str: "+str);			//hello world
+							//基于字符串创建新字符串
+			alert(str.slice(1,4));		//ell 	两个参数：开始位置，结束位置（字符串最后一个字符的后一个位置）
+			alert(str.substring(1,4));	//ell 	两个参数：开始位置，结束位置（字符串最后一个字符的后一个位置）
+			alert(str.substr(1,4));		//ello	两个参数：开始位置，返回的字符个数
+			alert(str.slice(-3));		//rld	传入的负值和字符串长度相加
+			alert(str.substring(-3));	//hello world	将所有负值转换成0
+			alert(str.substr(-3));		//rld	负的第一个参数加上字符串的长度，负的第二个参数变为0
+			alert(str.slice(3,-4));		//lo w 	
+			alert(str.substring(3,-4));	//hel
+			alert(str.substr(3,-4));	//""(空字符串) 	*/
+				//字符串位置方法
+		/*	alert(str.indexOf("o"));		//4		从头向后搜索
+			alert(str.lastIndexOf("o"));	//7		从后向前搜索
+			alert(str.indexOf("o",6));		//从位置6向后搜索		7
+			alert(str.lastIndexOf("o",6));	//从位置6向前搜索		4
+							//查找字符串中的所有要查询的子串
+			var str1="Lorem ipsum dolor sit amet, consectetur adipisicing elit";
+			var postions=new Array();
+			var pos=str1.indexOf("e");
+			while(pos>-1){
+				postions.push(pos);		//从后入栈
+				pos=str1.indexOf("e",pos+1);
+			}
+			alert(postions);	//3,24,32,35,52		*/
+				//trim()方法		（创建一个字符串的副本，并删除前置和后缀的所有空格，返回结果）
+		/*	var str2="   hello world   ";
+			var trimmedStringValue=str2.trim();
+			alert(str2);				//"   hello world   "
+			alert(trimmedStringValue);	//"hello world"		*/
+				//字符串大小写转换方法
+		/*	alert(str.toLocaleUpperCase());		//HELLO WORLD 	针对地区的方法	（不知道自己的代码要在什么语言环境中运行时，最好使用针对地区的方法）
+			alert(str.toUpperCase());			//HELLO WORLD
+			alert(str.toLocaleLowerCase());		//hello world 	针对地区的方法
+			alert(str.toLowerCase());			//hello world 	*/
+				//字符串模式的匹配方法
+							//match()
+			var text="cat,bat,sat,fat";
+			var pat=/.at/;
+			var matches=text.match(pat);	//只接受一个参数，正则表达式或RegExp对象
+			alert(matches.index);		//0
+			alert(matches[0]);			//cat
+			alert(pat.lastIndex);		//0
+							//search()
+			var pos=text.search(/at/);	//从开头向后查找模式。返回第一次找到的位置
+			alert("pos: "+pos);		//1
+							//replace()
+			var result=text.replace("at","ond");	//把第一个cat里的at替换成ond
+			alert(result);		//cond,bat,sat,fat
+
+			var result1=text.replace(/at/g,"ond");	//把所有at换成ond
+			alert(result1);		//cond,bond,sond,fond
+
+			var result2=text.replace(/(.at)/g,"word($1)");	//特殊字符序列$1，将正则表达式操作得到的值插入到结果字符串中
+			alert(result2);		//word(cat),word(bat),word(sat),word(fat)
+		}	
+		test5_6_3();
+	</script>
+</body>
+</html>

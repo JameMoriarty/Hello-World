@@ -2,18 +2,362 @@
 <html>
 <head>
 	<title>css-Unity2-背景与边框</title>
+	<meta charset="utf-8">
 </head>
 <body>
 	<!-- Chapter1半透明边框-->
-	<div class="BTMBK">Something.</div>
+	<div style="height: 100px;position: absolute;top:100px;">
+		<!-- 有色半透明框 -->
+		<span class="BTMBK">有色半透明边框</span>
+		<!-- 透明白色框 -->
+		<span class="BTMBK1">无色半透明边框</span>
+		<!-- 透明白色框 -->
+		<span class="BTMBK2">无色半透明边框</span>
+	</div>
+	<!--Chapter2多重边框-->
+	<div style="height: 100px;position: absolute;top:250px;">
+		<span class="DCBK">box-shadow做边框</span>
+		<span class="DCBK1">shadow多重边框</span>
+		<span class="DCBK2">outline</span>
+		<span class="DCBK3">outline缝边效果</span>
+		<span class="DCBK4">outline没有圆角</span>
+	</div >
+	<!--Chapter3灵活的背景定位-->
+	<div style="height: 200px;position: absolute;top:350px;" class="Chapter3">
+		<div class="BJDW">background-postion</div>
+		<div class="BJDW1">background-origin</div>
+		<div class="BJDW2">cala()计算实现</div>
+	</div >
+	<!-- Chapter4边框内圆角 -->
+	<div style="height: 200px;position: absolute;top:500px;" class="Chapter4">
+		<div class="BKNYJ">
+			<div>I have a nice subtle inner rounding,don't I look preety?</div>
+		</div>
+		<div class="BKNYJ1">I am happy.</div>
+	</div>
+	<!-- Chapter5条纹背景 -->
+	<div style="height: 200px;position: absolute;top:650px;" class="Chapter5">
+		<!-- 水平条纹 -->
+		<div class="TWBJ"></div>
+		<div class="TWBJ1"></div>
+		<div class="TWBJ2"></div>
+		<div class="TWBJ3"></div>
+		<div class="TWBJ4"></div>
+		<div class="TWBJ5"></div>
+		<!-- 垂直条纹 -->
+		<div class="CZTW"></div>
+		<!-- 斜向条纹 -->
+		<div class="XXTW"></div>
+		<div class="XXTW1"></div>
+		<div class="XXTW2"></div>
+		<div class="XXTW3"></div>
+		<!-- 同色系条纹 -->
+		<div class="TSXTW"></div>
+		<div class="TSXTW1"></div>
+	</div>
+	<!-- Chapter6复杂的背景图案-->
+	<div style="height:200px;position:absolute;top:1950px;" class="Chapter6">
+		<!-- 网格 -->
+		<div class="WG1"></div>
+		<div class="WG2"></div>
+		<div class="WG3"></div>
+		<!-- 波点 -->
+		<div class="BD1"></div>
+		<div class="BD2"></div>
+		<!-- 棋盘-->
+		<div class="QP1"></div>
+		<div class="QP2"></div>
+		<div class="QP3"></div>
+		<div class="QP4"></div>
+		<div class="QP5"></div>
+		<div class="QP6"></div>
+		<!--角向渐变-->
+		<div class="QP7"></div>
+	</div>
+
 	<style type="text/css">
+		body {
+			background:black;
+		}
+		span{
+			margin: 2em;
+			max-width: 10em;
+			padding: 2em;
+			font: 100%/1.5 sans-serif;
+		}
+		/********半透明边框 */
+		/*
+		*透明有色框
+		*/
 		.BTMBK{
-			height: 100px;
-			width: 100px;
 			border: 10px solid hsla(0,0%,100%,.5);
 			background: yellowgreen;
 			color: white;
-			text-align: center;
+		}
+		
+		/*
+		*透明白色框
+		*/
+		.BTMBK1 {
+			border: 10px solid hsla(0,0%,100%,.5);
+			background: white;
+			background-clip: padding-box;		/*背景被border的外沿框切掉*/
+		}
+		/*
+		*透明白色框
+		*/
+		.BTMBK2{			
+			border: 10px solid hsla(0,0%,100%,.5);
+			background: deeppink;
+			background-clip: padding-box;
+			color: white;
+		}
+		/********多重边框 */
+		/*投影box-shadow实现*/
+		.DCBK{
+			background: yellowgreen;
+			box-shadow: 0 0 0 10px #655;
+			color: white;
+		}
+		.DCBK1{
+			background: yellowgreen;
+			box-shadow: 0 0 0 10px #655,0 0 0 15px deeppink;
+			color: white;
+		}
+		/*outline描边实现*/
+		.DCBK2{
+			background: yellowgreen;
+			border: 10px solid #655;
+			outline: 5px solid deeppink;
+			color: white;
+		}
+		.DCBK3{
+			background: #655;
+			border: 10px solid #655;
+			outline: 1px dashed white;
+			outline-offset: -10px;		/*控制outline和元素的边缘距离*/
+			color: white;
+		}
+		.DCBK4{
+			background: yellowgreen;
+			border-radius: 10px;
+			outline: 5px solid white;
+			color: white; 
+		}
+		/********背景定位 */
+		.Chapter3 div{
+			font: 100%/1 sans-serif;
+			color: white;
+			margin: 2em;
+			max-width: 10em;
+			min-height: 5em;
+
+			float: left;
+		}
+		/*background-postion实现*/
+		.BJDW{
+			background: url(images/code-pirate.svg) no-repeat #58a bottom right;
+			background-position: right 20px bottom 10px;
+			padding: 10px;
+		}
+		/*background-origin实现*/
+		.BJDW1{
+			padding: 10px;
+			background: url(images/code-pirate.svg) no-repeat #58a bottom right;
+			background-origin: content-box;
+		}
+		/*cala()实现*/
+		.BJDW2{
+			background: url(images/code-pirate.svg) no-repeat #58a;
+			background-position:calc(100% - 20px) calc(100% - 10px);
+			padding: 10px;
+		}
+		/******边框内圆角*/
+		.Chapter4 > div{
+			font: 100%/1 sans-serif;
+			margin: 2em;
+		/*	color: white;
+			max-width: 10em;
+			min-height: 5em;
+								*/
+			float: left;
+		}
+		/*用两个div一个做背景一个做圆角框 */
+		.BKNYJ{
+			background: #655;
+			padding: .8em;
+		}
+		.BKNYJ > div{
+			background: tan;
+			border-radius: .8em;
+			padding: 1em;
+		}
+		/*一个div用shadow和outline实现 */
+		.BKNYJ1{
+			background: tan;
+			border-radius: .8em;
+			padding: 1em;
+			box-shadow: 0 0 0 .6em #655;	/*投影不能小于0.414r*/
+			outline: .7em solid #655;
+		}
+		/******条纹背景*/
+		.Chapter5 > div{
+			font: 100%/1 sans-serif;
+			color: white;
+			margin: 2em;
+			max-width: 10em;
+			padding: 8em;
+			float: left;
+		}
+		/*水平条纹*/
+		.TWBJ{
+			background: linear-gradient(#fb3,#58a);
+		}
+		.TWBJ1{
+			background: linear-gradient(#fb3 20%,#58a 80%);
+		}
+		.TWBJ2{
+			background: linear-gradient(#fb3 50%,#58a 50%);
+		}
+		.TWBJ3{
+			background: linear-gradient(#fb3 50%,#58a 50%);
+			background-size: 100% 80px;
+		}
+		.TWBJ4{
+			background: linear-gradient(#fb3 30%,#58a 0);
+			background-size: 100% 80px;
+		}
+		.TWBJ5{
+			background: linear-gradient(#fb3 33.3%,#58a 0,#58a 66.6%,deeppink 0);
+			background-size: 100% 45px;
+		}
+		/*垂直条纹*/
+		.CZTW{
+			background: linear-gradient(to right, /*或90deg*/ #fb3 50%,#58a 0);
+			background-size:80px 100%;		/*此处位置与水平条纹相反*/
+		}
+		/*斜向条纹*/
+		.XXTW{
+			background: linear-gradient(45deg, #fb3 50%,#58a 0);
+			background-size: 30px 30px;
+		}
+		.XXTW1{
+			background: linear-gradient(45deg, #fb3 25%,#58a 0,#58a 50%, #fb3 0,#fb3 75%,#58a 0);
+			background-size: 30px 30px;
+		}
+		.XXTW2{
+			background:repeating-linear-gradient(45deg, #fb3, #58a 30px);
+		}
+		.XXTW3{
+			background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0,#58a 30px);
+		}
+		/*同色系条纹*/
+		.TSXTW{
+			background: #58a;
+			background-image: repeating-linear-gradient(30deg, hsla(0,0%,100%,.1),hsla(0,0%,100%,.1) 15px, transparent 0,transparent 30px);
+		}
+		.TSXTW1{
+			background: #fb3;
+			background-image: repeating-linear-gradient(30deg, hsla(0,0%,100%,.1),hsla(0,0%,100%,.1) 15px, transparent 0,transparent 30px);
+		}
+		/*****复杂背景图案*/
+		.Chapter6 > div{
+			font: 100%/1 sans-serif;
+			color: white;
+			margin: 2em;
+			max-width: 10em;
+			padding: 8em;
+			float: left;
+		}
+		/* 网格 */
+		.WG1{
+			 background: white;
+			 background-image: linear-gradient(90deg,rgba(200,0,0,.5) 50%,transparent 0),linear-gradient(rgba(200,0,0,.5) 50%,transparent 0);
+			 background-size: 30px 30px;
+		}
+		.WG2{
+			background: #58a;
+			background-image: linear-gradient(white 1px,transparent 0),linear-gradient(90deg,white 1px,transparent 0);
+			background-size: 30px 30px;
+		}
+		.WG3{
+			background:#58a;
+			background-image: 
+					linear-gradient(white 2px,transparent 0),
+					linear-gradient(90deg,white 2px,transparent 0),
+					linear-gradient(hsla(0,0%,100%,.3) 1px,transparent 0),
+					linear-gradient(90deg,hsla(0,0%,100%,.3) 1px,transparent 0);
+			background-size: 75px 75px,78px 78px,15px 15px, 15px 15px;
+		}
+		/*波点*/
+		.BD1{
+			background: #655;
+			background-image: radial-gradient(tan 30%,transparent 0);
+			/* 经向渐变 */
+			background-size: 30px 30px;
+		}
+		.BD2{
+			background: #655;
+			background-image: radial-gradient(tan 20%,transparent 0),radial-gradient(tan 20%,transparent 0);
+			background-size: 30px 30px;
+			background-position: 0 0,15px 15px;
+		}
+		/*若使用预处理器，可将波点代码写成这样
+		@mixin polka($size,$dot,$base,$accent){
+			background: $base;
+			background-image: 
+					radial-gradient($accent $dot,transparent 0),
+					radial-gradient($accent $dot,transparent 0);
+			background-size: $size $size;
+			background-position: 0 0,$size/2 $size/2;
+		}
+		调用时：@include polka(30px,30%,#655,tan);
+		*/
+		/* 棋盘 */
+		.QP1{
+			background: #eee;
+			background-image: 
+						linear-gradient(45deg,transparent 75%,#bbb 0);
+			background-size: 30px 30px;
+		}
+		.QP2{
+			background: #eee;
+			background-image: linear-gradient(45deg,transparent 25%,#bbb 0);
+			background-size: 30px 30px;
+		}
+		.QP3{
+			background: #eee;
+			background-image: linear-gradient(45deg,#bbb 25%,transparent 0),
+					linear-gradient(45deg,transparent 75%,#bbb 0);
+			background-size: 30px 30px;
+		}
+		.QP4{
+			background: #eee;
+			background-image: linear-gradient(45deg,#bbb 25%,transparent 0),
+					linear-gradient(45deg,transparent 75%,#bbb 0);
+			background-position: 0 0,15px 15px;
+			background-size: 30px 30px;
+		}
+		.QP5{
+			background: #eee;
+			background-image: linear-gradient(45deg,#bbb 25%,transparent 0),
+					linear-gradient(45deg,transparent 75%,#bbb 0),
+					linear-gradient(45deg,#bbb 25%,transparent 0),
+					linear-gradient(45deg,transparent 75%,#bbb 0);
+			background-position: 0 0,15px 15px,
+								15px 15px,30px 30px;
+			background-size: 30px 30px;
+		}
+		.QP6{
+			background: #eee;
+			background-image: linear-gradient(45deg,rebeccapurple 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0),
+				linear-gradient(45deg,deeppink 25%,transparent 0,transparent 75%,rgba(0,0,0,.25) 0);
+			background-position: 0 0,15px 15px;
+			background-size: 30px 30px;
+		}
+		/*生成色轮-->角向渐变（暂未有浏览器支持）*/
+		.QP7{
+			background:conic-gradient(red,yellow,lime,aqua,blue,fuchsia,red); 
 		}
 	</style>
 </body>

@@ -19,7 +19,7 @@
 		caller-->存储调用函数的函数的引用</p>
 	<h3>5.5.5函数属性和方法</h3>
 	<p>属性：length-->函数希望接受的命令参数的个数,prototype-->保存所有实例方法<br>
-		方法：apply()-->在特定作用域中调用函数，两个参数（作用域和参数数组）,call()-->在特定作用域中调用函数,参数中第一个是this，后面的是注意列举传递给函数的参数</p>
+		方法：apply()-->在特定作用域中调用函数，两个参数（作用域和参数数组）,call()-->在特定作用域中调用函数,参数中第一个是this，后面的是注意列举传递给函数的参数，bind()-->创建一个函数实例，其this值会被绑定到传给bind()函数的值【可用来扩充作用域】</p>
 	<script type="text/javascript">
 		//函数两种定义方式
 	/*	function sum1(num1,num2){		//推荐使用的方法
@@ -102,7 +102,7 @@
 		}
 		outer();		*/
 				//****5.5.5函数属性和方法
-		function sayName(name){
+	/*	function sayName(name){
 			alert(name);
 		}
 		function sum(num1,num2){
@@ -133,7 +133,25 @@
 		function callSum3(num1,num2){
 			return sum2.call(this,num1,num2);
 		}
-		alert(callSum3(10,10));
+		alert(callSum3(10,10));		*/
+					//apply()&call()-->扩充函数的作用域
+		window.color1="red";
+		var o1={color1:"blue"};
+		function saycolor1(){
+			alert(this.color1);
+		}
+		saycolor1();		//red	执行环境是全局
+
+		saycolor1.call(this);		//red	执行环境是全局
+		saycolor1.call(window);		//red	执行环境是全局
+		saycolor1.call(o1);			//blue	执行环境是o1
+					//bind()--》扩充函数作用域
+		var objectSaycolor=saycolor1.bind(o1);	//objectSaycolor()函数的this为o1
+		objectSaycolor();			//blue	执行环境是o1
+					//toString(),toLocaleString(),valueOf()  返回函数代码
+		alert(saycolor1.toString());
+		alert(saycolor1.toLocaleString());
+		alert(saycolor1.valueOf());
 	</script>
 </body>
 </html>
