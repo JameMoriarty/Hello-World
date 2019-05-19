@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点赞特效</title>
+</head>
+
+<body>
+	<div>点赞</div>
+    <div id="like1" class="heart" rel="like"></div>
+
+    <style type="text/css">
+    	.heart{
+	        background: url(images/redheart.png);	/*加载帧动画图片*/
+	        background-position: left;					/*最左边*/
+	        background-repeat: no-repeat;				/*不重复*/
+	        height: 100px;								/*高100px*/
+	        width: 100px;								/*宽100px*/
+	        cursor: pointer;				/*设置鼠标进入div后的光标形状：一只手*/			
+	        position: absolute;				/*相对于static之外的第一个父元素定位*/
+	        left:50px;						/*据左边-14px*/
+	        background-size:2900%;			/*背景图片大小*/
+	   }
+	  .heart:hover, .heart:focus{			/*hover：设置鼠标浮动在其上时的样式*/
+	  										/*focus：选区获得焦点的元素，并设定其样式*/
+	        background-position: right;		/*最右边*/
+	   }
+	   /*帧动画*/
+		@-webkit-keyframes heartBlast {
+		    0% {
+		        background-position: left;
+		    }
+		    100% {
+		        background-position: right;
+		    }
+	   	}
+		
+		.heartAnimation {
+	          display: inline-block;
+	         -webkit-animation-name: heartBlast;	/*有-webkit-的是safari和chrome*/
+	          animation-name: heartBlast;			/*动画的名称*/
+	          -webkit-animation-duration: .8s;
+	          animation-duration: .8s;		/*定义动画完成一个周期需要多少秒或毫秒*/
+	          -webkit-animation-iteration-count: 1;
+	          animation-iteration-count: 1;		/*动画播放次数*/
+	          -webkit-animation-timing-function: steps(28);	/*共28个背景图片帧*/
+	          animation-timing-function: steps(28);		/*动画如何完成一个周期*/
+	          background-position: right;
+		}
+    </style>
+	<script src="/前端/jquery-3.0.0.min.js"></script>　　　　#引入jQuery
+	<script>
+		$(document).ready(function() {
+			$('body').on("click",'.heart',function(){
+			    //attr()-->获取属性值
+			    //$()-->选择页面元素，传递结果给变量
+			    var D=$(this).attr("rel");//如果为like则执行动画
+			    if(D =='like')
+			    {      
+			            //$("#likeCount"+messageID).html(C+1);
+			            //addClass()-->为集合中的元素添加指定的样式名
+			            $(this).addClass("heartAnimation").attr("rel","unlike");
+			            //css()-->为每个匹配元素命名的CSS样式属性设置指定的值
+			        	$(this).css("background-position","right");
+			                //不加这句有bug，动画最后又会到了起点，点击后强制使图片停在最右边，
+			    }
+			    else
+			    {
+			           // $("#likeCount"+messageID).html(C-1);
+			           //removeClass()-->从集合中删除每个元素指定的样式
+			            $(this).removeClass("heartAnimation").attr("rel","like");
+			            //css()-->为每个匹配元素命名的CSS样式属性设置指定的值
+			            $(this).css("background-position","left");
+			               //点击后强制使红心变黑，否则显示悬停状态的红色的心
+			    }
+			});
+		});
+	</script>
+
+</body>
+</html>

@@ -71,10 +71,36 @@
 		<div class="QP4"></div>
 		<div class="QP5"></div>
 		<div class="QP6"></div>
-		<!--角向渐变-->
+		<!--角向渐变（还未有浏览器支持）-->
 		<div class="QP7"></div>
 	</div>
-
+	<!--Chapter7伪随机背景-->
+	<div style="height:200px;position:absolute;top:2900px;" class="Chapter7">
+		<div class="SJ1"></div>
+		<div class="SJ2"></div>
+		<div class="SJ3"></div>
+	</div>
+	<!--Chapter8连续的图像边框-->
+	<div style="height:200px;position: absolute;top:3900px;" class="Chapter8">
+		<div class="LXBK1">I have a nice stone art border</div>
+		<div class="LXBK2">
+			<div>I have a nice stone art border</div>
+		</div>
+		<div class="LXBK3">I have a nice stone art border</div>
+		<div class="LXBK4">I have a nice stone art border</div>
+		<div class="LXBK5">I have a nice stone art border</div>
+		<div class="LXBK6">I have a nice stone art border</div>
+		<div class="LXBK7">I have a nice stone art border</div>
+		<!-- 蚂蚁行军边框 -->
+		<div class="LXBK8" >I have a nice stone art border</div>
+		<!--border-image的妙用(脚注)-->
+		<div class="LXBK9">This is a footnote.</div>
+	</div>
+	<!--自己生成图案-->
+	<div class="exerise" style="height: 200px;position: absolute;top: 4300px;">
+		<div class="e1"></div>
+		<div class="e1p1"></div>
+	</div>
 	<style type="text/css">
 		body {
 			background:black;
@@ -358,6 +384,148 @@
 		/*生成色轮-->角向渐变（暂未有浏览器支持）*/
 		.QP7{
 			background:conic-gradient(red,yellow,lime,aqua,blue,fuchsia,red); 
+		}
+
+		/********Chapter7伪随机背景*/
+		.Chapter7 > div{
+			font: 100%/1 sans-serif;
+			color: white;
+			margin: 2em;
+			/*max-width: 10em;*/
+			padding: 8em;
+			float: left;
+			width: 100%;
+		}
+		.SJ1{
+			background:linear-gradient(90deg,#fb3 15%,#655 0,#655 40%,#ab4 0,#ab4 65%,hsl(20,40%,90%) 0);
+			background-size: 80px 100%;
+		}
+		.SJ2{
+			background: hsl(20,40%,90%);
+			background-image: 
+						linear-gradient(90deg,#fb3 10px,transparent 0),
+						linear-gradient(90deg,#ab4 20px,transparent 0),
+						linear-gradient(90deg,#655 20px,transparent 0);
+			background-size: 80px 100%,60px 100%,40px 100%;
+			/*用background-size控制条纹间距*/
+		}
+		/*蝉原则：通过质数来增加随机性*/
+		.SJ3{
+			background: hsl(20,40%,90%);
+			background-image:
+						linear-gradient(90deg,#fb3 11px,transparent 0),
+						linear-gradient(90deg,#ab4 23px,transparent 0),
+						linear-gradient(90deg,#655 41px,transparent 0);
+			background-size: 41px 100%,61px 100%,83px 100%;
+		}
+		.Chapter8 > div{
+			font: 100%/1 sans-serif;
+			
+			margin: 2em;
+			/*max-width: 10em;
+			padding: 8em;*/
+			float: left;
+		}
+		.LXBK1{
+			color: black;
+			background: white;
+			border:16px solid transparent;
+			border-image:url(images/stone-art.jpg);
+		}
+		.LXBK2{
+			color: black;
+			background: url(images/stone-art.jpg);
+			background-size: cover;
+			padding: 1em;
+		}
+		.LXBK2 > div{
+			color: black;
+			background: white;
+			padding: 1em;
+		}
+		.LXBK3{
+			padding: 1em;
+			border:1em solid transparent;
+			background: linear-gradient(white,white),
+					url(images/stone-art.jpg);
+			background-size: cover;
+			background-clip: padding-box,border-box;
+		}
+		.LXBK4{
+			color: black;
+			padding: 1em;
+			border:1em solid transparent;
+			background: linear-gradient(white,white),
+					url(images/stone-art.jpg);
+			background-size: cover;
+			background-clip: padding-box,border-box;
+			background-origin: border-box;
+		}
+		.LXBK5{
+			color: black;
+			padding: 1em;
+			border: 1em solid transparent;
+			background: linear-gradient(white,white) padding-box,
+						url(images/stone-art.jpg) border-box 0 0 / cover;
+		}
+		.LXBK6{
+			color: black;
+			padding: 1em;
+			border: 1em solid transparent;
+			background: linear-gradient(white,white) padding-box,
+						repeating-linear-gradient(-45deg,red 0,red 12.5%,transparent 0,transparent 25%,#58a 0,#58a 37.5%,
+							transparent 0,transparent 50%) 0 / 5em 5em;
+		}
+
+		.LXBK7{
+			color: white;
+			padding: 1em;
+			border: 16px solid transparent;
+			border-image: 16 repeating-linear-gradient(-45deg,red 0 ,red 1em,
+							transparent 0,red 1em,
+							transparent 0,transparent 2em,
+							#58a 0, #58a 3em,
+							transparent 0,transparent 4em);
+		}
+		@keyframes ants {
+			to{background-position: 100%}
+		}
+		.LXBK8{
+			padding: 1em;
+			border: 1px solid transparent;
+			background:linear-gradient(white,white) padding-box,
+						repeating-linear-gradient(-45deg,black 0,
+						black 25%,white 0,white 50%) 0/.6em .6em;
+			animation: ants 12s linear infinite;
+		}
+		.LXBK9{
+			border-top:.2em solid transparent;
+			border-image: 100% 0 0 linear-gradient(90deg,currentColor 4em,transparent 0);
+			padding-top: 1em;
+			color: white; 
+		}
+		.exerise > div{
+			font: 100%/1 sans-serif;
+			
+			margin: 2em;
+			max-width: 10em;
+			padding: 8em;
+			float: left;
+		}
+		.e1{
+			background:linear-gradient(white 50%,lightblue 50%),
+						linear-gradient(90deg, lightgreen 50%,white 50%);
+			background-size: 100% 30px,30px 100%;
+			background-blend-mode:multiply;
+		}
+		.e1p1{
+			/*background: white;*/
+			background:radial-gradient(purple 30%,white 0),
+						radial-gradient(lightblue 30%,white 0),
+						radial-gradient(lightgreen 30%,white 0);
+			background-size: 15% 15%,30% 30%,60% 60%;
+			background-position: ;
+			background-blend-mode:multiply;
 		}
 	</style>
 </body>

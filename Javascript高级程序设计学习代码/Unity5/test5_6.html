@@ -142,7 +142,7 @@
 			alert(str.toLowerCase());			//hello world 	*/
 				//字符串模式的匹配方法
 							//match()
-			var text="cat,bat,sat,fat";
+		/*	var text="cat,bat,sat,fa==t";
 			var pat=/.at/;
 			var matches=text.match(pat);	//只接受一个参数，正则表达式或RegExp对象
 			alert(matches.index);		//0
@@ -159,7 +159,32 @@
 			alert(result1);		//cond,bond,sond,fond
 
 			var result2=text.replace(/(.at)/g,"word($1)");	//特殊字符序列$1，将正则表达式操作得到的值插入到结果字符串中
-			alert(result2);		//word(cat),word(bat),word(sat),word(fat)
+			alert(result2);		//word(cat),word(bat),word(sat),word(fat)	*/
+
+		/*	function htmlEscape(text){
+				return text.replace(/[<>"&]/g,function(match,pos,originalText){
+					switch(match){
+						case "<":
+								return "&lt;";
+						case ">":
+								return "&gt;";
+						case "&":
+								return "&amp;";
+						case "\"":
+								return "&quot;";
+					}
+				});
+			}
+			alert(htmlEscape("<p class=\"greeting\">Hello World!<p>"));
+			//&lt;p class=&quot;greeting&quot;&gt;Hello World!&lt;p&gt;		*/
+							//split()
+			var colorText="red,blue,green,yellow";
+			var color1=colorText.split(",");		//red,blue,green,yellow
+			var color2=colorText.split(",",2);		//red,blue
+			var color3=colorText.split(/[^\,]+/);	//,,,,,,,
+			alert("color1: "+color1);
+			alert("color2: "+color2);
+			alert("color3: "+color3);
 		}	
 		test5_6_3();
 	</script>
