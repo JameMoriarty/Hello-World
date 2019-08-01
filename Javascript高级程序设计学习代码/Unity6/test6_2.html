@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>6.2创建对象</title>
+</head>
+<body>
+	<h3>6.2创建对象</h3>
+	<p>因为使用Object创建对象会产生大量重复的代码，所以使用工厂模式</p>
+	<ul>
+		<li><b>工厂模式</b></li>
+		<li><b>构造函数模式</b></li>
+	</ul>
+	<script type="text/javascript">
+		//工厂模式-->以函数来封装特定接口创建对象
+		function test6_2_1(){
+			function createPerson(name,age,job){
+				var o=new Object();
+				o.name=name;
+				o.age=age;
+				o.job=job;
+				o.sayName=function(){
+					alert(this.name);
+				};
+				return o;
+			}
+			var person1=createPerson("JiangHudong",40,"MC");
+			var person2=createPerson("P.O",21,"Singer");
+			person1.sayName();	//JiangHudong
+			person2.sayName();	//P.O
+		}
+		//test6_2_1();
+		//构造函数模式
+		function test6_2_2(){
+			function Person(name,age,job){
+				this.name=name;
+				this.age=age;
+				this.job=job;
+				this.sayName=function(){
+					alert(this.name);
+				};
+			}
+			var person1=new Person("Kalos",35,"Doctor");
+			var person2=new Person("Greg",27,"Software Engineer");
+			person1.sayName();
+			person2.sayName();
+				//判断构造函数是否是Person
+			alert(person1.constructor==Person);		//true
+			alert(person2.constructor==Person);		//true
+				//判断对象是谁的实例
+			alert(person1 instanceof Object);		//true
+			alert(person1 instanceof Person);		//true
+			alert(person2 instanceof Object);		//true
+			alert(person2 instanceof Person);		//true
+		}
+		//test6_2_2();
+		//原型模式-->(类似继承)
+		function test6_2_3(){
+			//构造对象
+			function Person(){}
+			//将属性添加给原型对象中
+			Person.prototype.name="Nicholas";
+			Person.prototype.age=25;
+			Person.prototype.job="Engineer";
+			Person.prototype.sayName = function(){
+				alert(this.name);
+			};
+			var person1=new Person();
+			person1.sayName();		//Nivholas
+			var person2=new Person();
+			person2.name="Greg";	//会覆盖原型函数中的属性
+			person2.sayName();		//Greg
+			//使用hasOwnProperty()函数判断属性是实例属性还是原型属性
+			alert("person1.name 是否是实例属性"+person1.hasOwnProperty("name"));//false
+			alert("person2.name 是否是实例属性"+person2.hasOwnProperty("name"));//true
+			//in操作符
+			alert("name属性是否可以访问："+("name" in person1));	//true
+			alert("name属性是否可以访问："+("name" in person2));	//true
+			//判断属性存在于对象中还是原型中
+			function hasPrototypePrototype(object,name){
+				//只要hasOwnPrototype()返回false，在原型里；in返回true，属性可访问-->说明属性在原型里
+				return !object.hasOwnProperty(name) && (name in object);
+			}
+			alert("person1.name在原型里:"+hasPrototypePrototype(person1,"name"));//true
+			alert("person2.name在原型里:"+hasPrototypePrototype(person2,"name"));//false
+			//查看属性
+				//Object.keys()只返回所有可枚举的属性
+			var keys=Object.keys(Person.prototype);
+			alert("原型的属性："+keys);	//name,age,job,sayName
+			var keys1=Object.keys(person2);
+			alert("实例的属性："+keys1);	//name
+				//Object.getOwnPropertyNames()返回所有属性，不论可否枚举
+			var getKeys=Object.getOwnPropertyNames(Person.prototype);
+			alert("原型的所有属性:"+getKeys);		//constructor,name,age,job,sayName
+			var getKeys1=Object.getOwnPropertyNames(person2);
+			alert("对象的所有属性:"+getKeys1);	//name
+			//使用字面量封装原型
+			function Student(){
+			}
+			Student.prototype={
+				name:"Lily",
+				age:19,
+				class:"J3_1",
+				sayName:function(){
+					alert(this.name);
+				}
+			};
+			var student1=new Student();
+			alert(student1 instanceof Student);		//true
+			alert(student1.constructor==Student);	//false
+			alert(student1.constructor==Object);	//true
+			//原型的动态性
+			Student.prototype.sayHi=function(){
+				alert(this.name+" say: hi!");
+			};
+			student1.sayHi();	//hi!
+			//原生对象的原型
+			String.prototype.startsWith=function(text){
+				return this.indexOf(text)==0;
+			};
+			var msg="Hello world";
+			alert(msg.startsWith("Hello"));	//true
+			alert(msg.startsWith("world"));	//false
+		}
+		test6_2_3();
+	</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>单体内置对象</title>
+</head>
+<body>
+	<h3>单体内置对象</h3>
+	<p>由ECMAScript实现、不依赖于宿主环境的对象。开发人员不必显式的实例化，因为他们已经实例化了。</p>
+	<ul>
+		<li>Global对象</li>
+		<span>不属于任何其他对象的属性和方法都是它的属性和方法（兜底儿对象）</span>
+		<li>Math对象</li>
+		<span>保存数学公式和信息</span>
+	</ul>
+	<script type="text/javascript">
+		//*****单体内置对象
+		function test5_7_1(){
+					//URI编码方法-->对uri进行编码，用特殊的编码替换所有无效字符，使浏览器能够接受和理解。
+			function aboutURI(){
+				var uri="http://www.wrox.com/illegal value.htm#start";
+						//主要用于整个uri
+				alert(encodeURI(uri));//http://www.wrox.com/illegal%20value.htm#start
+						//主要用于对uri中的某一段
+				alert(encodeURIComponent(uri));//http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start
+						//解码 与编码对应的使用
+				alert(decodeURI("http://www.wrox.com/illegal%20value.htm#start"));//http://www.wrox.com/illegal value.htm#start
+				alert(decodeURIComponent("http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start"));//http://www.wrox.com/illegal value.htm#start
+			}
+			//aboutURI();
+					//eval()-->一个完整的ECMAScript解析器
+			function aboutEval(){
+				eval("alert('hello')");//hello
+				var msg="This is a sunny day.";
+				eval("alert(msg)");//This is a sunny day.
+						//在严格模式下，外部访问不到eval()里创建的任何变量和函数
+				eval("function sayHi() { alert('sayHi!'); }");
+				sayHi();//sayHi!
+			}
+			//aboutEval();
+		}
+		test5_7_1();
+		//window对象-->将全局对象作为window对象的一部分
+			//取得global对象的方法：1.使用window 2.使用函数
+				//1.
+	/*	var color="red";
+		function sayColor(){
+			alert(window.color);
+		}		
+		window.sayColor();//red
+				//2.
+		var global=function(){
+			return this;
+		}();
+		alert("global is ："+global);//global is ：[object Window] */
+			//*****Math对象
+		function test5_7_2(){
+				//Math对象的属性
+			function mathSx(){
+				alert("E: "+Math.E);	//e的值
+				alert("LN10: "+Math.LN10);//10的自然对数
+				alert("LN2: "+Math.LN2);//2的自然对数
+				alert("LOG2E: "+Math.LOG2E);//以2为底e的对数
+				alert("LOG10E: "+Math.LOG10E);//以10为底e的对数
+				alert("PI: "+Math.PI);	//Π的值
+				alert("SQRT1_2: "+Math.SQRT1_2);// 1/2的平方根
+				alert("SQRT2: "+Math.SQRT2);//2的平方根
+			}
+			//mathSx();
+				//min()和max()方法
+			function min_max(){
+					//min()
+				var min=Math.min(3,54,32,16);
+				alert(min);	//3
+					//max()
+				var max=Math.max(3,54,32,16);
+				alert(max);	//54
+					//使用apply()方法，找到数组中的最大最小值
+				var values=[1,2,3,4,5,6,7,8];
+				var max=Math.max.apply(Math,values);
+				alert(max);	//8
+			}
+			//min_max();
+				//舍入方法
+			function sr(){
+					//Math.ceil()向上舍入
+				alert("ceil:"+Math.ceil(25.9));	//26
+				alert("ceil:"+Math.ceil(25.5));	//26
+				alert("ceil:"+Math.ceil(25.1));	//26
+					//Math.floor()向下舍入
+				alert("floor:"+Math.floor(25.9));	//25
+				alert("floor:"+Math.floor(25.5));	//25
+				alert("floor:"+Math.floor(25.1));	//25
+					//Math.round()四舍五入(标准舍入)
+				alert("round:"+Math.round(25.9));	//26
+				alert("round:"+Math.round(25.5));	//26
+				alert("round:"+Math.round(25.1));	//25
+			}
+			//sr();
+				//random()返回大于等于0，小于1的随机数
+			function rand(){
+					// 值=Math.floor(Math.random()*可能的总数+第一个可能的值)
+				var num = Math.floor(Math.random()*10+1);
+				alert(num);//1-10的随机数
+				var num1=Math.floor(Math.random()*9+2);
+				alert(num1);//2-10的随机数
+					//通过函数计算可能的值和第一个可能的值
+				function selectFrom(lowerValue,upperValue){
+					var choices=upperValue-lowerValue+1;
+					return Math.floor(Math.random()*choices+lowerValue);
+				}
+				var num2=selectFrom(2,10);
+				alert(num2);//2-10
+					//使用此函数从数组中取出一项
+				var colors=["red","blue","yellow","green","black","purple","brown"];
+				var color=colors[selectFrom(0,colors.length-1)];
+				alert(color);//返回数组中的随机值
+			}
+			rand();
+		}
+		test5_7_2();
+	</script>
+</body>
+</html>

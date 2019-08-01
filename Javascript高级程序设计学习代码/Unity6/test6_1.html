@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>面向对象程序设计</title>
+</head>
+<body>
+	<h3>每个对象都是基于一种引用类型创建的。</h3>
+	<h3>属性类型</h3>
+	<ul>
+		<ol>数据属性</ol>
+		<ol>访问器属性</ol>
+	</ul>
+	<h3>定义多个属性</h3>
+	<script type="text/javascript">
+		//理解对象
+		function test6_1(){
+			//创建了一个名为person的对象，并为它添加了3个属性，一个方法
+			function OO(){
+				var person=new Object();
+				person.name="Gili";
+				person.age=29;
+				person.job="software engineer";
+				person.sayName=function(){
+					alert(this.name);
+				};
+				//字面量方法创建上面的对象
+				var person1={
+				name:"Sam",
+				age:30,
+				job:"software engineer",
+				sayName:function(){
+					alert(this.name);
+					}
+				};
+			}
+			//OO();
+			//属性类型(属性要放在[[里]])
+			function test6_1_1(){
+				//数据属性
+				var person = {
+					name:"Nicholas"
+				};//name属性的[[Value]]="Nicholas"
+					//修改属性默认的特性的值
+				Object.defineProperty(person,"name",{
+					writable:false,	//能否修改属性的值(不能)
+					Configurable:false,//能否使用delete删除属性，从而重新定义属性(不能)
+					Enumerable:true,	//能否通过for-in循环返回属性(能)
+					value:"Gili"	//属性的数据值
+				});
+				alert(person.name);	//Gili
+				person.name="Greg";
+				alert(person.name);	//Gili
+
+				delete person.name;
+				alert(person.name);//????
+				//访问器属性(包含一对getter和setter函数)
+				var book={
+					_year:2004,
+					edition:1
+				};
+				Object.defineProperty(book,"year",{
+					get:function(){			//在读取属性时调用的函数
+						return this._year;
+					},
+					set:function(newValue){	//在写入属性时调用的函数
+						if (newValue>2004){
+							this._year=newValue;
+							this.edition+=newValue-2004;
+						}
+					}
+				});
+				alert(book.year);	//2004 调用get
+				book.year=2005;		//调用set
+				alert(book.edition);//2 
+				alert(book.year);	//2005
+			}
+			//test6_1_1();
+			//定义多个属性
+			function test6_1_2(){
+				var book={};
+				Object.defineProperties(book,{
+					_year:{
+						writable:true,
+						value:2004
+					},
+					edition:{
+						writable:true,
+						value:1
+					},
+					year:{
+						get:function(){
+							return this._year;
+						},
+						set:function(newValue){
+							if (newValue>2004){
+								this._year=newValue;
+								this.edition+=newValue-2004;
+							}
+						}
+					}
+				});
+				alert(book.year);	//2004 调用get
+				book.year=2005;		//调用set
+				alert(book.edition);//2 
+				alert(book.year);	//2005
+			}
+			//test6_1_2();
+			//读取属性的类型
+			function test6_1_3(){
+				var book={};
+				Object.defineProperties(book,{
+					_year:{
+						value:2004
+					},
+					edition:{
+						value:1
+					},
+					year:{
+						get:function(){
+							return this._year;
+						},
+						set:function(newValue){
+							if (newValue>2004){
+								this._year=newValue;
+								this.edition+=newValue-2004;
+							}
+						}
+					}
+				});
+					//有数据属性
+				var descriptor=Object.getOwnPropertyDescriptor(book,"_year");
+				alert("_year.value:"+descriptor.value);	//2004
+				alert("_year.configurable:"+descriptor.configurable);//false
+				alert("_year.get:"+descriptor.get);		//undefine
+					//有访问器属性
+				var descriptor1=Object.getOwnPropertyDescriptor(book,"year");
+				alert("year.value:"+descriptor1.value);	//undefine
+				alert("year.configurable:"+descriptor1.configurable);//false
+				alert("year.get:"+descriptor1.get);		//function
+			}
+			test6_1_3();
+		}
+		test6_1();
+	</script>
+</body>
+</html>

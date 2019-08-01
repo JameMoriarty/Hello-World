@@ -42,6 +42,14 @@
 			<td>匹配的nn个捕获组的子字符串</td>
 		</tr>
 	</table>
+	<h3>单体内置对象</h3>
+	<p>由ECMAScript实现、不依赖于宿主环境的对象。开发人员不必显式的实例化，因为他们已经实例化了。</p>
+	<ul>
+		<li>Global对象</li>
+		<span>不属于任何其他对象的属性和方法都是它的属性和方法（兜底儿对象）</span>
+		<li>Math对象</li>
+		<span>保存数学公式和信息</span>
+	</ul>
 	<script type="text/javascript">
 				//****基本包装类型共性
 	/*	var s1="some text";
@@ -178,15 +186,38 @@
 			alert(htmlEscape("<p class=\"greeting\">Hello World!<p>"));
 			//&lt;p class=&quot;greeting&quot;&gt;Hello World!&lt;p&gt;		*/
 							//split()
-			var colorText="red,blue,green,yellow";
+		/*	var colorText="red,blue,green,yellow";
 			var color1=colorText.split(",");		//red,blue,green,yellow
 			var color2=colorText.split(",",2);		//red,blue
 			var color3=colorText.split(/[^\,]+/);	//,,,,,,,
 			alert("color1: "+color1);
 			alert("color2: "+color2);
-			alert("color3: "+color3);
+			alert("color3: "+color3);*/
+							//localCompare() 比较两个字符串
+		/*	var stringValue = "yellow";
+			alert(stringValue.localeCompare("brick"));//1 yellow排在brick之后
+			alert(stringValue.localeCompare("yellow"));//0 yellow和yellow相等
+			alert(stringValue.localeCompare("zoo"));//-1 yellow排在zoo之前*/
+			//localeCompare方法取决于实现，所以最好使用函数（以下）的方式调用。
+			function determineOrder(value){
+				var result=stringValue.localeCompare(value);
+				if (result<0){
+					alert("The string 'yellow' comes before the string '"+value+"'.");
+				}else if (result>0){
+					alert("The string 'yellow' comes after the string '"+value+"'.");
+				}else {
+					alert("The string 'yellow' is equal to the string '"+value+"'.");
+				}
+			}
+			//determineOrder("brick");
+			//determineOrder("yellow");
+			//determineOrder("zoo");
+							//fromCharCode() 把编码转换成字符串--与charCodeAt()相反
+			alert(String.fromCharCode(104,101,108,108,111));//hello
+			alert(str.charCodeAt("h"));//104
+							//html方法 使用js动态格式化html(尽量不使用，创建的标记通常无法表达语义)
 		}	
-		test5_6_3();
+		//test5_6_3();
 	</script>
 </body>
 </html>
