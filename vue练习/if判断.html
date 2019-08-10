@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue.js 条件与循环</title>
+	<script type="text/javascript" src="E:\前端\vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p v-if="seen">现在你看到我了</p>
+		<template v-if="ok">
+			<h1>Vue练习</h1>
+			<p>练习啊</p>
+			<p>好好练习！</p>
+		</template>
+		<!-- 随机生成一个数字，判断是否大于0.5，然后输出对应信息： -->
+		<div v-if="Math.random() > 0.5">
+			Sorry
+		</div>
+		<div v-else>
+			Not sorry
+		</div>
+		<!-- 判断 type 变量的值 -->
+		<div v-if="type === 'A'">
+			A
+		</div>
+		<div v-else-if="type === 'B'">
+			B
+		</div>
+		<div v-else>
+			Not A/B
+		</div>
+		<!-- 使用 v-show 指令来根据条件展示元素 -->
+		<h1 v-show="ok">Hello!</h1>
+	</div>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:'#app',
+			data:{
+				seen:true,
+				ok:true,
+				type:'A'
+			}
+		})
+	</script>
+</body>
+</html>

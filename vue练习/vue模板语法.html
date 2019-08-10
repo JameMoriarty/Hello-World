@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- saved from url=(0096)file:///E:/%E5%89%8D%E7%AB%AF/vue%E7%BB%83%E4%B9%A0/vue%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>vue模板语法</title>
+	<script type="text/javascript" src="E:\前端\vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 文本插值 -->
+		<p>{{message}}</p> 
+		<!-- 使用v-html指令输出html代码 -->
+		<div v-html="htmlCode"></div> 
+		<!-- 使用v-bind指令修改属性中值 -->
+		<!-- 以下实例判断 class1 的值，如果为 true 使用 class1 类的样式，否则不使用该类： -->
+		<label for="r1">修改颜色</label> 
+		<input type="checkbox" name="r1" id="r1" v-model="use"> 
+		<br><br> 
+		<div v-bind:class="{'class1':use}">
+			v-bind:class指令
+		</div>
+		<!-- 表达式 -->
+		{{5+5}}<br>
+		{{ok ? 'YES':'NO'}}<br>
+		{{message.split('').reverse().join('')}}
+		<div v-bind:id="'list-' + id">
+			菜鸟教程
+		</div>
+		<!-- 指令 -->
+		<p v-if="seen">现在你看到我了</p>
+		<!-- 参数 -->
+		<pre>
+			<a v-bind:href="url">菜鸟教程</a>
+		</pre>
+		<!-- 用户输入 -->
+		<p>{{message1}}</p>
+		<input v-model="message1">
+		<button v-on:click="reverseMessage">反转字符串</button>
+		<br>
+		<!-- 过滤器 -->
+		{{message|capitalize}}
+	</div>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:'#app',
+			data:{
+				message:"hello my first Vue code.",
+				htmlCode:'<h1>Vue使用v-html指令输出hmtl代码</h1>',
+				use:false,
+				ok:true,
+				id:1,
+				seen:true,
+				url:'http://www.runoob.com',
+				message1:'Runoob!'
+			},
+			//把输入的字符串的第一个字母变为大写
+			filters:{
+				capitalize:function(value){
+					if(!value) 
+						return '';
+					value=value.toString();
+					return value.charAt(0).toUpperCase()+value.slice(1);
+				}
+			},
+			methods:{
+				reverseMessage:function(){
+					this.message1=this.message1.split('').reverse().join('');
+				}
+			}
+		});
+	</script>
+	<style>
+	.class1{
+	  background: #444;
+	  color: #fff;
+	}
+</style>
+
+</body></html>

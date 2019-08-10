@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue起步</title>
+	<script type="text/javascript" src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+	<div id="vue_det">
+		<!-- {{ }} 用于输出对象属性和函数返回值 -->
+		<h1>site:{{site}}</h1>
+		<h1>url:{{url}}</h1>
+		<h1>{{details()}}</h1>
+	</div>
+	<a href="./vue模板语法.html">下一页</a>
+	<script type="text/javascript">
+		//每个Vue应用都需要实例化Vue
+		var vm=new Vue({
+			el:'#vue_det',  //对应id
+			//用于定义属性，实例中有三个属性分别为：site、url、alexa。
+			data:{
+				site:"vue练习1",
+				url:"www.runoob.com",
+				alexa:"1000"
+			},
+			//methods用于定义的函数，可以通过return来返回函数值
+			methods:{
+				details:function(){
+					return this.site+"- vue构造器。";
+				}
+			}
+		})
+		vm.site="vue响应式系统";
+	</script>
+</body>
+</html>
