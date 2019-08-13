@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>黄昏</title>
+</head>
+<body>
+	<div class="sky">
+		<div class="moon"></div>
+		<div class="sun"></div>
+		<div class="forest">
+			<div class="tree">
+				<div class="treeB"></div>
+			</div>
+			<div class="tree t1">
+				<div class="treeB"></div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+<style type="text/css">
+	.sky{
+		height: 400px;
+		width: 400px;
+		margin: 50px 0 0 50px;
+		/*background: red;*/
+		border-radius: 50%;
+		/* 使用简写属性把animation绑定到一个<div>元素 */
+		animation:mymove 10s infinite;
+		-webkit- animation:mymove 10s infinite;
+		/*position: absolute;*/
+	}
+	.sun{
+		height: 50px;
+		width: 50px;
+		background-color:#FFE4C4;
+		border-radius: 50%;
+		animation:sunmove 10s infinite;
+		-webkit- animation:sunmove 10s infinite;
+		position: absolute;
+		top: 0px;
+	}
+	.moon {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		box-shadow: 15px 15px 0 0 #fff;
+		animation:moonmove 10s infinite;
+		-webkit- animation:moonmove 10s infinite;
+		position: absolute;
+		top: 0px;
+	}
+	.tree{
+		width: 60px;
+		height: 100px;
+		border-radius: 50%;
+		box-shadow: 15px 15px 0 0 #90BF2F;
+		background-color: #C0FF3E;
+		position: absolute;
+		top: 333px;
+		left: 200px;
+	}
+	.treeB{
+		position: absolute;
+		top: 65px;
+		left: 24px;
+		width: 0;
+		height: 0;
+		border-bottom: 50px solid #603017;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+	}   
+	.t1{
+		top: 290px;
+		left: 265px;
+		width: 80px;
+		height: 120px;
+	}
+	.t1 .treeB{
+		top: 55px;
+		left: 30px;
+		border-bottom: 100px solid #603017;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+	}
+	/*天色变化*/
+	@keyframes mymove{
+		0%	{background-color:#000;}
+		25% {background-color:#63B8FF; }
+		50%	{background-color:#E0FFFF;}
+		75%	{background-color:#cc0033; }
+		100%{background-color:#000;}
+	}
+	@-webkit-keyframes mymove{
+		0%	{background-color:#000;}
+		25% {background-color:#63B8FF; }
+		50%	{background-color:#E0FFFF;}
+		75%	{background-color:#cc0033; }
+		100%{background-color:#000;}
+	}
+	/*太阳位置变化*/
+	@keyframes sunmove{
+		0%	{
+			margin: 300px 0 0 375px;
+			background-color: #fff;
+		}
+		25% {
+			margin: 200px 0 0 275px;
+			
+			}
+		50%	{
+			margin: 100px 0 0 175px;
+			background-color: #F08080;
+		}
+		75%	{
+			margin: 200px 0 0 75px;
+			background-color: #F08080;
+		}
+		100%{
+			margin: 300px 0 0 25px;
+			background-color: #000;
+		}
+	}
+	@-webkit-keyframes sunmove{
+		0%	{
+			margin: 300px 0 0 375px;
+			background-color: #fff;
+		}
+		25% {
+			margin: 200px 0 0 275px;
+
+			}
+		50%	{
+			margin: 100px 0 0 175px;
+			background-color: #F08080;
+		}
+		75%	{
+			margin: 200px 0 0 75px;
+			background-color: #F08080;
+		}
+		100%{
+			margin: 300px 0 0 25px;
+			background-color: #000;
+		}
+	}
+	/*月亮*/
+	@keyframes moonmove{
+		0%	{
+			margin: 300px 0 0 25px;
+			background-color:#000;
+		}
+		25% {
+			margin: 200px 0 0 75px;
+			background-color:#63B8FF;
+			box-shadow: 15px 15px 0 #63B8FF;
+		}
+		50%	{
+			margin: 100px 0 0 175px;
+			background-color: #E0FFFF;
+			box-shadow: 15px 15px 0 #E0FFFF;
+		}
+		75%	{
+			margin: 200px 0 0 275px;
+			background-color: #cc0033;
+			box-shadow: 15px 15px 0 #cc0033;
+		}
+		100%{
+			margin: 300px 0 0 325px;
+			background-color:#000;
+		}
+	}
+	@-webkit-keyframes moonmove{
+		0%	{
+			margin: 300px 0 0 25px;
+			background-color:#000;
+		}
+		25% {
+			margin: 200px 0 0 75px;
+			background-color:#63B8FF;
+			box-shadow: 15px 15px 0 #63B8FF;
+			}
+		50%	{
+			margin: 100px 0 0 175px;
+			background-color: #E0FFFF;
+			box-shadow: 15px 15px 0 #E0FFFF;
+		}
+		75%	{
+			margin: 200px 0 0 275px;
+			background-color: #cc0033;
+			box-shadow: 15px 15px 0 #cc0033;
+		}
+		100%{
+			margin: 300px 0 0 325px;
+			background-color:#000;
+		}
+	}
+</style>
+</html>
