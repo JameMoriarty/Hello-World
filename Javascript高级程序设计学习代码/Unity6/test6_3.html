@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>6.3继承</title>
+</head>
+<body>
+	<h1>6.3继承</h1>
+	<p>接口继承和实现继承</p>
+	<ol>
+		<li>原型链<p>利用原型让一个引用类型继承另一个引用类型的属性和方法。
+			一个原型指向一个对象的实例，该实例具有一个指向原型的指针，
+			该原型又指向一个新的实例，就构成了原型和实例的链条</p>
+			<ul><b>谨慎的定义方法</b>
+				<li>给原型添加方法的代码必须放在替换原型的语句之后</li>
+				<li>不能使用对象字面量创建原型，这样会重写原型链</li>
+			</ul>
+			<br>
+			<ul><b>原型链的问题</b>
+				<li>包含引用类型值的原型链会共享属性值</li>
+				<li>创建子类型的实例时，不能向超类型的构造函数中传递参数</li>
+			</ul>
+		</li>
+		<li>借用构造函数<p>在子类型构造函数的内部调用超类型构造函数apply(),call()</p></li>
+	</ol>
+	<script type="text/javascript">
+		//原型链
+		function test6_3_1(){
+			function SuperType(){
+				this.property=true;
+			}
+			SuperType.prototype.getSuperValue=function(){
+				return this.property;
+			};
+			function SubType(){
+				this.subproperty=false;
+			}
+			//继承了SuperType
+			SubType.prototype=new SuperType();
+			SubType.prototype.getSubValue=function(){
+				return this.subproperty;
+			};
+			var instance=new SubType();
+				//SubType的原型是SuperType的实例+指向SubType原型的指针
+			alert("SubType.getSuperValue: "+instance.getSuperValue());	//true
+			alert("SubType.getSubValue: "+instance.getSubValue());		//false
+			//*******确定原型和实例的关系
+				//使用instanceof
+			alert("F1.和Object： "+(instance instanceof Object));		//true
+			alert("F1.和SuperType："+(instance instanceof SuperType));	//true
+			alert("F1.和SubType："+(instance instanceof SubType));		//true
+				//使用isPrototypeOf()
+			alert("F2.和Object： "+Object.prototype.isPrototypeOf(instance));		//true
+			alert("F2.和SuperType："+SuperType.prototype.isPrototypeOf(instance));	//true
+			alert("F2.和SubType："+SubType.prototype.isPrototypeOf(instance));		//true
+			//*******谨慎的定义方法
+				//给原型添加方法的代码必须放在替换原型的语句之后
+				//不能使用对象字面量创建原型，这样会重写原型链
+		}
+		//test6_3_1();
+		//借用构造函数
+		function test6_3_2(){
+			function SuperType(){
+				this.colors=["red","blue","green"];
+			}
+			function SubType(){
+				//继承了SuperType
+				SuperType.call(this);
+			}
+			var instance1=new SubType();
+			instance1.colors.push("black");
+			alert("colors1: "+instance1.colors);	//red,blue,green,black
+			
+			var instance2=new SubType();
+			alert("colors2: "+instance2.colors);	//red,blue,green
+			
+			//******传递参数
+			function PersonType(name){
+				this.name=name;
+			}
+			function PerType(){
+				//继承了SuperType
+				PersonType.call(this,"Greg");
+				
+				//实例属性
+				this.age=29;
+			}
+			var instance3=new PerType();
+			alert("name: "+instance3.name);	//red,blue,green,black
+			alert("age: "+instance3.age);	//red,blue,gre
+		}
+		test6_3_2();
+	</script>
+</body>
+</html>

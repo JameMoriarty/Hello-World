@@ -5,10 +5,18 @@
 </head>
 <body>
 	<h3>6.2创建对象</h3>
-	<p>因为使用Object创建对象会产生大量重复的代码，所以使用工厂模式</p>
+	
 	<ul>
-		<li><b>工厂模式</b></li>
-		<li><b>构造函数模式</b></li>
+		<li><h2>工厂模式</h2><p>因为使用Object创建对象会产生大量重复的代码，所以使用工厂模式</p></li>
+		<li><h2>构造函数模式</h2></li>
+		<li><h2>原型模式</h2></li>
+		<li><h2>组合使用构造函数和原型模式</h2></li>
+		<li><h2>动态原型模式</h2><p>把所有信息都封装在构造函数中，在构造函数中初始化原型</p></li>
+		<li><h2>寄生构造函数模式</h2><p>创建一个函数，该函数的作用是封装创建对象的代码，再返回新创建的对象[无法使用instanceof操作符来确定对象类型]</p></li>
+		<li><h2>稳妥构造函数模式</h2>
+			<p><b>稳妥对象：</b>指没有公共属性，其方法不引用this的对象，用在安全的环境中。</p>
+			<p>模式与寄生构造函数类似，不同：1.新创建的对象实例方法不引用this；2.不适用new操作符调用构造函数</p>
+		</li>
 	</ul>
 	<script type="text/javascript">
 		//工厂模式-->以函数来封装特定接口创建对象
@@ -121,7 +129,107 @@
 			alert(msg.startsWith("Hello"));	//true
 			alert(msg.startsWith("world"));	//false
 		}
-		test6_2_3();
+		//test6_2_3();
+		//组合使用构造函数和原型模式
+		function test6_2_4(){
+			//使用构造函数模式定义实例属性
+			function Person(name,age,job){
+				this.name=name;
+				this.age=age;
+				this.job=job;
+				this.friends=["Shelby","Court"];
+			}
+			//使用原型模式定义方法和共享的属性
+			Person.prototype = {
+				//所有实例共享的属性
+				constructor:Person,
+				//方法
+				sayName:function(){
+					alert(this.name);
+				}
+			}
+			var person1=new Person("Nicholas",29,"Software Engineer");
+			var person2=new Person("Greg",30,"Doctor");
+			person1.friends.push("Van");
+			
+			alert("person1:"+person1.friends);	//Shelby,Court,Van
+			alert("person2:"+person2.friends);	//Shelby,Court
+			alert(person1.friends==person2.friends);	//false
+			alert(person1.sayname==person2.sayname);	//true
+			alert(person1.sayname)	//undefined
+		}
+		//test6_2_4();
+		//动态原型模式-->不能用字面量重写原型
+		function test6_2_5(){
+			function Person(name,age,job){
+				//属性
+				this.name=name;
+				this.age=age;
+				this.job=job;
+				//方法
+				if(typeof this.sayName!="function"){
+					Person.prototype.sayName=function(){
+						alert(this.name);
+					};
+				}
+			}
+			var friend=new Person("Greg",27,"Doctor");
+			friend.sayName();	//Greg
+		}
+		//test6_2_5();
+		//寄生构造函数模式
+		function test6_2_6(){
+			function Person(name,age,job){
+				var o=new Object();
+				o.name=name;
+				o.age=age;
+				o.job=job;
+				o.sayName=function(){
+					alert("My name is "+this.name);
+				};
+				return o;
+			}
+			var friend=new Person("Nicholas",29,"Software Engineer");
+			friend.sayName();	//Nicholas
+			
+			//可通过此方法创建一个具有额外方法的特殊数组
+			function SpecialArray(){
+				//创建数组
+				var values=new Array();
+				//添加值-->用push方法初始化数组的值
+				values.push.apply(values,arguments);
+				//添加方法
+				values.toPipedString = function(){
+					return this.join("|");
+				};
+				//返回数组
+				return values;
+			}
+			var colors=new SpecialArray("red","blue","green");
+			alert("array:"+colors.toPipedString());		//red|blue|green
+		}
+		//test6_2_6();
+		//稳妥构造函数模式
+		function test6_2_7(){
+			function Person(name,age,job){
+				//创建要返回的对象
+				var o = new Object();
+				//定义私有变量和函数
+				o.name=name;
+				o.age=age;
+				o.job=job;
+				//添加方法
+				o.sayName=function(){
+					alert("My name is "+name);	//不使用this引用对象
+				};
+				//返回对象
+				return o;
+			}
+			//调用构造函数没使用new操作符
+			var friend=Person("Greg",29,"Doctor");
+			friend.sayName();
+		}
+		test6_2_7();
 	</script>
 </body>
 </html>

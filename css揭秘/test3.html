@@ -4,6 +4,173 @@
 	<title>css-Unity3-形状</title>
 </head>
 <body>
-	<div></div>
+	<h2>·自适应的椭圆</h2>
+	<div class="one_line">
+		<!--自适应的椭圆-->
+		<div class="Z1 ZSYTY"></div>
+		<div class="Z2 ZSYTY"></div>
+		<!--半椭圆--> 
+		<div class="B1 SBTY"></div>
+		<div class="B1 XBTY"></div>
+		<div class="B2 ZBTY"></div>
+		<div class="B2 YBTY"></div>
+		<!--四分之一圆-->
+		<div class="B3 SFZY"></div>
+	</div>
+	<h4>····模仿Simurai的糖果按钮</h4>
+	<div class="one_line">
+		<button class="btnSweet1">call</button>
+		<button class="btnSweet">call</button>
+	</div>
+	<!--平行四边形 --> 
+	<h2>·平行四边形</h2>
+	<div class="one_line">
+		<div class="PXSBX"></div>
+		<div class="btn">
+			<div>Click me</div>
+		</div>
+		<h4>····使用伪元素避免增加太多结构</h4>
+		<div class="btn1">Click me</div>
+	</div>
 </body>
+<style type="text/css">
+	div{
+		margin:10px 0 0 10px;
+	}
+	.one_line div{
+		/*position:relative;*/
+		display:inline-block;
+	}
+	/*自适应的椭圆*/
+	.ZSYTY{
+		border-radius:50%;
+		background-color:#fb3;
+	}
+	.Z1{
+		height:100px;
+		width:100px;
+	}
+	.Z2{
+		height:50px;
+		width:100px;
+	}
+	/*半椭圆*/
+		/*上半椭圆*/
+	.SBTY{
+		background: #fb3;
+		/* 水平半径 / 垂直半径（ 左上 右上 右下 左下 ）*/
+		/* 左上、右下 右上、左下 */
+		border-radius: 50% / 100% 100% 0 0;
+	}
+		/*下半椭圆*/
+	.XBTY{
+		background:#fb3;
+		border-radius:50% / 0 0 100% 100%;
+	}
+		/*左半椭圆*/
+	.ZBTY{
+		background:#fb3;
+		border-radius:100% 0 0 100% / 50%; 
+	}
+	/*右半椭圆*/
+	.YBTY{
+		background:#fb3;
+		border-radius:0 100% 100% 0 / 50%;
+	}
+	.B1{
+		height:50px;
+		width:100px;
+	}
+	.B2{
+		height:100px;
+		width:50px;
+	}
+	.B3{
+		height:50px;
+		width:50px;
+	}
+	.SFZY{
+		background:#fb3;
+		border-radius:100% 0 0 0;
+	}
+	/*********模仿糖果按钮********/
+		/*自己写*/
+	.btnSweet{
+		background:hsl(199, 50%, 85%);
+		height:50px;
+		width:150px;
+		border-radius:20% 10% 20% 10% / 80% 10% 80% 10%;
+		border:1px solid #58a;
+		box-shadow:/*底部灰色阴影*/
+					2px 4px 2px 5px rgba(0,0,0,0.2),
+					/*下面深蓝色立体阴影*/
+					2px 4px 1px 1px hsl(208, 50%, 55%),
+					/*0 0 1px 50px hsla(0,0%,100%,.5) inset,*/
+					0 -15px 2px 2px rgba(0,0,0,0.10) inset;
+		color: hsl(208, 50%, 40%);
+		text-shadow: rgba(255,255,255,.5) 0 1px 0;
+		font: 24px/1em 'Droid Sans', sans-serif;
+		font-weight: bold;
+		
+		margin:0 0 0 10px;
+		
+	}
+	/*from：http://simurai.com/archive/buttons*/
+	.btnSweet1{
+		background:hsl(208, 100%, 75%);
+		height:50px;
+		width:150px;
+		border-radius:20% 10% 20% 10% / 80% 10% 80% 10%;
+		box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, 
+					inset rgba(0,0,0,0.15) 0 -0.1em .3em, 
+					/* inner shadow */ 
+					hsl(208, 50%, 55%) 0 .1em 3px, 
+					hsl(208, 50%, 40%) 0 .3em 1px, 
+					/* color border */ 
+					rgba(0,0,0,0.2) 0 .5em 5px;
+		color: hsl(208, 50%, 40%) !important;
+		text-shadow: rgba(255,255,255,.5) 0 1px 0;
+		font: 24px/1em 'Droid Sans', sans-serif;
+		font-weight: bold;
+		background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), 
+						to( rgba(255,255,255,0.7) )), 
+						url(noise.png);
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+	/*平行四边形*/
+	.PXSBX{
+		height: 50px;
+		width: 100px;
+		background: #58a;
+		transform: skewX(-45deg);
+		margin:0 0 0 50px;
+	}
+	.btn{
+		height: 50px;
+		width: 150px;
+		background:#FF69B4;
+		transform:skewX(-45deg);
+		margin:0 0 0 50px;
+		text-align:center;
+	}
+	.btn > div{
+		transform:skewX(45deg);
+	}
+	/*使用伪元素*/
+	.btn1{
+		position:relative;
+		text-align:center;
+		height:50px;
+		width:150px;
+		color:#fff;
+	}
+	.btn1::before{
+		content:'';
+		position:absolute;
+		top:0; right:0; bottom:0; left:0;
+		background:#C71585;
+		transform:skewX(-45deg);
+		z-index:-1;
+	}
+</style>
 </html>
