@@ -21,6 +21,12 @@
 			</ul>
 		</li>
 		<li>借用构造函数<p>在子类型构造函数的内部调用超类型构造函数apply(),call()</p></li>
+		<li>组合继承
+			<p>把原型链继承和构造函数继承结合起来，既通过在原型上构造函数实现了函数的复用，又能够保证每个实例都有自己的属性</p>
+		</li>
+		<li>原型式继承
+
+		</li>
 	</ol>
 	<script type="text/javascript">
 		//原型链
@@ -88,7 +94,103 @@
 			alert("name: "+instance3.name);	//red,blue,green,black
 			alert("age: "+instance3.age);	//red,blue,gre
 		}
-		test6_3_2();
+		//test6_3_2();
+		//创建子类Child，使用原型和构造函数的方式继承父类People的方法，并调用say函数说出姓名和年龄。
+			//原型方法
+		function testTipsPro(){
+			function people(name,age){
+				this.name=name;
+				this.age=age;
+				this.say=function(){
+					alert("my name is "+this.name);
+				}
+			}
+			function child(name,age){
+				this.name=name;
+				this.age=age;
+			}
+			child.prototype=new people();
+			var childAmy=new child("Amy",20);
+			childAmy.say();
+		}
+		//testTipsPro();
+		//构造函数继承
+		function testTipsCall(){
+			function people(name,age){
+				this.name=name;
+				this.age=age;
+				this.say=function(){
+					alert("my name is "+this.name);
+				}
+			}
+			function child(name,age){
+				people.call(this);
+				this.name=name;
+				this.age=age;
+				
+			}
+			//child=new people();
+			var childAmy=new child("Amy",20);
+			childAmy.say();
+		}
+		//testTipsCall();
+		//数组去重，利用es6里的新数据类型set没有重复值的特性
+		//方法从一个类似数组或可迭代对象中创建一个新的，浅拷贝的数组实例。
+		var num=[1,2,3,4,5,5,4,3,2,1,6]
+		function distinct(a) {
+		    return Array.from(new Set([...a]))
+		}
+		var num1=distinct(num);
+		console.log(num1);
+
+		//写一个函数通过如下调用实现输出结果是8（2*2*2） test(2)(2)(2);
+		function test(a){
+		    var ans = function(b){
+		        return test(a * b);
+		    }
+		    ans.toString = function(){
+		        return a;
+		    }
+		    return ans;
+		}
+		console.log(test(2)(2)(2));
+		//****组合继承
+		function test6_3_3(){
+			function Supertype(name){
+				this.name = name;
+				this.colors = ['red','blue','yellow'];
+			}
+			Supertype.prototype.sayName = function(){
+				console.log(this.name);
+			};
+			function Subtype(name,age){
+				//继承属性
+				Supertype.call(this,name);
+				this.age=age;
+			}
+			//继承方法
+			Subtype.prototype = new Supertype();
+			Subtype.prototype.constructor = Subtype;
+			//子对象的原型的方法
+			Subtype.prototype.sayAge = function(){
+				console.log(this.age);
+			};
+			//创建子对象的实例
+			console.log("创建了子对象的实例1：");
+			var instance1 = new Subtype("Nicholas",29);
+			instance1.colors.push("black");	//["red", "blue", "yellow", "black"]
+			console.log(instance1.colors);
+			instance1.sayName();
+			instance1.sayAge();
+
+			console.log("创建子对象的实例2：");
+			var instance2 = new Subtype("Amy",18);
+			console.log(instance2.colors);	//["red", "blue", "yellow"]
+			instance2.sayName();
+			instance2.sayAge();
+			//两个实例都有各自的属性，和方法，属性不会互相影响
+		}
+		test6_3_3();
 	</script>
 </body>
 </html>
