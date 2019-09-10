@@ -1,0 +1,174 @@
+#app[data-v-20654542] {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+#cover[data-v-20654542] {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #eee;
+  opacity: 0.5;
+  z-index: -1;
+}
+.main-header[data-v-6209339b] {
+  text-align: center;
+}
+.main-header h1[data-v-6209339b] {
+  font-size: 100px;
+  color: rgba(175,47,47,0.4);
+  font-weight: 100;
+  margin: 20px;
+}
+.real-app[data-v-d94f3526] {
+  width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 0 5px #666;
+}
+.add-input[data-v-d94f3526] {
+  position: relative;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  outline: none;
+  color: inherit;
+  padding: 16px 16px 16px 60px;
+  border: 1px solid #999;
+  box-shadow: inset 0 -1px 5px 0 #eee;
+  box-sizing: border-box;
+  background: #fff;
+}
+.todo-item[data-v-12cd8970] {
+  position: relative;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  outline: none;
+  color: inherit;
+  padding: 16px 16px 16px 16px;
+  border: 1px solid #999;
+  border-top: none;
+  background: #fff;
+}
+.todo-item:hover .destory[data-v-12cd8970] {
+  display: block;
+}
+.toggle[data-v-12cd8970] {
+  cursor: pointer;
+  position: relative;
+  top: 0.2em;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999;
+  outline: none;
+}
+.toggle[data-v-12cd8970]:checked {
+  background: #d5ffc0;
+  box-shadow: inset 0 0 0 2px #fff;
+  border: 1px solid #d5ffc0;
+}
+.words[data-v-12cd8970] {
+  padding: 0 0 0 10px;
+}
+.completed[data-v-12cd8970] {
+  text-decoration: line-through;
+  color: #d5ffc0;
+}
+.isaX[data-v-12cd8970] {
+  display: inline-block;
+  width: 15px;
+  height: 2px;
+  background: #ff9a81;
+  transform: rotate(45deg);
+}
+.isaX[data-v-12cd8970]::after {
+  content: '';
+  display: block;
+  width: 15px;
+  height: 2px;
+  background: #ff9a81;
+  transform: rotate(-90deg);
+}
+.destory[data-v-12cd8970] {
+  cursor: pointer;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: none;
+  outline: none;
+  background: #fff;
+  top: -0.5em;
+  float: right;
+  display: none;
+}
+.destory:active .isaX[data-v-12cd8970] {
+  transform: rotate(180deg);
+}
+.helper[data-v-aeeb21de] {
+  position: relative;
+  background: #fff;
+  line-height: 3em;
+  border: 1px solid #999;
+  border-top: none;
+  font-size: 13px;
+  color: #000;
+}
+.left[data-v-aeeb21de] {
+  padding: 0 10px 0 10px;
+}
+.tabs[data-v-aeeb21de] {
+  padding: 0 10px 0 100px;
+}
+.state[data-v-aeeb21de] {
+  margin: 0 5px 0 5px;
+  padding: 4px;
+  cursor: pointer;
+}
+.actives[data-v-aeeb21de] {
+  border: 1px solid #999;
+  box-shadow: 0 0 1px 1px #eee;
+  border-radius: 5px;
+}
+.clear[data-v-aeeb21de] {
+  position: relative;
+  float: right;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+}
+html body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+body {
+  background: url(Wallions-aaa.jpg);
+  background-size: cover;
+  font: 14px;
+  color: #4d4d4d;
+  font-weight: 300;
+}
+#footer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #bfbfbf;
+  font-size: 10px;
+  text-shadow: 0 1px 0 #eee;
+}
