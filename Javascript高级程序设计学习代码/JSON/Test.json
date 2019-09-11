@@ -1,0 +1,37 @@
+[
+	{
+		"title":"Professional Javascript",
+		"student":[
+			{
+				"name":"G",
+				"age":20
+			},
+			{
+				"name":"Z",
+				"age":29
+			},
+			{
+				"name":"A",
+				"age":19
+
+			}]
+	},
+	{
+		"title":"CSS secrets",
+		"student":[
+			{
+				"name":"B",
+				"age":20
+			},
+			{
+				"name":"D",
+				"age":29
+			},
+			{
+				"name":"E",
+				"age":19
+
+			}]
+	}
+]
+
