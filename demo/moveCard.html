@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cards">Something is here.</div>
+</body>
+<style>
+/*利用after和hover::after伪类实现平滑的卡片背景动画
+* 通过给afer和hover::after都添加transition属性，使其具有动画效果
+*/
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cards{
+    position: absolute;
+    background: #e0d2d6;
+    border-radius: 10px;
+    height:10em;
+    width:10em;
+    text-align:center;
+    margin:10em 0 0 0;
+}
+.cards:hover::after{
+    content: '';
+    position:absolute;
+    background:#470024;
+    border-radius: 10px;
+    left:-1em;
+    top:-1em;
+    right:-1em;
+    bottom:-2em;
+    z-index: -1;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+.cards::after{
+    content: '';
+    position:absolute;
+    background:#470024;
+    border-radius: 10px;
+    left:1em;
+    top:1em;
+    right:-1em;
+    bottom:-1em;
+    z-index: -1;
+    transition: 0.3s ease;
+}
+</style>
+</html>
