@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>个人作品集</title>
+</head>
+<body>
+	<header>
+		<div>Personal Blog</div>
+		<div class="box">
+			<div>分类</div>
+			<div>主页</div>
+			<div>时间线</div>
+		</div>
+	</header>
+	<div class="content">
+		<div>
+			<h2>Test1</h2>
+			<p>This is a great test.</p>
+		</div>
+		<div>
+			<h2>Test2</h2>
+			<p>This is a great test.</p>
+		</div>
+		<div>
+			<h2>Test3</h2>
+			<p>This is a great test.</p>
+		</div>
+		<div>
+			<h2>Test4</h2>
+			<p>This is a great test.</p>
+		</div>
+		<div>
+			<h2>Test5</h2>
+			<p>This is a great test.</p>
+		</div>
+		<div>
+			<h2>Test6</h2>
+			<p>This is a great test.</p>
+		</div>
+	</div>
+	<footer>
+		<div>@JameMoriarty in GitHub</div>
+		<a href="">GitHub</a>
+		<a href="">CSDN</a>
+	</footer>
+</body>
+<style type="text/css">
+	html{
+		height: 100%;
+	}
+	body{
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+	}
+	header{
+		height: 3rem;
+		width: 100%;
+		display: flex;
+		background: #d8553b;
+		position: relative;
+		top: 0;
+		left: 0;
+		color: white;
+		justify-content: space-around;
+		align-items: center;
+	}
+	footer{
+		position: relative;
+		left: 0;
+		bottom: 0;
+		height: 6rem;
+		width: 100%;
+		background: #470024;
+		color: #a37c89;
+		display: flex;
+		flex-direction:column;
+		justify-content: center;
+		align-items: center;
+	}
+	a{
+		margin: 5px 0 0 0;
+		display: flex;
+		color: #a37c89;
+	}
+	div{
+		display: flex;
+	}
+	.box{ 
+		width: 20rem;
+		justify-content: space-around;
+	}
+	.box div{
+		/*padding:5px;*/
+		transition: 0.3s border-bottom;
+	}
+	.box div:hover{
+		border-bottom:3px solid white;
+	}
+	.content{
+		padding:15px 0 20px 0; 
+		background: #ffb094;
+		display: flex;
+		flex-wrap: wrap;
+		flex-basis: 80%;
+		justify-content: center;
+		align-items: center;
+		width: 60rem;
+	}
+	.content div{
+		padding:10px; 
+		box-sizing: border-box;
+		margin: 10px 15px 10px 0;
+		height: 12.5rem;
+		width: 12.5rem;
+		background: white;
+		border-radius: 30px;
+		flex-direction: column;
+		transition: 0.5s all;
+		flex-basis: 30%;
+	}
+	.content div:hover{
+		background: #a37c89;
+		color: white;
+	}
+</style>
+</html>

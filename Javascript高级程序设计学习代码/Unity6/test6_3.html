@@ -24,9 +24,9 @@
 		<li>组合继承
 			<p>把原型链继承和构造函数继承结合起来，既通过在原型上构造函数实现了函数的复用，又能够保证每个实例都有自己的属性</p>
 		</li>
-		<li>原型式继承
-
-		</li>
+		<li>原型式继承</li>
+		<li>寄生式继承</li>
+		<li>寄生组合式继承：是最理想的继承方法</li>
 	</ol>
 	<script type="text/javascript">
 		//原型链
@@ -141,7 +141,7 @@
 		    return Array.from(new Set([...a]))
 		}
 		var num1=distinct(num);
-		console.log(num1);
+		//console.log(num1);
 
 		//写一个函数通过如下调用实现输出结果是8（2*2*2） test(2)(2)(2);
 		function test(a){
@@ -153,7 +153,7 @@
 		    }
 		    return ans;
 		}
-		console.log(test(2)(2)(2));
+		//console.log(test(2)(2)(2));
 		//****组合继承
 		function test6_3_3(){
 			function Supertype(name){
@@ -190,7 +190,86 @@
 			instance2.sayAge();
 			//两个实例都有各自的属性，和方法，属性不会互相影响
 		}
-		test6_3_3();
+		//test6_3_3();
+		//原型式继承
+		function test6_3_4(){
+			var person = {
+				name:"Greg",
+				age:20,
+				//会被创建的新的对象共享
+				friends:["Shelby","Court","Van"],
+			};
+			var person1=Object.create(person);
+			person1.name="Amy";
+			person1.friends.push("Rob");
+
+			var person2=Object.create(person);
+			person2.name="Linda";
+			person2.friends.push("Barbie");
+			//friends属性是共享的-->包含引用类型的属性都是共享的
+			alert(person.friends);	//"Shelby","Court","Van",Rob,Barbie
+			//name属性是独立的
+			alert(person1.name);	//Amy
+			alert(person1.age);		//20
+
+			//****函数另一个参数,参数格式
+			var person3 = Object.create(person,{
+				name:{value:"Alice"}
+			});
+			//覆盖原型对象的同名属性的值
+			alert("person:"+person.name);	//Greg
+			alert("person3:"+person3.name);	//Alice
+
+		}
+		//test6_3_4();
+		//寄生式继承
+		//*******不能做到函数复用
+		function test6_3_5(){
+			function creatAnother(parent){
+				//可以使用任何可以返回新对象的函数
+				var clone = Object(parent);
+				clone.sayHi = function(){
+					alert("Hi");
+				};
+				return clone;
+			}
+			var person = {
+				name:"Greg",
+				age:20,
+				friends:["Shelby","Court","Van"],
+			};
+			var person1=creatAnother(person);
+			person1.sayHi();
+		}
+		//test6_3_5();
+		//寄生组合式继承——>就是在寄生式的函数里放入原型赋值的过程
+		function test6_3_6(){
+			function inheritPrototype(subtype,supertype){
+				var prototype=Object(supertype.prototype);
+				prototype.constructor=subtype;
+				subtype.prototype=prototype;
+			}
+			function supertype(name){
+				this.name=name;
+				this.colors=["red","blue","green"];
+			}
+			supertype.prototype.sayName=function(){
+				alert(this.name);
+			}
+			function subtype(name,age){
+				supertype.call(this,name);
+				this.age=age;
+			}
+			inheritPrototype(subtype,supertype);
+			subtype.prototype.sayAge=function(){
+				alert(this.age);
+			}
+			subtype.prototype=new supertype();
+			var instance = new subtype("Amy",30);
+			instance.sayName();		//"Amy"
+			instance.sayAge();		//30
+		}
+		test6_3_6();
 	</script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css3NewFeatures</title>
+</head>
+<body>
+	<h1>定位布局</h1>
+	<h3>position</h3>
+	<div class="parentBox">
+		<div class="box1"></div>
+		<div class="box2"></div>
+		<div class="box3">
+			<div class="box4"></div>
+		</div>
+	</div>
+	<div class="words">当bottom和top都不为auto时，会忽略bottom。</div>
+	<h3>display</h3>
+	<div class="parentBox1">
+		<div class="box1"></div>
+		<div class="box2">
+			啦啦啦啦啦啦啦啦啦
+		</div>
+		<div class="box4"></div>
+		<div class="box3"></div>
+	</div>
+	<h3>2D变换</h3>
+	<div class="parentBox2">
+		<div class="box1"></div>
+		<div class="box2"></div>
+		<div class="box3"></div>
+		<div class="box4"></div>
+	</div>
+<style type="text/css">
+	/*position*/
+.parentBox{
+	height: 200px;
+	width: 100%;
+	background: #eee;
+}
+.parentBox .box1{
+	height:100px;
+	width: 100px;
+	background: #58a;
+	position:absolute;
+	top:50px;
+	left:100px;
+}
+.parentBox .box2{
+	height: 100px;
+	width: 100px;
+	background: #765;
+	position: relative;
+	top: 50px;
+	left: 100px;
+}
+.parentBox .box3{
+	height:100px;
+	width: 100px;
+	background: #85b;
+	/*绝对定位，相对祖先元素定位,若祖先没有设置absolute或者relative时就相对html定位*/
+	position:absolute;
+}
+.parentBox .box4{
+	height: 50px;
+	width: 50px;
+	background: #25c;
+	/*相对定位，相对自己原来的的位置定位*/
+	position: relative;
+}
+.words{
+	font-size: 16px;
+	margin: 10px 20px 0 20px;
+}
+	/*display*/
+.parentBox1{
+	height: 200px;
+	width: 100%;
+	background: #eee;
+}
+.parentBox1 .box1{
+	height:100px;
+	width: 100px;
+	background: #58a;
+	display: none;
+}
+.parentBox1 .box2{
+	height:100px;
+	width: 100px;
+	background: #90a;
+	/*行内元素，靠内部元素撑开宽高*/
+	display: inline;
+}
+.parentBox1 .box3{
+	height:100px;
+	width: 100px;
+	background: #241;
+	/*块元素，独占一行*/
+	display: block;
+}
+.parentBox1 .box4{
+	height:100px;
+	width: 100px;
+	background: #256;
+	/*内联块元素，宽高生效，可以和inline或者inline-block元素同行显示*/
+	display: inline-block;
+}
+/*2D变换*/
+.parentBox2{
+	height: 200px;
+	width: 100%;
+	background: #eee;
+}
+.parentBox2 .box1{
+	height: 100px;
+	width: 100px;
+	top: 30px;
+	left: 20px;
+	display: inline-block;
+	position: relative;
+	background: #58a;
+	transform: matrix(0.866,0.5,-0.5,0.866,0,0);
+}
+.parentBox2 .box2{
+	height: 100px;
+	width: 100px;
+	left: 20px;
+	display: inline-block;
+	position: relative;
+	background: #9855;
+	transform: translate(30px,30px);
+}
+.parentBox2 .box3{
+	height: 100px;
+	width: 100px;
+	left: 20px;
+	display: inline-block;
+	position: relative;
+	background: #69b;
+	transform: rotate(45deg);
+}
+.parentBox2 .box4{
+	height: 100px;
+	width: 100px;
+	left: 20px;
+	display: inline-block;
+	position: relative;
+	background: #1266;
+	transform: skew(30deg,0);
+}
+</style>
+</body>
+</html>

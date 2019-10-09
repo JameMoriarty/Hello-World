@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>switch开关</title>
+</head>
+<body>
+	<!--立体滑动按钮-->
+	<div class="buttons">
+	<div class="one-line">
+		<div class="words on">ON</div>
+		<div>
+		<label class="switch box">	
+			<input type="checkbox">
+		</label>
+		</div>
+		<div class="words off">OFF</div>
+	</div>
+	<!--平面滑动按钮-->
+	<div class="one-line">
+		<div class="words on">ON</div>
+		<div>
+		<label class="switch plane">	
+			<input type="checkbox">
+		</label>
+		</div>
+		<div class="words off">OFF</div>
+	</div>
+	</div>
+	<style>
+		.buttons{
+			text-align:center;
+		}
+		.one-line{
+			margin:50px 0 0 0;
+		}
+		.one-line > div{
+			display:inline-block;
+		}
+		.switch{
+			width:100px;
+			height:50px;
+			line-height:50px;
+			/*定位控制*/
+			position:absolute;
+			border-radius:30px;
+		}
+		.box{
+			background:#B0CDF9;
+			box-shadow: 2px 2px 1px 3px #80AFF6,
+						2px 4px 3px 4px #CCCCCC;
+		}
+		.switch input{
+			
+			width:90px;
+			height:40px;
+			border-radius:30px;
+			position:absolute;
+			top:4%;
+			left:1%;
+			/*box-shadow:2px 2px 1px 3px #80AFF6 inset;*/
+			/*去除checkbox本身样式*/
+			appearance: none;
+			-webkit-appearance: none;
+			/*外围边框去掉*/
+			outline: 0;
+		}
+		.box input{
+			background:#B0CDF9;
+			box-shadow:2px 2px 1px 3px #80AFF6 inset;
+
+		}
+		.switch input:before{
+			/*设置悬浮鼠标样式*/
+			cursor: pointer;
+		}
+		.switch input:after{
+			cursor: pointer;
+			/*content 属性与 :before 及 :after 伪元素配合使用，来插入生成内容。*/
+			content: '';
+			display: inline-block;
+			background:#fff;
+			position: relative;
+			/*content: '';*/
+			width:35px;
+			height:35px;
+			border-radius:30px;
+			top:5%;
+			left:1%;
+		}
+		.box input:after{
+			box-shadow:2px 1px 1px 1px #dddddd;
+
+		}
+		.switch input:checked:before {
+		}
+		.switch input:checked:after {
+			left: 60%;
+		}
+		.box input:checked:after{
+			box-shadow:-2px 1px 1px 1px #dddddd;
+
+		}
+		/*文字*/
+		.words{
+			position:relative;
+			top:2em;
+			font-weight:bolder;
+			color:#B0CDF9;
+		}
+		.on{
+			right:1em;
+			color:#B0CDF9;
+		}
+		.off{
+			left:7.5em;
+		}
+		
+		.plane{
+			border:#B0CDF9 1px solid;
+		}
+		.plane input:after{
+			background:#B0CDF9;
+		}
+	</style>
+</body>
+</html>

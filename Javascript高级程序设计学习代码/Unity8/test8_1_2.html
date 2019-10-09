@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>框架与窗口关系</title>
+</head>
+	<!--创建了一个框架集，其中一个框架居上，两个框架居下-->
+	<frameset rows="160,*">
+		<!--window.frame[0]/top.frame[0]-->
+		<frame src="https://www.cnblogs.com" name="topFrame">
+			<frameset cols="50%,50%">
+				<!--window.frame[1]/top.frame[1]-->
+				<frame src="https://www.baidu.com" name="leftFrame">
+				<!--window.frame[2]/top.frame[2]-->
+				<frame src="https://www.w3school.com.cn" name="rightFrame">
+			</frameset>
+	</frameset>
+</html>

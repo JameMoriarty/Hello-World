@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>8.3navigetor对象</title>
+</head>
+<body>
+<h1>navigetor对象</h1>
+<p>navigator对象属性通常用于检测网页的浏览器类型。navigator对象现在已经成为识别客户端浏览器的事实标准。</p>
+<h1>8.3.1检测插件</h1>
+<p>对于非IE浏览器，使用plugins数组来检测浏览器是否安装了插件。该数组中的每一项都包含了下列属性：</p>
+<ul>
+	<li>name:插件的名字</li>
+	<li>description:插件的描述</li>
+	<li>filename:插件的文件名</li>
+	<li>length:插件所处理的MIME类型数量</li>
+</ul>
+<p>IE浏览器中检测插件的唯一方式就是使用专有的ActiveXObject类型，并尝试创建一个特定插件的实例。IE是以COM对象的方式实现插件的，COM对象使用唯一标识符来标识。</p>
+<p>一般使用通用方法：针对每个插件分别创建检测函数，使用非IE浏览器的检测方法，若返回false就在使用IE的检测方法，如果两次都返回false就整体返回false，只要有一个返回true，整体就返回true</p>
+<h1>8.3.2注册处理程序</h1>
+<p>Firefox2为navigator对象新增了registerContentHandler()和registerProtocolHandler()方法，可以让一个站点指明它可以处理特定类型的信息。为像使用桌面应用程序一样默认的使用RSS阅读器和在线电子邮件程序提供了一种方式。</p>
+<h1>8.4screen对象</h1>
+<p>screen 对象基本上只
+用来表明客户端的能力，其中包括浏览器窗口外部的显示器的信息，如像素宽度和高度等。每个浏览器中的 screen 对象都包含着各不相同的属性，</p>
+<h1>8.5history对象</h1>
+<p>保存着用户上网的历史纪录。。因为 history 是 window对象的属性，因此每个浏览器窗口、每个标签页乃至每个框架，都有自己的 history 对象与特定的window 对象关联。出于安全方面的考虑，开发人员无法得知用户浏览过的URL。不过，借由用户访问过的页面列表，同样可以在不知道实际 URL 的情况下实现后退和前进。</p>
+</body>
+<script type="text/javascript">
+//8.3.1
+	//****在非IE的浏览器中检测插件
+	function hasPlugin(name){
+		//转换成小写，便于比较
+		name=name.toLowerCase();
+		//遍历plugins数组
+		for(var i=0;i<navigator.plugins.length;i++){
+			//使用indexOf()检测每一个name属性，以确定传入的名称是否出现在字符串的某个位置
+			if(navigator.plugins[i].name.toLowerCase().indexOf(name) > -1){
+				return true;
+			}
+		}
+		return false;
+	}
+	//检测Flash，若有flash属性则返回true，没有返回false
+	console.log(hasPlugin("Flash"));
+	//检测QuickTime
+	console.log(hasPlugin("QuickTime"));
+
+	//****在IE中检测插件
+	function hasIEPlugin(name){
+		try{
+			//创建一个COM对象的实例，如果有COM对象（有插件）就不会抛出错误，如果没有就会抛出错误
+			new ActiveXObject(name);
+			return true;
+		} catch (ex){
+			return false;
+		}
+	}
+	//检测Flash，使用COM唯一标识符检查插件
+	console.log(hasIEPlugin("ShockwaveFlash.ShockwaveFlash"));
+	//检测QuickTime
+	console.log(hasIEPlugin("QuickTime.QuickTime"));
+
+	//****通用方法
+	//针对每个插件分别创建检测函数，使用非IE浏览器的检测方法，若返回false就在使用IE的检测方法，如果两次都返回false就整体返回false，只要有一个返回true，整体就返回true
+	function hasFlash(){
+		var result=hasPlugin("Flash");
+		if(!result){
+			result=hasIEPlugin("ShockwaveFlash.ShockwaveFlash");
+		}
+		return result;
+	}
+	//检测Flash
+	console.log(hasFlash());
+
+//8.3.2
+//用于Firefox2
+function test8_3_2(){
+	//registerContentHandle接受三个参数：要处理的MIME类型、可以处理该MIME类型的页面的URL、应用程序的名称。
+	//要将一个站点注册成处理RSS源的处理程序
+	navigator.registerContentHandle("application/rss+xml","http://www.somereader.com?feed=%s","Some Reader");
+	//registerProtocolHandle接受三个参数：要处理的协议，处理该协议的页面的URL、应用程序的名称。
+	//注册一个mailto协议的处理程序，表示该程序指向一个基于web的电子邮件客户端。
+	navigator.registerProtocolHandle("mailto","http://www.somemailtoclient.com?cmd=%s","Some Mail Client");	//目前还不能用
+}
+//test8_3_2();
+//8.4
+function test8_4(){
+	console.log(screen.height+"*"+screen.width);	//768*1366 屏幕的像素宽高
+	console.info(screen.colorDepth);	//24 用于表现颜色的位数
+}
+test8_4();
+//8.5
+function test8_5(){
+	//后退一页
+	history.go(-1);
+	//前进一页
+	history.go(1);
+	//前进两页
+	history.go(2);
+
+	//跳转到历史纪录中的具体的一页，如果历史纪录中不包含这个字符串那么就什么也不做
+	history.go("wrox.com");
+	//使用back和forward来模仿前进、后退
+	//后退一页
+	history.back();
+	//前进一页
+	history.forward();
+	//length历史纪录的数量
+	console.log(history.length);
+	//可以使用这个方法来检测当前页面是不是用户历史纪录中的第一个页面
+	if(history.length == 0){
+		console.info("这是用户打开窗口后的第一个页面");
+	}
+}
+test8_5();
+</script>
+</html>

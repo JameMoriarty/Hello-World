@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unity8 BOM</title>
+</head>
+<body>
+	<h1>BOM</h1>
+	<h2>8.1.1全局作用域</h2>
+	<p>window对象表示浏览器的一个实例，同时也是Global对象。所有在全局声明的函数或者变量都是他的属性或者方法。但是全局变量不能使用delete删除，而window.shuxing可以使用delete删除。</p>
+	<h1>8.1.2框架与窗口关系</h1>
+	<!--内联框架-->
+	<iframe src="something.html"></iframe>
+	<h1>8.1.3窗口位置</h1>
+	<p>screenX,sxreenY和screenTop,screenLeft，表示窗口位置</p>
+	<h1>8.1.4窗口大小</h1>
+	<p>innerWidth,innerHeight,outerWidth,outerHeight，document.documentElement.clientWidth，document.documentElement.clientHeight，document.body.clientWidth，document.body.clientHeight视口大小，不同浏览器对应的不同。</p>
+	<p>在移动设备中innerWidth,innerHeight保存着可见视口，屏幕上可见区域的大小。document.documentElement度量的是布局视口，即渲染后页面的实际大小。</p>
+	<h1>8.1.5导航和打开窗口</h1>
+	<h3>弹出窗口</h3>
+	<p>window.open( 要加载的url，目标窗口，特性字符串，布尔值)</p>
+	<P>布尔值表示新页面是否要取代浏览器历史纪录中加载当前页面布尔值。通常只传第一个参数，最后一个参数只在不打开新窗口的情况下使用。</P>
+	<p>弹出窗口中window.opener属性保存着打开他的原始窗口对象的地址，但是原始窗口不会跟踪打开的新窗口。浏览器会在独立的进程中运行每个标签页，如果两个标签页要互相通信，就不能在独立的进程中运行两个标签页。如果将window.opener属性设为null，则表示在独立的进程里运行标签页，标签页之间就无法通信了，就等于告诉浏览器标签页之间不需要通信，标签页之间的联系一旦切断，就不可恢复。</p>
+	<h3>安全限制</h3>
+	<p>浏览器对弹出式页面做了限制，为保证安全性。</p>
+	<h3>弹出窗口屏蔽程序</h3>
+	<P>当窗口被浏览器屏蔽了，则会返回null，若是被屏蔽插件屏蔽了会抛出一个错误。</P>
+	<h1>间歇调用和超时调用</h1>
+	<p>setTimeout(要执行的代码，要等待的毫秒数)超时调用，返回一个id，通过这个id来取消超时调用clearTimeout(id)。到了等待的时间，把要执行的代码放入javascript任务队列，若任务队列为空，则立刻执行代码，否则要按添加到队列的顺序执行。</p>
+	<p>setInterval(要执行的代码，间隔的毫秒数)间歇调用</p>
+	<h1>系统对话框</h1>
+	<p>alert()只有确定按钮，只是显示提示信息。</p>
+	<p>comfirm()有确定和取消按钮，返回值分别是true和false，可以让用户判断是否执行某些操作</p>
+	<p>prompt()输入框、确认和取消，确认之后返回输入的字符串，取消之后返回null，两个参数，第一个是提示信息，第二个通常为空表示输入信息</p>
+	<p>打印print()，查找find()</p>
+<script type="text/javascript">
+	//8.1.1
+	var age=12;
+	window.name="littleA";
+	console.log(delete window.age);		//false
+	console.log(delete window.name);	//true
+	console.log(window.age);			//12
+	console.log(window.name);			//undefine
+	//8.1.3
+	//跨浏览器取得窗口左边和上边的位置
+	var leftPos = (typeof window.screenLeft == "number") ? window.screenLeft : window.screenX;
+	var topPos = (typeof window.screenTop == "number") ? window.screenTop : window.screenY;
+	console.log(leftPos+" "+topPos); //0 0
+	//移动窗口，以下方法有可能被浏览器禁用，以下方法都不适用于框架，只适用于window对象
+	//将窗口移动到200，300
+	window.moveTo(200,300);
+	//将窗口向下移动100
+	window.moveBy(0,100);
+	//8.1.4
+	var pageWidth = window.innerWidth;
+	var pageHeight = window.innerHeight;
+	if(typeof pageWidth != "number"){
+		//检查页面是否处于标准模式
+		if(document.compatMode == "CSS1Compat"){
+			pageWidth = document.documentElement.clientWidth;
+			pageHeight = document.documentElement.clientHeight;
+		} else {
+			pageWidth = document.body.clientWidth;
+			pageHeight = document.body.clientHeight;
+		}
+	}
+	console.log(pageWidth+" x "+pageHeight); //1366*320
+	//调整窗口的大小，会被禁用，只能对最外层window对象使用
+	//调整到100*100 new height,new width
+	window.resizeTo(100,100);
+	//调整到300*150 new height - old height,new width - old width
+	window.resizeBy(100,50);
+	//8.1.5
+	/*
+	//在toFrame的窗口或框架打开url网页，若没有就在新窗口打开
+	window.open("http://www.wrox.com","toFrame"); //在新标签页打开，并将窗口命名为toFrame
+	//设置第三个参数
+	var wroxWin = window.open("http://www.wrox.com","wroxWindow","height=300,width=300,top=10,left=10,resizable=no");
+	wroxWin.resizeTo(500,500);	//改变大小
+	wroxWin.moveTo(100,100);	//移动
+	//wroxWin.close();	//关闭，只能关闭弹出窗口
+	// 检测弹出窗口是否被屏蔽
+	var blocked = false;
+	try{
+		var wrox=window.open("http://baidu.com","_blank");
+		if(wrox == null){
+			blocked=true;
+		}
+	} catch(ex){
+		blocked=true;
+	}
+
+	if(blocked){
+		alert("The popup is blocked.");
+	}
+	*/
+	//8.1.6
+	function test8_1_6(){
+		// 超时调用
+		var timeoutId = setTimeout(function(){
+			console.log("Hello World!");
+		},2000);
+		//取消
+		clearTimeout(timeoutId);
+		//间歇调用，有可能会发生错误导致后一个间歇调用在前一个之前执行，所以最好不要使用间歇调用。
+		var num =0;
+		var interval = null;
+		function creatnumber(){
+			num++;
+			console.log(num);
+			if(num == 10){
+				clearInterval(interval);
+				console.log("Done");
+			}
+		}
+		interval = setInterval(creatnumber,500);
+		//使用超时调用来模拟间歇调用
+		var num1 =0;
+		function creatnumber1(){
+			num1++;
+			console.log("setTimeout:"+num1);
+			//如果执行次数未到达要求的值，就设置下一侧超时调用
+			if(num1 < 10){
+				setTimeout(creatnumber1,500);
+				
+			}else{
+				console.log("setTimeout Done");
+			}
+		}
+		setTimeout(creatnumber1,500);
+	}
+	//test8_1_6();
+	//8.1.7
+	function test8_1_7(){
+		//comfirm有取消和确定两个选择，分别返回值是false和true
+		if(confirm("Are you sure?")){
+			alert("I'm so great you are sure.");
+		}else{
+			alert("I'm sorry to hear that.");
+		}
+		//prompt()输入框、确认和取消，确认之后返回输入的字符串，取消之后返回null，两个参数，第一个是提示信息，第二个通常为空表示输入信息
+		var result = prompt("What is your name?","");
+		if(result!=null){
+			alert("Welcome "+result);
+		}
+		//打印print()，查找find()
+		window.print();
+		window.find();
+	}
+	test8_1_7();
+</script>
+</body>
+</html>

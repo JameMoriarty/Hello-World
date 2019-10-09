@@ -1,0 +1,184 @@
+
+<html>
+<head>
+	<title>Time is money.</title>
+</head>
+<body>
+	<div class="headPart">时间就是金钱</div>
+	<div class="headPart1">开着页面去干点什么吧，回来看看你花掉了多少时间</div>
+	<!--金钱转换部分-->
+	<div class="gCenter">
+		<!--金币-->
+		<div class="gold goldAni">
+			<div class="inGoldCircle">
+				<div class="starShadow star">
+					<div class="star starColor starAni"></div>
+				</div>
+			</div>
+		</div>
+		<!--按钮-->
+		<button class="goldBtn" onclick="howMany()">花掉的时间</button>
+		<!--<img id="coin" class="myCoin" src="./images/myCoin.svg" />-->
+	</div>
+	<div class="footer">G1657643182@163.com</div>
+<style type="text/css">
+	body{
+		background: linear-gradient(to right, #470024 50%,#32081a 0);
+		background-size: 90px 100%;
+	}
+	.headPart{
+		margin: 50px 0 0 0;
+		text-align:center;
+		font-size: 40px;
+		font-weight: bolder;
+		color: #fff;
+	}
+	.headPart1{
+		font-size: 30px;
+		color: #fff;
+		margin: 20px 0 50px 0;
+		text-align:center;
+	}
+	/*金币转换部分*/
+	.gCenter{
+		display: flex;
+		align-items: center;
+  		justify-content:center;
+  		flex-direction:column;
+	}
+	/*金币*/
+	.gold{
+		height: 10em;
+		width: 10em;
+		border-radius: 50%;
+		box-shadow: 0 4px 2px 3px hsla(0,0%,10%,0.2);
+		/*background:#ffd700;*/
+		display: flex;
+		align-items: center;
+  		justify-content: center;
+  		position:relative;
+	}
+	.goldAni{
+		visibility: hidden;
+  		animation: 10s colorChange infinite;
+	}
+	.inGoldCircle{
+		display: flex;
+		align-items: center;
+  		justify-content: center;
+		height: 7em;
+		width: 7em;
+		border-radius: 50%;
+		box-shadow: inset 0 0 2px 3px hsla(0,0%,10%,0.2);
+	}
+	/*加阴影*/
+	.star{
+		display: flex;
+		height: 5em;
+		width: 5em;
+		-webkit-clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+		clip-path: polygon(50% 0,65% 35%,100% 50%,65% 65%,50% 100%,35% 65%,0 50%,35% 35%);
+
+	}
+	.starShadow{
+		height: 5.3em;
+		width: 5.3em;
+		background:hsla(0,0%,10%,0.2);
+	}
+	.starColor{
+		/*background:#efc900;*/
+	}
+	.starAni{
+		animation:10s colorChangeStar infinite;
+	}
+	/*按钮*/
+	.goldBtn{
+		margin: 2em;
+		padding:1em 5em 1em 5em; 
+		border-radius: 10px;
+		color: #fff;
+		border:none; 
+		font-size: 16px;
+		font-weight: bold;
+		background: -webkit-linear-gradient(#6c3495,#4b0080);
+		background:linear-gradient(#6c3495,#4b0080);
+		z-index: 2;
+		text-decoration: none;
+		cursor: pointer;
+		outline: none;
+	}
+	.footer{
+		margin: 5em 0 0 0;
+		text-align: center;
+		font-weight: bold;
+		color:#522d3a;
+	}
+	@keyframes colorChange{
+		0%{
+			/*background:#fff8dd;*/
+			background: hsla(48%,100%,93%,0.8);
+			visibility: visible;
+		}
+		80%{
+			background:#ffd700;
+			top: 0;
+		}
+		90%{
+			visibility: hidden;
+		}
+		100%{
+			background:hsla(48%,100%,93%,0.8);
+			top:6em;
+		}
+	}
+	@keyframes colorChangeStar{
+		0%{
+			/*background:#fafad2;*/
+			background: hsla(50%,100%,47%,0.2);
+		}
+		80%{
+			background:#efc900;
+		}
+		100%{
+			background:hsla(50%,100%,47%,0.2);
+		}
+	}
+</style>
+<script type="text/javascript">
+	var number=0;
+	var	mytime=setInterval(count, 1000);
+	function count(){
+		number++;
+		
+	}
+	function howMany(){
+		clearInterval(mytime);
+		console.log(number);
+		var back="<body style=\"background:linear-gradient(to right, #470024 50%,#32081a 0);background-size:90px 100%;\"></body>";
+		var headPart="margin: 2em 0 2em 0;text-align:center;font-size: 40px;font-weight: bolder;color: #fff;z-index:0;";
+		document.write("<div style=\""+headPart+"\">你的时间花的值得了吗？</div>");
+		document.write(back);
+		for(var i=0;i<number;i++){
+			myCoin();
+		}	
+	}
+	function myCoin(){
+		
+		//var coin = document.getElementById('coin');
+		var w=document.body.clientWidth-100;
+		var h=document.body.clientHeight-100; //窗口的大小                 
+        //产生随机坐标  
+    	var x = Math.random()*w;  
+      
+    	var y = Math.random()*h;  
+    	//coin.style.display="block";
+	    //图片的定位  
+	    cleft=x+"px";  
+	      
+	    ctop=y+"px";  
+	    var coinhtl="<img id=\"coin\" style=\"position: absolute;height: 5em;width: 5em;z-index:-1;left:"+cleft+";top:"+ctop+";\" src=\"./images/myCoin.svg\" />";
+		document.write(coinhtl);
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Unity7</title>
+</head>
+<body>
+<h1>定义函数两种方式</h1>
+<h2>1.函数声明</h2>
+<p>function sayName(){}函数声明提升：在执行代码时会先读取函数声明，可以把函数声明放在调用它的语句后面。</p>
+<h2>2.函数表达式</h2>
+<p>var sayName=function(){}这种方式创建的函数是匿名函数，name属性是空字符串，使用时必须先赋值，即调用函数必须放在创建函数后面。<br>
+在把函数当成值来使用的情况下，使用匿名函数。</p>
+<h1>递归</h1>
+<p>arguments.callee()指向正在执行函数的指针，或者使用命名函数</p>
+<h1>闭包</h1>
+<p>闭包是指有权访问另一函数作用域中变量的函数。闭包的缺点：占用内存</p>
+<h2>作用域链</h2>
+<p>作用域链产生了一个副作用-->即闭包只能取得包含函数中任意变量的最后一个值</p>
+<h1>闭包与变量</h1>
+<p>解决副作用</p>
+<h1>关于this对象</h1>
+<p>this是指包含它的函数作为方法被调用时所属的对象，this对象是在运行时基于函数的执行环境绑定的。全局函数的this是window，当函数被作为某个对象的方法时this就是该对象。<i>匿名函数具有全局性，所以匿名函数的this对象通常是window</i>
+<ol>改变this的函数
+	<li>call(对象，参数1，参数2....)</li>
+	<li>apply(对象，[参数1，参数2...])</li>
+	<li>bind(对象，参数1，参数2....)() 返回的是一个函数所以要加括号调用</li>
+</ol>
+</p>
+<h1 onclick="assignHandle()" id="something">内存泄漏</h1>
+<p onclick="assignHandle1()" id="something1">在闭包的作用域链里保存着一个html元素的话，会导致该元素无法被销毁。</p>
+<h1>模仿块级作用域</h1>
+<p>javascript中没有块级作用域的概念，在函数中定义的变量在整个函数中都可以随处访问。<br>
+(function(){ //这里是块级作用域 })();</p>
+<h1>私有变量</h1>
+<p>javascript里没有私有成员的概念，所有对象属性都是公有的。任何在函数中定义的变量都是私有变量，因为不能在函数的外部访问这个变量</p>
+<div style="background: #fffb99;padding:.5em .5em .5em .5em;">
+	<h4>Tips：构造函数的缺点：</h4>
+	<p>针对每一个实例都会创建同样一组新方法。</p>
+</div>
+<h1>静态私有变量</h1>
+<p>使用原型方法，并把私有变量放在一个块级里，所有实例都没有私有变量，变量是实例共享的</p>
+<h1>模块模式</h1>
+<p>是为单例创建私有变量和特权方法的，<i>单例：是以对象字面量的方式来创建单例对象的</i></p>
+<h1>增强的模块模式</h1>
+<p>在返回对象之前加入对其增强的代码，这种增强模式适合那些单例必须是某种类型的实例，以及必须添加某些属性或方法对其加以增强</p>
+<script type="text/javascript">
+	function test7_1_0(){
+		//******函数表达式定义函数-->匿名函数
+		//这样会报错
+		//sayHi(); //Uncaught TypeError: sayHi is not a function
+		var sayHi = function(){
+			alert("hi!");
+		};
+		//******函数声明定义函数-->函数声明提升
+		//sayHello();	//hello
+		function sayHello(){
+			alert("hello!");
+		}
+		//不同浏览器对这种情况的处理方式不同，最好不要使用这种方式
+		/*var condition = false;
+		if(condition){
+			function sayHito(){
+				alert("Hi!");
+			}
+		}else{
+			function sayHito(){
+				alert("Yo!");
+			}
+		}
+		sayHito();*/
+		//可更改为
+		var condition = true;
+		var sayHito;
+		if(condition){
+			sayHito = function(){
+				alert("Hi!");
+			};
+		}else{
+			sayHito=function(){
+				alert("Yo!");
+			};
+		}
+		sayHito();
+	}
+	//test7_1_0();
+	//****递归
+	function test7_1_1(){
+		//一个函数通过名字调用他自身
+		function factorial(num){
+			if(num <= 1){
+				return 1;
+			} else {
+				return num * factorial(num-1);
+			}
+		}
+		console.log(factorial(3)); //会在把factorial函数赋值给其他函数时出现错误。
+		//arguments.callee()指向正在执行函数的指针
+		//以上的代码改为
+		function factorial1(num){
+			if(num <= 1){
+				return 1;
+			} else {
+				return num * arguments.callee(num-1);
+			}
+		}
+		var anthorfactorial=factorial1;
+		factorial1 = null;
+		console.log(anthorfactorial(10));
+		//在严格模式下使用arguments.callee()会报错
+		//使用命名函数解决问题
+		var factorial2 = (function f(num){
+			if(num <= 1){
+				return 1;
+			} else {
+				return num * f(num-1);
+			}
+		});
+		//以上定义了一个f的命名函数表达式
+		var anthorfactorial=factorial2;
+		factorial2 = null;
+		console.log(anthorfactorial(6));
+	}
+	//test7_1_1();
+	//闭包
+	function test7_2_0(){
+		function createComparisonFunction(propertyName){
+			return function(object1,object2){ //匿名函数
+				var value1=object1[propertyName];
+				var value2=object2[propertyName];
+				if(value1 < value2){
+					return -1;
+				}else if(value1 > value2){
+					return 1;
+				}else{
+					return 0;
+				}
+			};
+		}
+		//创建函数
+		var compare=createComparisonFunction("name");
+		//调用函数
+		var result=compare({name:"Nicholas"},{name:"Greg"});
+		//消除对匿名函数的引用(以便释放内存)
+		compare = null;	
+		console.log(compare);
+		console.log(result);	//1
+	}
+	//test7_2_0();
+	//*****闭包与变量
+	function test7_2_1(){
+		//获取的是最后一个值
+		function createFunction(){
+			var result = new Array();
+			for(var i=0;i<10;i++){
+				result[i]=function(){
+					return i;
+				};
+			}
+			return result;
+		}
+		var funcs = createFunction();
+            
+        //every function outputs 10
+        for (var i=0; i < funcs.length; i++){
+            document.write(funcs[i]() + "<br />");
+        }
+        //加入了一个新的匿名变量，使输出的值是对应的编号
+		function createFunction1(){
+			var result = new Array();
+			for(var i=0;i<10;i++){
+				result[i]=function(num){
+					return function(){
+						return num;
+					};
+				}(i);
+			}
+			return result;
+		}
+		var funcs1 = createFunction1();
+            
+        //every function outputs it's num
+        for (var i=0; i < funcs1.length; i++){
+            document.write(funcs1[i]() + "<br />");
+        }
+	}
+	//test7_2_1();
+	//关于this对象
+	function test7_2_2(){
+		//改变this的函数call()/apply()/bind()
+		var person = {
+			name:"Lining",
+			age:this.age,
+			myfun:function(from,to){
+				console.log("name:"+this.name+" age:"+this.age+" from:"+from+" to:"+to);
+			}
+		};
+		var hmm = {
+			name:"HanMeimei",
+			age:18
+		};
+		//call(对象，参数1，参数2....)
+		person.myfun.call(hmm,"Beijing","Xi'an");
+		//apply(对象，[参数1，参数2...])
+		person.myfun.apply(hmm,["Shandong","Hongkong"]);
+		//bind(对象，参数1，参数2....)() 返回的是一个函数所以要加括号调用
+		person.myfun.bind(hmm,"Guangzhou","Xi'an")();
+
+		//闭包里的this对象
+		var obj = {
+			name:"My object",
+			getNameFunc:function(){
+				return function(){
+					return this.name;
+				};
+			}
+		};
+		console.log(obj.getNameFunc()()); //the window  this指向window
+
+		var obj1 = {
+			name:"My object",
+			getNameFunc:function(){
+				var that = this;	//把指向obj1的this赋值给that
+				return function(){
+					return that.name;	//调用that时that指向的是this
+				};
+			}
+		};
+		console.log(obj1.getNameFunc()());	//my object
+
+		var obj2 = {
+			name:"obj2",
+			getNameFunc:function(){
+				return this.name;
+			}
+		};
+		console.log(obj2.getNameFunc());	//obj2
+		console.log((obj2.getNameFunc)());	//obj2
+		//函数表达式表示的值是函数本身，所以this的值得不到维持
+		console.log((obj2.getNameFunc = obj2.getNameFunc)()); //the window
+	}
+	var name="the window";
+	//test7_2_2();
+	//内存泄漏
+	//element占用的内存永远不会被回收
+		function assignHandle(){
+			var element = document.getElementById("something");
+			element.onclick = function(){
+				alert(element.id);	//something
+			};
+		}
+		//修改之后
+		function assignHandle1(){
+			var element = document.getElementById("something1");
+			var id = element.id;
+			element.onclick = function(){
+				alert(id);	//something1
+			};
+			element = null;	//解除对dom对象的引用
+		}
+	//模仿块级作用域
+	function test7_3(){
+		//在函数中定义的变量作用域是整个函数
+		function outputNumber(count){
+			for(var i=0;i<10;i++){
+				console.log(i);
+			}
+			console.log("再次调用i："+i);
+		}
+		outputNumber(10);
+		//模仿块级作用域
+		function outputNumber1(count){
+			(function(){
+				for(var i=0;i<count;i++){
+					console.log(i);
+				}
+			})();
+			console.log("再次调用i："+i);	//error:i is not defined
+		}
+		outputNumber1(5);
+	}
+	//test7_3();
+	//***私有变量
+	function test7_4(){
+		function Myobject(){
+			//私有变量和私有函数
+			var privateVariable = 10;
+			function privateFunction(){
+				return false;
+			}
+			//特权方法
+			//用一个闭包，来获取外部函数的变量和方法
+			this.publicMethod = function(){
+				console.log(++privateVariable);
+				return privateFunction();
+			};
+		}
+		var obj=new Myobject();
+		//使用特权方法来调用私有函数和私有变量
+		console.log(obj.publicMethod());
+		//不能在外部调用私有函数
+		//console.log(obj.privateFunction());//Uncaught TypeError: obj.privateFunction is not a function
+
+		//*****使用私有和特权成员，隐藏那些不应该直接被修改的数据
+		function Person(name){
+			this.getName = function(){
+				return name;
+			};
+			this.setName = function(value){
+				name = value;
+			};
+		}
+		//必须使用构造函数模式
+		var person = new Person("Bob");
+		console.log(person.getName());	//Bob
+		person.setName("Amy");
+		console.log(person.getName());	//Amy
+	}
+	//test7_4();
+	//*****静态私有成员
+	function test7_4_1(){
+		(function(){
+			var name = "";
+			Person = function(value){
+				name=value;
+			};
+			Person.prototype.getName = function(){
+				return name;
+			};
+			Person.prototype.setName = function(value){
+				name = value;
+			};
+		})();
+		var per1 = new Person("Nicholas");
+		console.log("per1: "+per1.getName());
+		per1.setName("Amy");
+		console.log("per1: "+per1.getName());
+		//每个实例没有自己的变量，所有变量都是可共享的。
+		var per2 = new Person("Greg");
+		console.log("per2: "+per2.getName());
+		console.log("per1: "+per1.getName());
+	}
+	//test7_4_1();
+	//****模块模式
+	function test7_4_1(){
+		function BaseComponents(){
+
+		}
+		function otherComponents(){
+
+		}
+		var application = function(){
+			//私有变量和函数
+			var components = new Array();
+			components.push(new BaseComponents());
+			//公共
+			return {
+				getComponent : function(){
+					return components.length;
+				},
+				registerComponents : function(component){
+					if(typeof component == "object"){
+						components.push(component);
+					}
+				}
+			};
+		}();
+
+		application.registerComponents(new otherComponents());
+		console.log(application.getComponent());	//2
+	}
+	//test7_4_1();
+	//增强的模块模式
+	function test7_4_2(){
+		//对象必须是某个其他对象的实例
+		//模板代码
+	/*	var application = function(){
+			//私有变量和方法
+			var privateVariable = 10;
+			function privateFunction(){
+				return false;
+			}
+			//创建对象
+			var object = new CustomType();
+			//添加特权和公共属性
+			onject.publicProperty = true;
+			object.publicMethod = function(){
+				privateVariable++;
+				return privateFunction();
+			};
+			//返回对象，将object对象赋值给了application
+			return object;
+		}();
+	*/
+		function BaseComponents(){
+
+		}
+		function otherComponents(){
+
+		}
+		var application = function(){
+			//私有变量和函数
+			var components = new Array();
+			//初始化
+			components.push(new BaseComponents());
+			//创建一个application的局部副本
+			var app = new BaseComponents();
+
+			//公共接口
+			app.getComponent = function(){
+				return components.length;
+			};
+			app.registerComponents = function(component){
+				if(typeof component == "object"){
+					components.push(component);
+				}
+			};
+			//返回这个副本
+			return app;
+		}();
+
+		application.registerComponents(new otherComponents());
+		application.registerComponents(new BaseComponents());
+		console.log(application.getComponent());	//3
+	}
+	test7_4_2();
+</script>
+</body>
+</html>
